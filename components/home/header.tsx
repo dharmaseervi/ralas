@@ -124,12 +124,12 @@ export default function Header() {
                 </NavigationMenu>
                 <div className="flex flex-1 items-center justify-end space-x-2">
                     <nav className="hidden md:flex items-center space-x-2">
-                        <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                        <Button variant="outline" size="sm" className="text-primary hover:text-primary-foreground hover:bg-primary">
                             Visit Our Store
                         </Button>
 
-                        <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                            Contact Us
+                        <Button size="sm" variant='ghost' className="text-primary hover:text-primary-foreground hover:bg-primary">
+                            Call Us
                         </Button>
 
                         <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
@@ -139,7 +139,7 @@ export default function Header() {
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon" className="md:hidden">
-                                <Menu className="h-5 w-5" />
+                                <Menu className="h-8 w-8" />
                                 <span className="sr-only">Toggle menu</span>
                             </Button>
                         </SheetTrigger>
@@ -157,10 +157,10 @@ export default function Header() {
                                 </Link>
                                 <MobileAccordionMenu title="Products" items={products} />
                                 <MobileAccordionMenu title="Resources" items={resources} />
-                                <Link href="#about" onClick={() => setIsOpen(false)}>About Us</Link>
-                                <Link href="#contact" onClick={() => setIsOpen(false)}>Contact</Link>
-                                <Button variant="outline" onClick={() => setIsOpen(false)}>Find a Store</Button>
-                                <Button variant="ghost" onClick={() => setIsOpen(false)}>Sign in</Button>
+                                <Link href="/about" onClick={() => setIsOpen(false)}>About Us</Link>
+                                <Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
+                                <Button  variant="outline" onClick={() => setIsOpen(false)}>Visit Our Store</Button>
+                                <Button variant="ghost" onClick={() => setIsOpen(false)}>Call Us</Button>
                                 <Button onClick={() => setIsOpen(false)}>Book Appointment</Button>
                             </nav>
                         </SheetContent>
