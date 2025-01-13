@@ -159,7 +159,7 @@ export default function Header() {
                                 <MobileAccordionMenu title="Resources" items={resources} />
                                 <Link href="/about" onClick={() => setIsOpen(false)}>About Us</Link>
                                 <Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
-                                <Button  variant="outline" onClick={() => setIsOpen(false)}>Visit Our Store</Button>
+                                <Button variant="outline" onClick={() => setIsOpen(false)}>Visit Our Store</Button>
                                 <Button variant="ghost" onClick={() => setIsOpen(false)}>Call Us</Button>
                                 <Button onClick={() => setIsOpen(false)}>Book Appointment</Button>
                             </nav>
