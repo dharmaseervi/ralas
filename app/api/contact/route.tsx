@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
                   4th Block, Jayanagar, Bengaluru, Karnataka 560011
                 </p>
                 <div style="margin: 1rem 0;">
-                  <a href="https://ralashearing.com" 
+                  <a href="https://ralas.co.in" 
                      style="color: #1e40af; text-decoration: none; margin: 0 0.5rem;">
                     Website
                   </a>
