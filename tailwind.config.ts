@@ -15,6 +15,9 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			  'oticon-red': '#ED1C24',
+			  'oticon-blue': '#005EB8',
+			  'oticon-teal': '#00A3A1',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'

@@ -3,130 +3,167 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimation, useInView } from 'framer-motion'
 import Image from 'next/image'
+import { Waves, Cpu, BatteryFull, Volume2, Bluetooth, Ear, BrainCircuit } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
-const HearingAidPart = ({ src, alt, initial, animate, transition, className, description }) => {
-  const [isHovered, setIsHovered] = useState(false)
-
+const FeatureCard = ({ icon: Icon, title, description, specs }) => {
   return (
-    <motion.div
-      className={`absolute ${className} cursor-pointer group`}
-      initial={initial}
-      animate={animate}
-      transition={transition}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <motion.div 
+      className="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
     >
-      <Image
-        src={src}
-        alt={alt}
-        width={200}
-        height={400}
-        className="transition-transform duration-300 group-hover:scale-110"
-      />
-      {isHovered && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute left-full ml-4 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 p-4 rounded-lg shadow-lg max-w-xs z-10"
-        >
-          <p className="text-sm text-gray-800 dark:text-gray-200">{description}</p>
-        </motion.div>
-      )}
+      <div className="flex items-start gap-4 mb-4">
+        <div className="p-3 bg-blue-100 rounded-lg">
+          <Icon className="w-6 h-6 text-blue-600" />
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+          <p className="text-gray-600 mt-1">{description}</p>
+        </div>
+      </div>
+      <div className="border-t pt-4">
+        <h4 className="text-sm font-medium text-gray-500 mb-2">Key Specifications:</h4>
+        <div className="grid grid-cols-2 gap-3">
+          {specs.map((spec, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <span className="text-blue-600">{spec.icon}</span>
+              <span className="text-sm text-gray-700">{spec.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </motion.div>
   )
 }
 
-export default function AnimatedHearingAid() {
+export default function TechnologyShowcase() {
   const controls = useAnimation()
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.3 })
+  const inView = useInView(ref, { once: true, amount: 0.2 })
 
   useEffect(() => {
-    if (inView) {
-      controls.start('visible')
-    }
+    if (inView) controls.start('visible')
   }, [controls, inView])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        when: 'beforeChildren',
-        staggerChildren: 0.3,
-      },
+  const features = [
+    {
+      icon: BrainCircuit,
+      title: "BrainHearing™ Technology",
+      description: "Supports your brain's natural sound processing for clearer understanding",
+      specs: [
+        { icon: '⚡', label: '2.4GHz Processor' },
+        { icon: '🎯', label: '12M Sound Scenes' },
+        { icon: '🔊', label: '120dB Range' },
+        { icon: '🧠', label: 'Neural Network' }
+      ]
     },
-  }
+    {
+      icon: Waves,
+      title: "OpenSound Navigator™",
+      description: "Real-time environmental adaptation for natural listening",
+      specs: [
+        { icon: '🌐', label: '360° Sound' },
+        { icon: '⏱️', label: '0.5ms Response' },
+        { icon: '🎚️', label: 'Auto Adjustment' },
+        { icon: '🔇', label: 'Smart Noise Reduction' }
+      ]
+    },
+    {
+      icon: Bluetooth,
+      title: "Connectivity Suite",
+      description: "Seamless integration with modern devices and ecosystems",
+      specs: [
+        { icon: '📶', label: 'Bluetooth 5.2' },
+        { icon: '🔋', label: 'Wireless Charging' },
+        { icon: '📱', label: 'iOS/Android App' },
+        { icon: '🎧', label: 'Direct Streaming' }
+      ]
+    }
+  ]
 
   return (
-    <section ref={ref} className="py-20 px-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-blue-900">
-      <div className="container mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-8 text-blue-800 dark:text-blue-300">
-          Revolutionary Hearing Aid Technology
-        </h2>
-        <p className="text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12">
-          Experience the pinnacle of auditory innovation with our cutting-edge hearing aids, combining advanced technology
-          and sleek design for unmatched sound quality and comfort.
-        </p>
-        <motion.div
-          className="relative w-full h-[600px]"
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
+    <section ref={ref} className="py-24 bg-white relative overflow-hidden">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <HearingAidPart
-            src="/hearing-aid-shell.svg"
-            alt="Hearing Aid Shell"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[500px]"
-            description="The outer shell provides durability and a perfect fit, ensuring all components work seamlessly together."
-          />
-          <HearingAidPart
-            src="/hearing-aid-microphone.svg"
-            alt="Hearing Aid Microphone"
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Advanced Hearing Technology
+            </span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Clinical-grade performance meets intuitive design in our next-generation hearing solutions
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+          <motion.div 
+            className="relative h-[500px]"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="left-[calc(50%-120px)] top-[15%] w-[100px] h-[100px]"
-            description="Dual microphones capture sound in high resolution, ensuring clear audio in all environments."
-          />
-          <HearingAidPart
-            src="/hearing-aid-speaker.svg"
-            alt="Hearing Aid Speaker"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="left-[calc(50%+50px)] bottom-[25%] w-[80px] h-[80px]"
-            description="Delivering crisp and natural sound, the speaker is designed for unparalleled clarity."
-          />
-          <HearingAidPart
-            src="/hearing-aid-battery.svg"
-            alt="Hearing Aid Battery"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
-            className="left-[calc(50%-40px)] bottom-[10%] w-[80px] h-[140px]"
-            description="Long-lasting, rechargeable battery ensures all-day use without interruptions."
-          />
-          <HearingAidPart
-            src="/hearing-aid-processor.svg"
-            alt="Hearing Aid Processor"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 1.2, ease: 'easeOut' }}
-            className="left-[calc(50%-60px)] top-[40%] w-[120px] h-[60px]"
-            description="Real-time sound optimization powered by our state-of-the-art processor."
-          />
-        </motion.div>
-        <div className="mt-16 text-center z-10 relative">
-          <h3 className="text-2xl font-semibold text-blue-800 dark:text-blue-300">Why Choose Our Hearing Aids?</h3>
-          <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto mt-4">
-            Designed with precision and built with care, our hearing aids deliver crystal-clear audio, unmatched comfort,
-            and seamless integration with modern technology. Elevate your hearing experience today.
-          </p>
+            transition={{ duration: 0.8 }}
+          >
+            <Image
+              src="/hearing-aid-cutaway.png"
+              alt="Technology cutaway"
+              fill
+              className="object-contain"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent" />
+          </motion.div>
+
+          <div className="space-y-8">
+            {features.map((feature, index) => (
+              <FeatureCard
+                key={index}
+                {...feature}
+              />
+            ))}
+          </div>
         </div>
+
+        <motion.div 
+          className="grid md:grid-cols-3 gap-8 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="p-6 bg-blue-50 rounded-xl">
+            <div className="text-4xl font-bold text-blue-600 mb-3">30h</div>
+            <div className="font-medium">Battery Life</div>
+            <p className="text-sm text-gray-600 mt-2">With wireless charging support</p>
+          </div>
+          <div className="p-6 bg-purple-50 rounded-xl">
+            <div className="text-4xl font-bold text-purple-600 mb-3">-40dB</div>
+            <div className="font-medium">Noise Reduction</div>
+            <p className="text-sm text-gray-600 mt-2">Advanced environmental filtering</p>
+          </div>
+          <div className="p-6 bg-green-50 rounded-xl">
+            <div className="text-4xl font-bold text-green-600 mb-3">0.5ms</div>
+            <div className="font-medium">Processing Speed</div>
+            <p className="text-sm text-gray-600 mt-2">Ultra-low latency performance</p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          className="mt-20 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          <Button 
+            size="lg"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-6 rounded-xl shadow-lg transition-all"
+          >
+            Schedule Technology Demo
+          </Button>
+          <p className="text-sm text-gray-500 mt-4">FDA-cleared medical device | 3-year warranty included</p>
+        </motion.div>
       </div>
     </section>
   )

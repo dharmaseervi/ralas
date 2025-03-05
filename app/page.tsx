@@ -1,4 +1,3 @@
-import HeroCarousel from '@/components/home/HeroCarousel'
 import Features from '@/components/home/Features'
 import VideoSection from '@/components/home/VideoSection'
 import Footer from '@/components/home/Footer'
@@ -11,7 +10,6 @@ export default function HomePage() {
   return (
     <div className="bg-gradient-to-b from-gray-50 to-white">
       <Header />
-      <HeroCarousel />
       <AnimatedHearingAid  />
       <Features />
       <HearingTest />

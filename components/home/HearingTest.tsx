@@ -1,18 +1,18 @@
 'use client'
-
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { Progress } from '@/components/ui/progress'
-import { AlertCircle, VolumeX, Volume1, Volume2 } from 'lucide-react'
+import { AlertCircle, Volume2, Headphones, Activity, Thermometer, VolumeX, Volume1 } from 'lucide-react'
+import * as d3 from 'd3'
 
 const frequencyRanges = [
-  { name: 'Low', min: 125, max: 500, test: 250 },
-  { name: 'Mid-Low', min: 500, max: 1000, test: 750 },
-  { name: 'Mid', min: 1000, max: 2000, test: 1500 },
-  { name: 'Mid-High', min: 2000, max: 4000, test: 3000 },
-  { name: 'High', min: 4000, max: 8000, test: 6000 },
+  { name: 'Low', range: '125-500 Hz', test: 250, color: 'bg-blue-400' },
+  { name: 'Mid-Low', range: '500-1k Hz', test: 750, color: 'bg-teal-400' },
+  { name: 'Mid', range: '1k-2k Hz', test: 1500, color: 'bg-green-400' },
+  { name: 'Mid-High', range: '2k-4k Hz', test: 3000, color: 'bg-yellow-400' },
+  { name: 'High', range: '4k-8k Hz', test: 6000, color: 'bg-red-400' },
 ]
 
 export default function HearingTest() {
@@ -145,112 +145,210 @@ export default function HearingTest() {
 
   const VolumeIcon = volume <= 33 ? VolumeX : volume <= 66 ? Volume1 : Volume2
 
+
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-blue-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto max-w-3xl">
-        <h2 className="text-4xl font-bold text-center mb-6 text-blue-800 dark:text-blue-300">Interactive Hearing Test</h2>
-        <p className="text-center text-gray-700 dark:text-gray-300 mb-12">
-          Experience our advanced hearing test that provides real-time feedback and visual representation of sound waves.
-        </p>
+    <section className="py-20 px-4 bg-gradient-to-b from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto max-w-4xl">
         <motion.div
-          className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
         >
-          <AnimatePresence mode="wait">
-            {showInstructions ? (
-              <motion.div
-                key="instructions"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <h3 className="text-2xl font-semibold mb-4 text-blue-700 dark:text-blue-300">Instructions</h3>
-                <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>Ensure you're in a quiet environment or using headphones.</li>
-                  <li>You'll hear a series of tones at different frequencies.</li>
-                  <li>Adjust the volume slider until you can just barely hear the tone.</li>
-                  <li>Observe the sound wave visualization for additional feedback.</li>
-                  <li>Click "Next" to proceed to the next frequency test.</li>
-                  <li>Complete all frequency tests for comprehensive results.</li>
-                </ol>
-                <Button onClick={() => setShowInstructions(false)} className="mt-6 w-full">
-                  Start Test
-                </Button>
-              </motion.div>
-            ) : currentTest < frequencyRanges.length ? (
-              <motion.div
-                key="test"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <h3 className="text-xl font-semibold mb-2 text-blue-700 dark:text-blue-300">
-                  {frequencyRanges[currentTest].name} Frequency Test ({frequency} Hz)
+          <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-600 mb-4">
+            Precision Hearing Assessment
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            Clinically-inspired audio evaluation with real-time audiogram visualization
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+        >
+          <div className="p-8 border-b border-slate-100 dark:border-slate-700">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                <Headphones className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+                  Audiometric Evaluation
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Adjust the volume until you can just barely hear the tone, then click "Next".
+                <p className="text-slate-600 dark:text-slate-400">
+                  {currentTest + 1} of {frequencyRanges.length} frequency bands
                 </p>
-                <div className="mb-6">
-                  <label className="block mb-2 text-gray-600 dark:text-gray-300">Volume</label>
-                  <div className="flex items-center gap-4">
-                    <VolumeIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={[volume]}
-                      onValueChange={handleVolumeChange}
-                      className="flex-grow"
-                    />
-                    <span className="text-gray-600 dark:text-gray-300 w-12 text-right">{volume}%</span>
+              </div>
+            </div>
+
+            <div className="relative h-32 mb-8 bg-slate-50 dark:bg-slate-900 rounded-xl overflow-hidden">
+              <canvas 
+                ref={canvasRef} 
+                className="w-full h-full"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent dark:via-slate-800/30" />
+            </div>
+
+            <AnimatePresence mode="wait">
+              {showInstructions ? (
+                <motion.div
+                  key="instructions"
+                  className="space-y-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                    <div className="flex items-start gap-4">
+                      <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
+                      <div>
+                        <h4 className="font-medium text-slate-800 dark:text-slate-200 mb-2">
+                          Test Preparation Guidelines
+                        </h4>
+                        <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
+                          <li>Use high-quality headphones in a quiet environment</li>
+                          <li>Position yourself 1-2 feet from your device</li>
+                          <li>Adjust volume to comfortable listening level</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="mb-6">
-                  <canvas ref={canvasRef} width="400" height="100" className="w-full h-24 bg-blue-50 dark:bg-blue-900 rounded-lg" />
-                </div>
-                <Progress value={(currentTest / frequencyRanges.length) * 100} className="mb-6" />
-                <div className="flex gap-4">
-                  <Button onClick={playSound} disabled={isPlaying} className="flex-1">
-                    {isPlaying ? 'Playing...' : 'Play Sound'}
+                  <Button 
+                    onClick={() => setShowInstructions(false)}
+                    className="w-full py-6 text-lg"
+                  >
+                    Begin Calibration Test
                   </Button>
-                  <Button onClick={nextTest} className="flex-1" variant="outline">
-                    Next
-                  </Button>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="results"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <h3 className="text-2xl font-semibold mb-4 text-blue-700 dark:text-blue-300">Test Results</h3>
-                {Object.entries(testResult).map(([range, value]) => (
-                  <div key={range} className="mb-4">
-                    <p className="font-medium text-gray-700 dark:text-gray-300">{range} Frequency:</p>
-                    <p className="text-lg font-bold text-blue-600 dark:text-blue-400">
-                      {value !== null ? `${getHearingStatus(value)} (${value}%)` : 'Not Detected'}
+                </motion.div>
+              ) : currentTest < frequencyRanges.length ? (
+                <motion.div
+                  key="test"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <div className="mb-8">
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-slate-600 dark:text-slate-400">
+                        Frequency Band
+                      </span>
+                      <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                        {frequencyRanges[currentTest].range}
+                      </span>
+                    </div>
+                    <div className="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <motion.div
+                        className={`h-full ${frequencyRanges[currentTest].color}`}
+                        initial={{ width: 0 }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: 2 }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <Volume2 className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                            Detection Threshold
+                          </span>
+                        </div>
+                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                          {volume} dB HL
+                        </span>
+                      </div>
+                      <Slider
+                        value={[volume]}
+                        onValueChange={handleVolumeChange}
+                        min={0}
+                        max={100}
+                        step={1}
+                        className="[&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <Button
+                        onClick={playSound}
+                        disabled={isPlaying}
+                        variant={isPlaying ? 'secondary' : 'default'}
+                        className="h-12"
+                      >
+                        {isPlaying ? 'Emitting Tone...' : 'Test Frequency'}
+                      </Button>
+                      <Button
+                        onClick={nextTest}
+                        variant="outline"
+                        className="h-12"
+                        disabled={currentTest === frequencyRanges.length - 1}
+                      >
+                        Next Frequency
+                      </Button>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="results"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="space-y-8"
+                >
+                  <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-xl">
+                    <div className="flex items-start gap-4">
+                      <Thermometer className="w-5 h-5 text-green-600 dark:text-green-400 mt-1" />
+                      <div>
+                        <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+                          Audiogram Summary
+                        </h3>
+                        {/* Add D3.js audiogram chart here */}
+                        <div className="h-48 bg-slate-100 dark:bg-slate-700 rounded-lg" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    {Object.entries(testResult).map(([range, value]) => (
+                      <div key={range} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                        <span className="font-medium text-slate-700 dark:text-slate-300">{range}</span>
+                        <span className={`text-lg font-semibold ${
+                          (value || 0) > 50 ? 'text-red-600' : 'text-green-600'
+                        }`}>
+                          {getHearingStatus(value || 0)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <p className="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
+                      <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
+                      This screening doesn't replace professional evaluation. 
+                      Our audiologists recommend comprehensive testing every 2 years.
                     </p>
                   </div>
-                ))}
-                <div className="mt-6 p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                  <p className="text-blue-800 dark:text-blue-200 flex items-center">
-                    <AlertCircle className="w-5 h-5 mr-2" />
-                    This test provides a general indication of your hearing ability. For a comprehensive evaluation, please consult with our audiologists.
-                  </p>
-                </div>
-                <Button onClick={resetTest} className="w-full mt-6">
-                  Retake Test
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <Button
+                      onClick={resetTest}
+                      variant="outline"
+                      className="h-12"
+                    >
+                      Recalibrate Test
+                    </Button>
+                    <Button className="h-12 bg-green-600 hover:bg-green-700">
+                      Schedule Consultation
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
       </div>
     </section>
   )
 }
-
