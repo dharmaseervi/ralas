@@ -17,6 +17,7 @@ import { useState } from 'react'
 import * as z from 'zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { BookAppointment } from '@/components/Bookappointment'
 
 const metadata: Metadata = {
   title: 'Contact Us | Ralas Hearing Aid Clinic',
@@ -41,7 +42,7 @@ export default function ContactPage() {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log(data);
-    
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -229,10 +230,7 @@ export default function ContactPage() {
           <p className="text-lg text-muted-foreground mb-8">
             Schedule a free consultation at our state-of-the-art clinic
           </p>
-          <Button size="lg" className="gap-2">
-            <CalendarRange className="w-5 h-5" />
-            Book Appointment
-          </Button>
+          <BookAppointment />
         </div>
       </section>
     </div>

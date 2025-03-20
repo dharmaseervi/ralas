@@ -100,7 +100,7 @@ export function BookAppointment() {
     ]
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={setOpen} >
             <DialogTrigger asChild>
                 <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
                     Book Appointment
@@ -119,8 +119,8 @@ export function BookAppointment() {
                             <div className="rounded-full bg-green-100 p-3 mb-4">
                                 <CheckCircle className="h-10 w-10 text-green-600" />
                             </div>
-                            <h2 className="text-2xl font-bold mb-2">Appointment Booked!</h2>
-                            <p className="text-muted-foreground mb-6">We'll send a confirmation to your email shortly.</p>
+                            <DialogTitle className="text-2xl font-bold mb-2">Appointment Booked!</DialogTitle>
+                            <DialogDescription className="text-muted-foreground mb-6">We'll send a confirmation to your email shortly.</DialogDescription>
                             <Button
                                 onClick={() => {
                                     setSuccess(false)

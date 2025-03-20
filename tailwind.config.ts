@@ -9,15 +9,15 @@ export default {
   ],
   theme: {
   	extend: {
-		height: {
-			"300vh": "300vh",
-		  },
+  		height: {
+  			'300vh': '300vh'
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-			  'oticon-red': '#ED1C24',
-			  'oticon-blue': '#005EB8',
-			  'oticon-teal': '#00A3A1',
+  			'oticon-red': '#ED1C24',
+  			'oticon-blue': '#005EB8',
+  			'oticon-teal': '#00A3A1',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -61,6 +61,28 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		}
   	}
   },

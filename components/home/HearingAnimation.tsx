@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 
 const FeatureCard = ({ icon: Icon, title, description, specs }) => {
   return (
-    <motion.div 
+    <motion.div
       className="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3 }}
@@ -85,7 +85,7 @@ export default function TechnologyShowcase() {
   return (
     <section ref={ref} className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export default function TechnologyShowcase() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-          <motion.div 
+          <motion.div
             className="relative h-[500px]"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -127,7 +127,7 @@ export default function TechnologyShowcase() {
           </div>
         </div>
 
-        <motion.div 
+        <motion.div
           className="grid md:grid-cols-3 gap-8 text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -148,21 +148,6 @@ export default function TechnologyShowcase() {
             <div className="font-medium">Processing Speed</div>
             <p className="text-sm text-gray-600 mt-2">Ultra-low latency performance</p>
           </div>
-        </motion.div>
-
-        <motion.div 
-          className="mt-20 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          <Button 
-            size="lg"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-6 rounded-xl shadow-lg transition-all"
-          >
-            Schedule Technology Demo
-          </Button>
-          <p className="text-sm text-gray-500 mt-4">FDA-cleared medical device | 3-year warranty included</p>
         </motion.div>
       </div>
     </section>
