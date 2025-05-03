@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
 
         // Send email to clinic
         const { error } = await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
-            to: ['dharmaseervijb18239@gmail.com'],
+            from: 'contact@ralasclinic.com',
+            to: ['sinchanaravi0201@gmail.com'],
             subject: `New Contact Form Submission from ${firstName} ${lastName}`,
             html: `
            <!DOCTYPE html>
