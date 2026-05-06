@@ -4,12 +4,14 @@ interface ServiceHeroProps {
   title: string;
   subtitle: string;
   imageSrc: string;
+  eyebrow?: string;
 }
 
-export default function ServiceHero({ title, subtitle, imageSrc }: ServiceHeroProps) {
+export default function ServiceHero({ title, subtitle, imageSrc ,eyebrow }: ServiceHeroProps) {
   return (
     <section className="relative w-full bg-gray-100 py-16 mt-2">
       <div className="container mx-auto px-6 text-center">
+        <h1 className="text-sm uppercase tracking-widest text-gold mb-2">{eyebrow}</h1>
         <h1 className="text-4xl font-bold text-primary">{title}</h1>
         <p className="text-lg text-muted-foreground mt-4">{subtitle}</p>
       </div>

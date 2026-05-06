@@ -1,10 +1,12 @@
 import Features from '@/components/home/Features'
 import VideoSection from '@/components/home/VideoSection'
-import Footer from '@/components/home/Footer'
-import Header from '@/components/home/header'
+
 import AnimatedHearingAid from '@/components/home/HearingAnimation'
 import HearingTest from '@/components/home/HearingTest'
-import { OticonBentoGrid } from '@/components/BentoGrid'
+import Header from '@/components/home/Header'
+import BentoGrid from '@/components/BentoGrid'
+import Footer from '@/components/home/Footer'
+
 
 
 export default function HomePage() {
@@ -12,7 +14,7 @@ export default function HomePage() {
     <div className="bg-gradient-to-b from-gray-50 to-white">
       <Header />
       <AnimatedHearingAid  />
-      <OticonBentoGrid />
+      <BentoGrid />
       <Features />
       <HearingTest />
       <VideoSection />

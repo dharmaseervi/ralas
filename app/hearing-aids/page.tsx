@@ -1,131 +1,103 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import { BookAppointment } from "@/components/Bookappointment";
-import { Check } from "lucide-react";
-import ServiceHero from "@/components/home/servicehero";
-import FAQ from "@/components/home/FQA";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+import Link from "next/link"
 
-export const metadata: Metadata = {
-    title: "Advanced Hearing Aids | Ralas Hearing Clinic",
-    description: "Discover state-of-the-art hearing aids designed for comfort and clarity.",
-};
+import FAQ from "@/components/home/FAQ"
+import Footer from "@/components/home/Footer"
+import Navbar from "@/components/home/navbar"
+import ServiceHero from "@/components/home/servicehero"
+import TechnologyShowcase from "@/components/home/HearingAnimation"
 
-export default function HearingAids() {
-    return (
-        <div className="container mx-auto mt-10 px-2">
+const products = [
+  { type: "Behind-the-Ear (BTE)", range: "₹18,000 – ₹2,20,000", desc: "The most versatile style. Sits behind the ear with a tube connecting to an ear mould. Suitable for mild to profound hearing loss in all ages.", features: ["All hearing loss levels", "Long battery life", "Easy to handle", "Rechargeable options"] },
+  { type: "Receiver-in-Canal (RIC)", range: "₹25,000 – ₹2,80,000", desc: "The receiver sits inside the ear canal for a more natural sound experience. Slim, discreet, and comfortable for daily wear.", features: ["Near-invisible design", "Natural sound quality", "Bluetooth streaming", "Most popular style"] },
+  { type: "In-the-Ear (ITE)", range: "₹22,000 – ₹1,80,000", desc: "Custom-made to fit your ear. Entirely inside the ear for a discreet look while being easy to insert and remove.", features: ["Custom fitted", "Discreet appearance", "Easy to use", "Mild–severe loss"] },
+  { type: "Smart Hearing Aids", range: "₹60,000 – ₹3,50,000", desc: "App-controlled, AI-powered devices that learn your listening preferences. Stream directly from your phone and adjust settings on the go.", features: ["AI sound processing", "App control", "Direct streaming", "Remote fine-tuning"] },
+]
 
-            <Breadcrumb>
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>hearing-aids</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
-            <ServiceHero
-                title="State-of-the-Art Hearing Aids"
-                subtitle="Experience clear sound with the latest technology"
-                imageSrc="/images/oticon-9.png"
-            />
+const brands = [
+  { name: "Oticon", desc: "Pioneers of BrainHearing™ technology. Their More™ platform is trained on 12M sound scenes for unmatched clarity." },
+  { name: "Phonak", desc: "Swiss-engineered hearing solutions known for AutoSense OS™ — adapts automatically to every listening environment." },
+  { name: "Signia", desc: "Innovative Own Voice Processing (OVP™) makes your own voice sound completely natural. Ideal for first-time wearers." },
+  { name: "Widex", desc: "Leaders in natural sound processing. Their ZeroDelay™ technology delivers the fastest signal processing available." },
+]
 
-            <section className="py-16">
-                <div className="grid md:grid-cols-2 gap-12 items-center px-2">
-                    <div className="space-y-6">
-                        <h2 className="text-3xl font-bold">Why Choose Our Hearing Aids?</h2>
-                        <ul className="space-y-4 text-muted-foreground">
-                            <li className="flex items-start gap-3 border p-4 rounded-lg shadow-sm">
-                                <Check className="w-6 h-6 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-medium text-muted-foreground">Enhanced Sound Quality</h3>
-                                    <p>Crystal clear audio with advanced noise reduction.</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-3 border p-4 rounded-lg shadow-sm">
-                                <Check className="w-6 h-6 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-medium text-muted-foreground">Comfortable Fit</h3>
-                                    <p>Ergonomically designed for all-day wear.</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-3 border p-4 rounded-lg shadow-sm">
-                                <Check className="w-6 h-6 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-medium text-muted-foreground">Smart Connectivity</h3>
-                                    <p>Sync with your phone or TV for seamless listening.</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-3 border p-4 rounded-lg shadow-sm">
-                                <Check className="w-6 h-6 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-medium text-muted-foreground">Long Battery Life</h3>
-                                    <p>Rechargeable options with extended battery life.</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-3 border p-4 rounded-lg shadow-sm">
-                                <Check className="w-6 h-6 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-medium text-muted-foreground">Customized to Your Needs</h3>
-                                    <p>Tailored settings for your specific hearing requirements.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <Image
-                        src="/images/hearing-aid-fitting.jpg"
-                        alt="Hearing aid fitting process"
-                        width={600}
-                        height={400}
-                        className="rounded-lg shadow-xl"
-                    />
+const faqs = [
+  { question: "How do I know which hearing aid is right for me?", answer: "The right device depends on your audiogram, lifestyle, dexterity, and budget. Our audiologists will recommend options after a full hearing test — we never push a particular brand or model." },
+  { question: "Do you offer a trial period?", answer: "Yes. All hearing aids come with a 30-day trial. If you are not satisfied for any reason, you can return the device for a full refund within 30 days of fitting." },
+  { question: "What is included in the price?", answer: "All prices include the device, professional fitting, a follow-up fine-tuning session at 2–4 weeks, and a manufacturer's warranty (typically 2–3 years). Batteries or charging cables are included for the first year." },
+  { question: "Can I get my existing hearing aid serviced here?", answer: "Yes. We service and repair all major brands, including devices purchased elsewhere. Call us to check if we support your specific model." },
+  { question: "Is GST billing available?", answer: "Yes. We provide GST-compliant invoices for all purchases, accepted by most health insurance providers for reimbursement claims." },
+]
+
+export default function HearingAidsPage() {
+  return (
+    <>
+      <Navbar />
+      <ServiceHero
+  
+        title="The right hearing aid, fitted for you"
+        subtitle="Authorised dealer for Oticon, Phonak, Signia, and Widex. Every device is precisely calibrated to your audiogram by our certified audiologists."
+        imageSrc="/images/hearing-aids-hero.jpg"
+      />
+
+      {/* Product types */}
+      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "56px" }}>
+            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+              Device Types
+            </div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>Find the style that suits you</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "2px" }}>
+            {products.map(({ type, range, desc, features }) => (
+              <div key={type} style={{ background: "var(--white)", padding: "40px 36px", border: "0.5px solid rgba(26,58,42,0.08)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 400, color: "var(--forest)", lineHeight: 1.25 }}>{type}</div>
+                  <div style={{ fontSize: "12px", fontWeight: 300, color: "var(--gold)", whiteSpace: "nowrap", marginLeft: "16px", paddingTop: "4px" }}>{range}</div>
                 </div>
-            </section>
-
-            <section className="py-16 bg-muted">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">Our Hearing Aid Process</h2>
-                    <div className="grid md:grid-cols-3 gap-8 px-2">
-                        {[
-                            { title: "Consultation", description: "Personalized assessment for best device selection." },
-                            { title: "Fitting", description: "Customized fitting for maximum comfort and clarity." },
-                            { title: "Support", description: "Ongoing care and adjustments to ensure optimal use." },
-                        ].map((step) => (
-                            <div key={step.title} className="p-6 bg-background rounded-lg">
-                                <h3 className="font-medium mb-2">{step.title}</h3>
-                                <p className="text-muted-foreground">{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
+                <p style={{ fontSize: "13.5px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.7, marginBottom: "20px" }}>{desc}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                  {features.map((f) => (
+                    <span key={f} style={{ fontSize: "11px", fontWeight: 300, color: "var(--text-mid)", border: "0.5px solid rgba(26,58,42,0.15)", padding: "4px 10px" }}>{f}</span>
+                  ))}
                 </div>
-            </section>
-
-            <FAQ
-                title="Hearing Aids FAQs"
-                questions={[
-                    {
-                        question: "How do I know which hearing aid is right for me?",
-                        answer: "Our specialists will assess your hearing and lifestyle needs to recommend the best fit."
-                    },
-                    {
-                        question: "Are rechargeable hearing aids available?",
-                        answer: "Yes! We offer rechargeable options with extended battery life."
-                    },
-                ]}
-            />
-
-
-            <section className="py-16 text-center">
-                <div className="max-w-2xl mx-auto">
-                    <h2 className="text-3xl font-bold mb-4">Improve Your Hearing Today</h2>
-                    <p className="text-muted-foreground mb-8">
-                        Book a consultation to find the perfect hearing aid for you.
-                    </p>
-                    <BookAppointment />
-                </div>
-            </section>
+              </div>
+            ))}
+          </div>
         </div>
-    );
+      </section>
+
+      <TechnologyShowcase />
+
+      {/* Brands */}
+      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "56px" }}>
+            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+              Our Brands
+            </div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>World-leading manufacturers</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "2px" }}>
+            {brands.map(({ name, desc }) => (
+              <div key={name} style={{ background: "var(--white)", padding: "36px", border: "0.5px solid rgba(26,58,42,0.08)", display: "flex", gap: "24px", alignItems: "flex-start" }}>
+                <div style={{ width: "56px", height: "56px", background: "var(--forest)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "13px", fontWeight: 300, color: "var(--gold-lt)", letterSpacing: "0.06em" }}>{name[0]}</span>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 400, color: "var(--forest)", marginBottom: "8px" }}>{name}</div>
+                  <p style={{ fontSize: "13.5px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.7 }}>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FAQ title="Hearing aid questions" questions={faqs} />
+      <Footer />
+    </>
+  )
 }

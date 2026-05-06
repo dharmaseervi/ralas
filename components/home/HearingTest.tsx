@@ -1,351 +1,145 @@
-'use client'
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Slider } from '@/components/ui/slider'
-import { Progress } from '@/components/ui/progress'
-import { AlertCircle, Volume2, Headphones, Activity, Thermometer, VolumeX, Volume1 } from 'lucide-react'
-import * as d3 from 'd3'
+"use client"
 
-const frequencyRanges = [
-  { name: 'Low', range: '125-500 Hz', test: 250, color: 'bg-blue-400' },
-  { name: 'Mid-Low', range: '500-1k Hz', test: 750, color: 'bg-teal-400' },
-  { name: 'Mid', range: '1k-2k Hz', test: 1500, color: 'bg-green-400' },
-  { name: 'Mid-High', range: '2k-4k Hz', test: 3000, color: 'bg-yellow-400' },
-  { name: 'High', range: '4k-8k Hz', test: 6000, color: 'bg-red-400' },
+import { useState, useRef, useEffect } from "react"
+import { motion, useInView } from "framer-motion"
+
+const frequencies = [
+  { label: "250 Hz",  pct: 82, status: "Normal",   statusColor: "#6BAF7C" },
+  { label: "500 Hz",  pct: 75, status: "Normal",   statusColor: "#6BAF7C" },
+  { label: "1 kHz",   pct: 68, status: "Normal",   statusColor: "#6BAF7C" },
+  { label: "2 kHz",   pct: 52, status: "Mild",     statusColor: "var(--gold)" },
+  { label: "4 kHz",   pct: 36, status: "Moderate", statusColor: "#E08040" },
+  { label: "8 kHz",   pct: 18, status: "Sig. Loss", statusColor: "#C44" },
 ]
 
-export default function HearingTest() {
-  const [frequency, setFrequency] = useState(1000)
-  const [volume, setVolume] = useState(50)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [testResult, setTestResult] = useState<Record<string, number | null>>({})
-  const [currentTest, setCurrentTest] = useState(0)
-  const [showInstructions, setShowInstructions] = useState(true)
-  const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
-  const [analyser, setAnalyser] = useState<AnalyserNode | null>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+export default function HearingTestSection() {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.3 })
+  const [animated, setAnimated] = useState(false)
 
   useEffect(() => {
-    if (currentTest < frequencyRanges.length) {
-      setFrequency(frequencyRanges[currentTest].test)
-    }
-  }, [currentTest])
-
-  useEffect(() => {
-    if (isPlaying && analyser && canvasRef.current) {
-      const canvas = canvasRef.current
-      const canvasCtx = canvas.getContext('2d')
-      if (!canvasCtx) return
-
-      const bufferLength = analyser.frequencyBinCount
-      const dataArray = new Uint8Array(bufferLength)
-
-      const draw = () => {
-        animationRef.current = requestAnimationFrame(draw)
-        analyser.getByteTimeDomainData(dataArray)
-
-        canvasCtx.fillStyle = 'rgb(200, 220, 255)'
-        canvasCtx.fillRect(0, 0, canvas.width, canvas.height)
-        canvasCtx.lineWidth = 2
-        canvasCtx.strokeStyle = 'rgb(0, 0, 0)'
-        canvasCtx.beginPath()
-
-        const sliceWidth = (canvas.width * 1.0) / bufferLength
-        let x = 0
-
-        for (let i = 0; i < bufferLength; i++) {
-          const v = dataArray[i] / 128.0
-          const y = (v * canvas.height) / 2
-
-          if (i === 0) {
-            canvasCtx.moveTo(x, y)
-          } else {
-            canvasCtx.lineTo(x, y)
-          }
-
-          x += sliceWidth
-        }
-
-        canvasCtx.lineTo(canvas.width, canvas.height / 2)
-        canvasCtx.stroke()
-      }
-
-      draw()
-    }
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [isPlaying, analyser])
-
-  const playSound = () => {
-    setIsPlaying(true)
-    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)()
-    setAudioContext(ctx)
-
-    const oscillator = ctx.createOscillator()
-    const gainNode = ctx.createGain()
-    const analyserNode = ctx.createAnalyser()
-
-    oscillator.type = 'sine'
-    oscillator.frequency.setValueAtTime(frequency, ctx.currentTime)
-    gainNode.gain.setValueAtTime(volume / 100, ctx.currentTime)
-
-    oscillator.connect(gainNode)
-    gainNode.connect(analyserNode)
-    analyserNode.connect(ctx.destination)
-
-    setAnalyser(analyserNode)
-
-    oscillator.start()
-    oscillator.stop(ctx.currentTime + 2)
-
-    setTimeout(() => {
-      setIsPlaying(false)
-      if (audioContext) {
-        audioContext.close()
-      }
-    }, 2000)
-  }
-
-  const handleVolumeChange = (newVolume: number[]) => {
-    setVolume(newVolume[0])
-    if (audioContext) {
-      const gainNode = audioContext.createGain()
-      gainNode.gain.setValueAtTime(newVolume[0] / 100, audioContext.currentTime)
-    }
-  }
-
-  const nextTest = () => {
-    if (currentTest < frequencyRanges.length) {
-      setTestResult(prev => ({ ...prev, [frequencyRanges[currentTest].name]: volume }))
-      setCurrentTest(prev => prev + 1)
-      setVolume(50)
-    }
-  }
-
-  const resetTest = () => {
-    setTestResult({})
-    setCurrentTest(0)
-    setVolume(50)
-    setShowInstructions(true)
-  }
-
-  const getHearingStatus = (volume: number) => {
-    if (volume <= 20) return 'Excellent'
-    if (volume <= 40) return 'Good'
-    if (volume <= 60) return 'Fair'
-    if (volume <= 80) return 'Poor'
-    return 'Severe Loss'
-  }
-
-  const VolumeIcon = volume <= 33 ? VolumeX : volume <= 66 ? Volume1 : Volume2
-
+    if (inView) setTimeout(() => setAnimated(true), 200)
+  }, [inView])
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto max-w-4xl">
+    <section style={{ background: "var(--forest)", padding: "96px 48px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start", maxWidth: "1200px", margin: "0 auto" }}>
+
+        {/* Left — copy */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
         >
-          <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-600 mb-4">
-            Precision Hearing Assessment
+          <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+            Quick Screening
+          </div>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 300, lineHeight: 1.15, color: "white", marginBottom: "20px" }}>
+            Take a preliminary<br />hearing check
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Clinically-inspired audio evaluation with real-time audiogram visualization
+          <p style={{ fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, marginBottom: "24px" }}>
+            Use headphones in a quiet space. This is a screener only — not a substitute for a clinical evaluation by a qualified audiologist.
           </p>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", lineHeight: 1.7, marginBottom: "40px" }}>
+            Our audiologists recommend a full diagnostic test every 2 years. Book yours at the clinic for a complete, calibrated audiogram.
+          </p>
+
+          {/* Stats */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", marginBottom: "40px" }}>
+            {[
+              { val: "30 min", lbl: "Test duration" },
+              { val: "Free", lbl: "First visit" },
+              { val: "Same day", lbl: "Audiogram report" },
+              { val: "All ages", lbl: "We test everyone" },
+            ].map(({ val, lbl }) => (
+              <div key={lbl} style={{ background: "rgba(255,255,255,0.04)", padding: "18px 20px", border: "0.5px solid rgba(255,255,255,0.07)" }}>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px", fontWeight: 300, color: "white", lineHeight: 1 }}>{val}</div>
+                <div style={{ fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginTop: "6px" }}>{lbl}</div>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href="/contact"
+            style={{
+              display: "inline-block",
+              background: "var(--gold)",
+              color: "var(--forest)",
+              fontSize: "12px",
+              fontWeight: 500,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              padding: "14px 32px",
+              textDecoration: "none",
+            }}
+          >
+            Schedule Full Test →
+          </a>
         </motion.div>
 
+        {/* Right — audiogram screener card */}
         <motion.div
-          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          ref={ref}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65, delay: 0.15 }}
+          style={{
+            background: "rgba(255,255,255,0.05)",
+            border: "0.5px solid rgba(255,255,255,0.12)",
+            padding: "40px",
+          }}
         >
-          <div className="p-8 border-b border-slate-100 dark:border-slate-700">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                <Headphones className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+          <div style={{ fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "8px" }}>
+            Frequency Response Screener
+          </div>
+          <p style={{ fontSize: "12.5px", color: "rgba(255,255,255,0.4)", marginBottom: "32px", lineHeight: 1.55 }}>
+            Demo audiogram illustrating typical age-related high-frequency loss. Your actual thresholds will differ.
+          </p>
+
+          {/* Frequency bars */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+            {frequencies.map(({ label, pct, status, statusColor }, i) => (
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)", width: "58px", textAlign: "right", flexShrink: 0 }}>{label}</div>
+                <div style={{ flex: 1, height: "4px", background: "rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={animated ? { width: `${pct}%` } : { width: 0 }}
+                    transition={{ duration: 1.2, delay: i * 0.12, ease: "easeOut" }}
+                    style={{ height: "100%", background: "var(--gold)", position: "absolute", top: 0, left: 0 }}
+                  />
+                </div>
+                <div style={{ fontSize: "11.5px", color: statusColor, width: "58px", flexShrink: 0, fontWeight: 400 }}>{status}</div>
               </div>
-              <div>
-                <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
-                  Audiometric Evaluation
-                </h3>
-                <p className="text-slate-600 dark:text-slate-400">
-                  {currentTest + 1} of {frequencyRanges.length} frequency bands
-                </p>
-              </div>
+            ))}
+          </div>
+
+          {/* Legend */}
+          <div style={{ marginTop: "32px", paddingTop: "24px", borderTop: "0.5px solid rgba(255,255,255,0.1)" }}>
+            <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px" }}>Hearing thresholds</div>
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+              {[
+                { label: "Normal", color: "#6BAF7C" },
+                { label: "Mild loss", color: "var(--gold)" },
+                { label: "Moderate", color: "#E08040" },
+                { label: "Significant", color: "#C44" },
+              ].map(({ label, color }) => (
+                <div key={label} style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+                  <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: color, flexShrink: 0 }} />
+                  <span style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.4)" }}>{label}</span>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <div className="relative h-32 mb-8 bg-slate-50 dark:bg-slate-900 rounded-xl overflow-hidden">
-              <canvas 
-                ref={canvasRef} 
-                className="w-full h-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent dark:via-slate-800/30" />
-            </div>
-
-            <AnimatePresence mode="wait">
-              {showInstructions ? (
-                <motion.div
-                  key="instructions"
-                  className="space-y-6"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-                    <div className="flex items-start gap-4">
-                      <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                      <div>
-                        <h4 className="font-medium text-slate-800 dark:text-slate-200 mb-2">
-                          Test Preparation Guidelines
-                        </h4>
-                        <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
-                          <li>Use high-quality headphones in a quiet environment</li>
-                          <li>Position yourself 1-2 feet from your device</li>
-                          <li>Adjust volume to comfortable listening level</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <Button 
-                    onClick={() => setShowInstructions(false)}
-                    className="w-full py-6 text-lg"
-                  >
-                    Begin Calibration Test
-                  </Button>
-                </motion.div>
-              ) : currentTest < frequencyRanges.length ? (
-                <motion.div
-                  key="test"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <div className="mb-8">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm text-slate-600 dark:text-slate-400">
-                        Frequency Band
-                      </span>
-                      <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                        {frequencyRanges[currentTest].range}
-                      </span>
-                    </div>
-                    <div className="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
-                      <motion.div
-                        className={`h-full ${frequencyRanges[currentTest].color}`}
-                        initial={{ width: 0 }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: 2 }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                          <Volume2 className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                            Detection Threshold
-                          </span>
-                        </div>
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                          {volume} dB HL
-                        </span>
-                      </div>
-                      <Slider
-                        value={[volume]}
-                        onValueChange={handleVolumeChange}
-                        min={0}
-                        max={100}
-                        step={1}
-                        className="[&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <Button
-                        onClick={playSound}
-                        disabled={isPlaying}
-                        variant={isPlaying ? 'secondary' : 'default'}
-                        className="h-12"
-                      >
-                        {isPlaying ? 'Emitting Tone...' : 'Test Frequency'}
-                      </Button>
-                      <Button
-                        onClick={nextTest}
-                        variant="outline"
-                        className="h-12"
-                        disabled={currentTest === frequencyRanges.length - 1}
-                      >
-                        Next Frequency
-                      </Button>
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="results"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="space-y-8"
-                >
-                  <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-xl">
-                    <div className="flex items-start gap-4">
-                      <Thermometer className="w-5 h-5 text-green-600 dark:text-green-400 mt-1" />
-                      <div>
-                        <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
-                          Audiogram Summary
-                        </h3>
-                        {/* Add D3.js audiogram chart here */}
-                        <div className="h-48 bg-slate-100 dark:bg-slate-700 rounded-lg" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    {Object.entries(testResult).map(([range, value]) => (
-                      <div key={range} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                        <span className="font-medium text-slate-700 dark:text-slate-300">{range}</span>
-                        <span className={`text-lg font-semibold ${
-                          (value || 0) > 50 ? 'text-red-600' : 'text-green-600'
-                        }`}>
-                          {getHearingStatus(value || 0)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                    <p className="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
-                      <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-1" />
-                      This screening doesn't replace professional evaluation. 
-                      Our audiologists recommend comprehensive testing every 2 years.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <Button
-                      onClick={resetTest}
-                      variant="outline"
-                      className="h-12"
-                    >
-                      Recalibrate Test
-                    </Button>
-                    <Button className="h-12 bg-green-600 hover:bg-green-700">
-                      Schedule Consultation
-                    </Button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+          {/* Disclaimer */}
+          <div style={{ marginTop: "24px", padding: "14px 16px", background: "rgba(201,168,76,0.08)", border: "0.5px solid rgba(201,168,76,0.2)" }}>
+            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)", lineHeight: 1.6 }}>
+              This screener does not replace a professional audiological evaluation. Visit our clinic for a calibrated, certified audiogram.
+            </p>
           </div>
         </motion.div>
       </div>

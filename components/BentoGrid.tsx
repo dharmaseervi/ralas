@@ -1,202 +1,241 @@
 "use client"
-import Image from "next/image"
-import { ArrowRight, Check, ChevronRight, Clock, Link, MapPin, Phone, Star, Users, View } from "lucide-react"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { motion } from "framer-motion"
-import Viewdetails from "./viewdetails"
-import TechnologyCard from "./TechnologyCard"
-import { Badge } from "@/components/ui/badge"
 
-export function OticonBentoGrid() {
+import { useEffect, useRef } from "react"
+import Link from "next/link"
+import { motion, useInView } from "framer-motion"
+
+const cards = [
+  {
+    span: "lg:col-span-8",
+    variant: "light",
+    num: "01",
+    tag: "BrainHearing™ Platform",
+    title: "Hearing aids that think like your brain",
+    desc: "Our partnered devices leverage neural-network processing with 12M trained sound scenes, delivering 50% better speech clarity in noisy environments.",
+    stats: [
+      { val: "50%", lbl: "better clarity" },
+      { val: "0.5ms", lbl: "response time" },
+      { val: "30h", lbl: "battery life" },
+    ],
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
+      </svg>
+    ),
+  },
+  {
+    span: "lg:col-span-4",
+    variant: "dark",
+    num: "02",
+    tag: "Free Assessment",
+    title: "Comprehensive hearing test on first visit",
+    desc: "Walk in for a no-obligation audiometric evaluation. Get your personalised audiogram the same day.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v8M8 12h8" />
+      </svg>
+    ),
+  },
+  {
+    span: "lg:col-span-4",
+    variant: "light",
+    num: "03",
+    tag: "In-Home Service",
+    title: "We come to you",
+    desc: "For elderly patients or those with mobility constraints, our audiologists offer home visit programmes across Bengaluru.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    ),
+  },
+  {
+    span: "lg:col-span-4",
+    variant: "gold",
+    num: "04",
+    tag: "Satisfaction Guarantee",
+    title: "30-day trial, no questions asked",
+    desc: "Not happy? Return within 30 days for a full refund. We believe in the product — and in you.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+    ),
+  },
+  {
+    span: "lg:col-span-4",
+    variant: "light",
+    num: "05",
+    tag: "Speech Therapy",
+    title: "Dedicated speech-language pathologist on-site",
+    desc: "From childhood articulation delays to post-stroke rehabilitation — personalised, evidence-based therapy.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
+  },
+  {
+    span: "lg:col-span-4",
+    variant: "stat",
+    num: "06",
+    statVal: "1200+",
+    statLbl: "Patients served",
+  },
+]
+
+const variantStyles: Record<string, React.CSSProperties> = {
+  light: { background: "var(--white)", border: "0.5px solid rgba(26,58,42,0.1)" },
+  dark: { background: "var(--forest)", border: "none" },
+  gold: { background: "var(--gold)", border: "none" },
+  stat: { background: "var(--white)", border: "0.5px solid rgba(26,58,42,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", textAlign: "center" },
+}
+
+export default function BentoGrid() {
   return (
-    <section className="container py-12 md:py-24 mx-auto">
-      <div className="flex flex-col items-center justify-center text-center mb-12">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
-        >
-          Premium Hearing Aid Brands
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-4 text-muted-foreground md:text-xl max-w-[700px]"
-        >
-          Discover our selection of top-quality hearing aids from leading manufacturers
-        </motion.p>
-      </div>
+    <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        style={{ marginBottom: "56px", maxWidth: "480px" }}
+      >
+        <div className="section-label">Why Ralas</div>
+        <h2 className="section-h2">Audiological care<br />redefined</h2>
+        <p className="section-sub" style={{ marginTop: "12px" }}>
+          Combining clinical precision with a deeply human approach to hearing health.
+        </p>
+      </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12  gap-4">
-        {/* Featured Brand - Oticon */}
-        <motion.div
-          className="md:col-span-8 h-full"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="overflow-hidden group h-full">
-            <div className="relative">
-              <AspectRatio ratio={16 / 9}>
-                <Image
-                  src="/images/oticon-1.png"
-                  alt="Oticon hearing aids"
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105 duration-300"
-                  
-                />
-              </AspectRatio>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                <div className="space-y-2">
-                  <Badge className="w-fit mb-2 bg-primary/80 backdrop-blur-sm">Featured Brand</Badge>
-                  <CardTitle className="text-2xl text-white">Oticon</CardTitle>
-                  <CardDescription className="text-white/80">
-                    Premium hearing solutions with advanced technology
-                  </CardDescription>
-                </div>
-              </div>
-            </div>
-            <CardFooter className="p-4 flex justify-between items-center bg-muted/50">
-              <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                <span className="text-sm font-medium">4.9/5 Expert Rating</span>
-              </div>
-              <Button variant="ghost" size="sm" className="gap-1 group">
-                View Collection
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </CardFooter>
-          </Card>
-        </motion.div>
-
-        {/* Product Cards Column */}
-        <div className="md:col-span-4 grid gap-4">
-          {/* Oticon More */}
+      {/* Grid */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: "16px" }}>
+        {cards.map((card, i) => (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            key={i}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: i * 0.07 }}
+            className={card.span}
+            style={{
+              ...variantStyles[card.variant],
+              padding: "36px 32px",
+              position: "relative",
+              overflow: "hidden",
+              gridColumn: `span ${card.span.includes("8") ? 8 : 4}`,
+              transition: "box-shadow 0.3s, transform 0.3s",
+              cursor: "default",
+              minHeight: card.variant === "stat" ? "180px" : "auto",
+            }}
+            whileHover={{ y: -3, boxShadow: "0 12px 40px rgba(26,58,42,0.1)" }}
           >
-            <Card className="overflow-hidden group h-full">
-              <CardHeader className="p-4 pb-2">
-                <Badge className="w-fit mb-2 bg-green-600 text-white">New Release</Badge>
-                <CardTitle className="text-xl">Oticon More™</CardTitle>
-                <CardDescription>BrainHearing™ Technology</CardDescription>
-              </CardHeader>
-              <CardContent className="p-0 relative">
-                <AspectRatio ratio={4 / 3}>
-                  <Image
-                    src="/images/oticon-2.png"
-                    alt="Oticon More hearing aid"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-110 duration-300"
-                  />
-                </AspectRatio>
-              </CardContent>
-              <CardFooter className="p-4 bg-muted/50">
-                <Button variant="outline" size="sm" className="w-full group">
-                  Explore Features
-                  <ChevronRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </CardFooter>
-            </Card>
-          </motion.div>
-
-          {/* Oticon Opn S */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Card className="overflow-hidden group h-full">
-              <CardHeader className="p-4 pb-2">
-                <CardTitle className="text-xl">Oticon Opn S™</CardTitle>
-                <CardDescription>Open Sound Experience</CardDescription>
-              </CardHeader>
-              <CardContent className="p-0 relative">
-                <AspectRatio ratio={4 / 3}>
-                  <Image
-                    src="/images/oticon-3.png"
-                    alt="Oticon Opn S hearing aid"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-110 duration-300"
-                  />
-                </AspectRatio>
-              </CardContent>
-              <CardFooter className="p-4 bg-muted/50">
-                <Viewdetails />
-              </CardFooter>
-            </Card>
-          </motion.div>
-        </div>
-
-        {/* Features Card */}
-        <motion.div
-          className="md:col-span-4"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="h-full bg-primary/90 text-primary-foreground border-primary/30 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-2xl">Why Choose Oticon?</CardTitle>
-              <CardDescription className="text-primary-foreground/80">
-                Industry-leading hearing technology
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {[
-                { icon: <Users className="h-5 w-5" />, text: "Worn by 2M+ users worldwide" },
-                { icon: <Check className="h-5 w-5" />, text: "BrainHearing™ Technology" },
-                { icon: <Clock className="h-5 w-5" />, text: "24hr Rechargeable Battery" },
-                { icon: <Star className="h-5 w-5" />, text: "3-year Warranty" },
-                { icon: <Phone className="h-5 w-5" />, text: "Bluetooth Connectivity" },
-              ].map((feature, index) => (
-                <div key={index} className="flex items-center gap-4 p-3 rounded-lg bg-primary/20 hover:bg-primary/30 transition-colors">
-                  <div className="p-2 bg-primary/10 rounded-full">{feature.icon}</div>
-                  <p className="text-sm">{feature.text}</p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Technology Card */}
-        <motion.div
-          className="md:col-span-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="overflow-hidden group h-full">
-            <div className="grid md:grid-cols-2 h-full">
-              <div className="p-6 flex flex-col justify-between">
-                <div>
-                  <Badge className="w-fit mb-4">Innovation</Badge>
-                  <CardTitle className="text-2xl mb-2">Deep Neural Network</CardTitle>
-                  <CardDescription className="mb-4">
-                    Trained with 12 million real-world sound scenes for superior performance
-                  </CardDescription>
-                </div>
-                <TechnologyCard />
+            {/* Background number */}
+            {card.num && (
+              <div style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "72px",
+                fontWeight: 300,
+                lineHeight: 1,
+                position: "absolute",
+                top: "16px",
+                right: "24px",
+                color: card.variant === "dark"
+                  ? "rgba(255,255,255,0.07)"
+                  : card.variant === "gold"
+                  ? "rgba(26,58,42,0.12)"
+                  : "rgba(26,58,42,0.06)",
+                userSelect: "none",
+              }}>
+                {card.num}
               </div>
-              <div className="relative">
-                <AspectRatio ratio={1}>
-                  <Image
-                    src="/images/dnn.jpg"
-                    alt="Neural network technology"
-                    fill
-                    className="object-cover"
-                  />
-                </AspectRatio>
-              </div>
-            </div>
-          </Card>
-        </motion.div>
+            )}
+
+            {card.variant === "stat" ? (
+              <>
+                <div style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "64px",
+                  fontWeight: 300,
+                  color: "var(--forest)",
+                  lineHeight: 1,
+                }}>
+                  {card.statVal}
+                </div>
+                <div style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-lt)", marginTop: "8px" }}>
+                  {card.statLbl}
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Icon */}
+                <div style={{
+                  width: "40px",
+                  height: "40px",
+                  border: `1px solid ${card.variant === "dark" ? "rgba(255,255,255,0.2)" : "rgba(26,58,42,0.15)"}`,
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "20px",
+                }}>
+                  {card.icon}
+                </div>
+
+                {/* Tag */}
+                <div style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: card.variant === "dark" ? "var(--gold-lt)" : card.variant === "gold" ? "rgba(26,58,42,0.6)" : "var(--gold)",
+                  marginBottom: "10px",
+                }}>
+                  {card.tag}
+                </div>
+
+                {/* Title */}
+                <div style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "22px",
+                  fontWeight: 400,
+                  marginBottom: "10px",
+                  color: card.variant === "dark" ? "white" : "var(--forest)",
+                  lineHeight: 1.25,
+                }}>
+                  {card.title}
+                </div>
+
+                {/* Desc */}
+                <p style={{
+                  fontSize: "13.5px",
+                  fontWeight: 300,
+                  color: card.variant === "dark" ? "rgba(255,255,255,0.65)" : card.variant === "gold" ? "rgba(26,58,42,0.75)" : "var(--text-mid)",
+                  lineHeight: 1.65,
+                }}>
+                  {card.desc}
+                </p>
+
+                {/* Stats row (card 0 only) */}
+                {card.stats && (
+                  <div style={{ display: "flex", gap: "32px", marginTop: "24px" }}>
+                    {card.stats.map(({ val, lbl }) => (
+                      <div key={lbl}>
+                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "44px", fontWeight: 300, color: "var(--forest)", lineHeight: 1 }}>{val}</div>
+                        <div style={{ fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-lt)", marginTop: "4px" }}>{lbl}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </motion.div>
+        ))}
       </div>
     </section>
   )

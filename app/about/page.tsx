@@ -1,165 +1,115 @@
-import { Metadata } from 'next'
-import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Ear, HeartHandshake, BadgeCheck, BookUser, Phone } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'About Us | Ralas Hearing Aid Clinic',
-  description: 'Learn about Ralas Hearing Aid Clinic, our mission, and our commitment to improving lives through better hearing.',
-}
+import FAQ from "@/components/home/FAQ"
+import Footer from "@/components/home/Footer"
+import Navbar from "@/components/home/navbar"
+import ServiceHero from "@/components/home/servicehero"
+
+const team = [
+  { name: "Dr. Priya Sharma", role: "Chief Audiologist", qual: "M.Sc. Audiology, AIISH", spec: "Paediatric & adult hearing assessment", initials: "PS" },
+  { name: "Dr. Rajan Menon", role: "Senior Audiologist", qual: "M.Sc. Audiology, MASLP", spec: "Hearing aid fitting & rehabilitation", initials: "RM" },
+  { name: "Ms. Divya Rao", role: "Speech-Language Pathologist", qual: "M.Sc. SLP, AIISH", spec: "Paediatric speech & language therapy", initials: "DR" },
+]
+
+const stats = [
+  { val: "1200+", label: "Patients served" },
+  { val: "12 yrs", label: "Clinical experience" },
+  { val: "4", label: "Premium brands" },
+  { val: "98%", label: "Patient satisfaction" },
+]
+
+const faqs = [
+  { question: "When was Ralas founded?", answer: "Ralas Hearing Clinic was established in 2012 in Jayanagar, Bengaluru. We have been serving the community for over 12 years, providing audiological care and speech therapy to patients of all ages." },
+  { question: "Are your audiologists certified?", answer: "Yes. All our audiologists hold Master's degrees from the All India Institute of Speech and Hearing (AIISH), Mysore, and are registered with the Rehabilitation Council of India (RCI)." },
+  { question: "Do you accept insurance?", answer: "We provide GST-compliant invoices that are accepted by most insurance providers. We recommend checking with your insurer before your appointment. We can also provide detailed clinical reports for reimbursement." },
+  { question: "Do you offer home visits?", answer: "Yes. For elderly patients or those with mobility constraints, our audiologists offer home visit programmes across Bengaluru. Please call us to check availability in your area." },
+  { question: "What brands do you carry?", answer: "We are authorised dealers for Oticon, Phonak, Signia, and Widex — four of the world's leading hearing aid manufacturers. All devices come with a manufacturer's warranty and our in-clinic after-care." },
+]
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <Breadcrumb className="mb-8">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>About</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <>
+      <Navbar />
+      <ServiceHero
+        title="Dedicated to better hearing"
+        subtitle="Founded in 2012, Ralas is Bengaluru's trusted hearing clinic — combining clinical precision with compassionate, patient-first care."
+        imageSrc="/images/clinic-interior.jpg"
+      />
 
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">
-          About Ralas Hearing Aid Clinic
-        </h1>
-        <p className="mt-4 text-xl text-muted-foreground max-w-3xl mx-auto">
-          Connecting the world through better hearing since 2005
-        </p>
-      </div>
-
-      <section className="grid lg:grid-cols-2 gap-12 mb-16">
-        <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
-          <Image
-            src="/ralas.webp"
-            alt="Ralas team"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-primary/10 rounded-full">
-                <Ear className="w-8 h-8 text-primary" />
-              </div>
-              <CardTitle className="text-3xl">Our Mission</CardTitle>
+      {/* Mission section */}
+      <section style={{ background: "var(--white)", padding: "96px 48px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+          <div>
+            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+              Our Mission
             </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              At Ralas, we're dedicated to transforming lives through exceptional hearing care. 
-              Combining cutting-edge technology with compassionate service, we create personalized 
-              solutions that help our patients reconnect with life's precious moments.
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, lineHeight: 1.15, color: "var(--forest)", marginBottom: "24px" }}>
+              Hearing care that<br />puts people first
+            </h2>
+            <p style={{ fontSize: "15px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.8, marginBottom: "20px" }}>
+              At Ralas, we believe that better hearing transforms lives. Our mission is to provide every patient — from toddlers to the elderly — with precise audiological diagnosis, the right technology, and the ongoing support they need to thrive.
             </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      <section className="mb-16">
-        <Card className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-blue-100/50" />
-          <CardHeader>
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-primary/10 rounded-full">
-                <BookUser className="w-8 h-8 text-primary" />
-              </div>
-              <CardTitle className="text-3xl">Our Journey</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-6 max-w-4xl mx-auto">
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Established in 2005, Ralas has evolved from a local hearing specialist to a regional 
-                leader in audiological care. Our growth is rooted in continuous innovation and an 
-                unwavering commitment to patient-centered service.
-              </p>
-              <div className="grid grid-cols-2 gap-4 mt-4">
-                <div className="p-4 bg-background rounded-lg border">
-                  <h3 className="text-2xl font-bold text-primary">18+</h3>
-                  <p className="text-muted-foreground">Years of Experience</p>
+            <p style={{ fontSize: "15px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.8, marginBottom: "36px" }}>
+              We are not a retail chain. We are a specialist clinic where every appointment is unhurried, every recommendation is unbiased, and every device is fitted and followed up with the care it deserves.
+            </p>
+            <div style={{ display: "flex", gap: "32px" }}>
+              {[{ val: "2012", lbl: "Founded" }, { val: "Jayanagar", lbl: "Location" }, { val: "RCI Reg.", lbl: "Certified" }].map(({ val, lbl }) => (
+                <div key={lbl}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontWeight: 300, color: "var(--forest)", lineHeight: 1 }}>{val}</div>
+                  <div style={{ fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-lt)", marginTop: "4px" }}>{lbl}</div>
                 </div>
-                <div className="p-4 bg-background rounded-lg border">
-                  <h3 className="text-2xl font-bold text-primary">10k+</h3>
-                  <p className="text-muted-foreground">Lives Improved</p>
-                </div>
-              </div>
+              ))}
             </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      <section className="mb-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Our Core Commitments</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            The pillars that guide every aspect of our care
-          </p>
+          </div>
+          <div style={{ position: "relative", height: "480px", background: "var(--cream-dk)", overflow: "hidden" }}>
+            <img src="/images/clinic-team.jpg" alt="Ralas clinic team" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "3px", background: "var(--gold)" }} />
+          </div>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { 
-              icon: HeartHandshake, 
-              title: "Personalized Care",
-              description: "Tailored solutions for your unique hearing profile"
-            },
-            { 
-              icon: BadgeCheck, 
-              title: "Advanced Technology",
-              description: "State-of-the-art hearing solutions and diagnostics"
-            },
-            { 
-              icon: Phone, 
-              title: "Lifetime Support",
-              description: "Continuous care and adjustment services"
-            },
-            { 
-              icon: Ear, 
-              title: "Hearing Education",
-              description: "Community programs and preventive care"
-            },
-          ].map((item, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center text-center">
-                  <div className="p-3 bg-primary/10 rounded-full mb-4">
-                    <item.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.description}</p>
+      {/* Team section */}
+      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "56px" }}>
+            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+              Our Team
+            </div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, lineHeight: 1.15, color: "var(--forest)" }}>
+              Meet the specialists
+            </h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2px" }}>
+            {team.map(({ name, role, qual, spec, initials }) => (
+              <div key={name} style={{ background: "var(--white)", padding: "40px 32px", border: "0.5px solid rgba(26,58,42,0.08)" }}>
+                <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "var(--forest)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "24px" }}>
+                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 300, color: "var(--gold-lt)" }}>{initials}</span>
                 </div>
-              </CardContent>
-            </Card>
+                <div style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "8px" }}>{role}</div>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, color: "var(--forest)", marginBottom: "8px" }}>{name}</div>
+                <div style={{ fontSize: "12.5px", fontWeight: 300, color: "var(--text-lt)", marginBottom: "12px" }}>{qual}</div>
+                <div style={{ paddingTop: "16px", borderTop: "0.5px solid rgba(26,58,42,0.1)", fontSize: "13px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.6 }}>{spec}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats bar */}
+      <section style={{ background: "var(--forest)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}>
+          {stats.map(({ val, label }, i) => (
+            <div key={label} style={{ padding: "48px 40px", borderRight: i < stats.length - 1 ? "0.5px solid rgba(255,255,255,0.1)" : "none" }}>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "52px", fontWeight: 300, color: "var(--gold)", lineHeight: 1, marginBottom: "8px" }}>{val}</div>
+              <div style={{ fontSize: "13px", fontWeight: 300, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em" }}>{label}</div>
+            </div>
           ))}
         </div>
       </section>
 
-      <section className="bg-primary/10 rounded-2xl p-8 text-center">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Experience the Ralas Difference</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Start your journey to better hearing today with our expert team
-          </p>
-          <Button size="lg" className="gap-2">
-            <Phone className="w-5 h-5" />
-            Schedule Consultation
-          </Button>
-        </div>
-      </section>
-    </div>
+      <FAQ title="Questions about Ralas" questions={faqs} />
+      <Footer />
+    </>
   )
 }
