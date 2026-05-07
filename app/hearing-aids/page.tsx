@@ -2,9 +2,11 @@ import Link from "next/link"
 
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
+
+import TechnologyShowcase from "@/components/home/TechnologyShowcase"
 import Navbar from "@/components/home/Navbar"
 import ServiceHero from "@/components/home/ServiceHero"
-import TechnologyShowcase from "@/components/home/TechnologyShowcase"
+
 
 const products = [
   { type: "Behind-the-Ear (BTE)", range: "₹18,000 – ₹2,20,000", desc: "The most versatile style. Sits behind the ear with a tube connecting to an ear mould. Suitable for mild to profound hearing loss in all ages.", features: ["All hearing loss levels", "Long battery life", "Easy to handle", "Rechargeable options"] },

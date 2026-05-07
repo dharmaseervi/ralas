@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import Footer from "@/components/home/Footer"
 import Navbar from "@/components/home/Navbar"
+import { useState } from "react"
+
 
 const services = ["Hearing Test", "Speech Therapy", "Hearing Aid Fitting", "Tinnitus Treatment", "Initial Consultation", "Follow-up / Adjustment"]
 

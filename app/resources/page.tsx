@@ -5,6 +5,7 @@ import { useState } from "react"
 import Footer from "@/components/home/Footer"
 import Navbar from "@/components/home/Navbar"
 
+
 const articles = [
   { tag: "Guide", title: "How to read your audiogram", desc: "Your audiogram tells the full story of your hearing. Here's what the axes, symbols, and thresholds mean — and what your results indicate.", readTime: "5 min" },
   { tag: "Tips", title: "10 ways to protect your hearing", desc: "Most hearing loss from noise exposure is entirely preventable. Simple daily habits can preserve your hearing for decades.", readTime: "4 min" },
