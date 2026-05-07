@@ -1,6 +1,6 @@
 "use client"
 import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/navbar"
+import Navbar from "@/components/home/NavigationBar"
 
 import { useState } from "react"
 

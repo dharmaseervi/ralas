@@ -3,8 +3,8 @@ import Link from "next/link"
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import TechnologyShowcase from "@/components/home/TechnologyShowcase"
-import ServiceHero from "@/components/home/servicehero"
-import Navbar from "@/components/home/navbar"
+import ServiceHero from "@/components/home/ServiceheroSection"
+import Navbar from "@/components/home/NavigationBar"
 
 
 

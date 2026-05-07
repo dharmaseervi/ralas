@@ -2,8 +2,8 @@ import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import { BookAppointment } from "@/components/Bookappointment"
 import HearingTestSection from "@/components/home/HearingTest"
-import Navbar from "@/components/home/navbar"
-import ServiceHero from "@/components/home/servicehero"
+import Navbar from "@/components/home/NavigationBar"
+import ServiceHero from "@/components/home/ServiceheroSection"
 
 const testTypes = [
   { tag: "Standard", title: "Pure Tone Audiometry", desc: "The core hearing test. You'll hear tones at different frequencies and volumes through headphones and indicate when you can hear them. Results are plotted on an audiogram.", duration: "20 min" },

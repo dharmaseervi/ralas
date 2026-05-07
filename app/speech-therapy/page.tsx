@@ -2,8 +2,8 @@
 import { BookAppointment } from "@/components/Bookappointment"
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/navbar"
-import ServiceHero from "@/components/home/servicehero"
+import Navbar from "@/components/home/NavigationBar"
+import ServiceHero from "@/components/home/ServiceheroSection"
 
 
 
