@@ -1,8 +1,9 @@
-import Navbar from "@/components/home/Navbar"
-import ServiceHero from "@/components/home/ServiceHero"
+
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import { BookAppointment } from "@/components/Bookappointment"
+import Navbar from "@/components/home/navbar"
+import ServiceHero from "@/components/home/servicehero"
 
 const symptoms = ["Ringing or buzzing in ears", "Hissing or whistling sounds", "Clicking or pulsing sounds", "Sound only you can hear", "Worse in quiet environments", "Difficulty sleeping", "Concentration problems", "Anxiety or distress from sound"]
 

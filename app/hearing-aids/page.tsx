@@ -2,10 +2,10 @@ import Link from "next/link"
 
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
-
 import TechnologyShowcase from "@/components/home/TechnologyShowcase"
-import Navbar from "@/components/home/Navbar"
-import ServiceHero from "@/components/home/ServiceHero"
+import ServiceHero from "@/components/home/servicehero"
+import Navbar from "@/components/home/navbar"
+
 
 
 const products = [

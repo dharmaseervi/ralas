@@ -1,8 +1,9 @@
 
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/Navbar"
-import ServiceHero from "@/components/home/ServiceHero"
+import Navbar from "@/components/home/navbar"
+import ServiceHero from "@/components/home/servicehero"
+
 
 
 

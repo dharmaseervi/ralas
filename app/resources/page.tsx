@@ -3,7 +3,8 @@
 import { useState } from "react"
 
 import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/Navbar"
+import Navbar from "@/components/home/navbar"
+
 
 
 const articles = [
