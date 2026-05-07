@@ -1,11 +1,8 @@
-import Link from "next/link"
-
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
-import TechnologyShowcase from "@/components/home/TechnologyShowcase"
-import ServiceHero from "@/components/home/ServiceheroSection"
 import Navbar from "@/components/home/NavigationBar"
-
+import ServiceHero from "@/components/home/ServiceheroSection"
+import TechnologyShowcase from "@/components/home/TechnologyShowcase"
 
 
 const products = [
@@ -35,33 +32,43 @@ export default function HearingAidsPage() {
     <>
       <Navbar />
       <ServiceHero
-  
+        eyebrow="Hearing Aids"
         title="The right hearing aid, fitted for you"
         subtitle="Authorised dealer for Oticon, Phonak, Signia, and Widex. Every device is precisely calibrated to your audiogram by our certified audiologists."
         imageSrc="/images/hearing-aids-hero.jpg"
       />
 
-      {/* Product types */}
-      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Product types — 1 col mobile, 2 col desktop ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--cream)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Device Types
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>Find the style that suits you</h2>
+            <h2 className="font-light" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>
+              Find the style that suits you
+            </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "2px" }}>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
             {products.map(({ type, range, desc, features }) => (
-              <div key={type} style={{ background: "var(--white)", padding: "40px 36px", border: "0.5px solid rgba(26,58,42,0.08)" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 400, color: "var(--forest)", lineHeight: 1.25 }}>{type}</div>
-                  <div style={{ fontSize: "12px", fontWeight: 300, color: "var(--gold)", whiteSpace: "nowrap", marginLeft: "16px", paddingTop: "4px" }}>{range}</div>
+              <div key={type} className="p-7 md:p-9" style={{ background: "var(--white)" }}>
+                {/* Type + price — stacks on very small, row on sm+ */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-4">
+                  <div className="font-normal leading-snug" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(18px,3vw,22px)", color: "var(--forest)" }}>
+                    {type}
+                  </div>
+                  <div className="text-xs font-light flex-shrink-0 sm:pt-1" style={{ color: "var(--gold)" }}>
+                    {range}
+                  </div>
                 </div>
-                <p style={{ fontSize: "13.5px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.7, marginBottom: "20px" }}>{desc}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                <p className="text-sm font-light leading-relaxed mb-4" style={{ color: "var(--text-mid)" }}>{desc}</p>
+                <div className="flex flex-wrap gap-1.5">
                   {features.map((f) => (
-                    <span key={f} style={{ fontSize: "11px", fontWeight: 300, color: "var(--text-mid)", border: "0.5px solid rgba(26,58,42,0.15)", padding: "4px 10px" }}>{f}</span>
+                    <span key={f} className="text-xs font-light px-2.5 py-1" style={{ color: "var(--text-mid)", border: "0.5px solid rgba(26,58,42,0.15)" }}>
+                      {f}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -72,25 +79,30 @@ export default function HearingAidsPage() {
 
       <TechnologyShowcase />
 
-      {/* Brands */}
-      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Brands — 1 col mobile, 2 col desktop ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--cream)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Our Brands
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>World-leading manufacturers</h2>
+            <h2 className="font-light" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>
+              World-leading manufacturers
+            </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "2px" }}>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
             {brands.map(({ name, desc }) => (
-              <div key={name} style={{ background: "var(--white)", padding: "36px", border: "0.5px solid rgba(26,58,42,0.08)", display: "flex", gap: "24px", alignItems: "flex-start" }}>
-                <div style={{ width: "56px", height: "56px", background: "var(--forest)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "13px", fontWeight: 300, color: "var(--gold-lt)", letterSpacing: "0.06em" }}>{name[0]}</span>
+              <div key={name} className="flex gap-4 md:gap-6 items-start p-7 md:p-9" style={{ background: "var(--white)" }}>
+                <div className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center flex-shrink-0" style={{ background: "var(--forest)" }}>
+                  <span className="font-light tracking-wider" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "13px", color: "var(--gold-lt)" }}>
+                    {name[0]}
+                  </span>
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 400, color: "var(--forest)", marginBottom: "8px" }}>{name}</div>
-                  <p style={{ fontSize: "13.5px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.7 }}>{desc}</p>
+                  <div className="font-normal mb-2" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", color: "var(--forest)" }}>{name}</div>
+                  <p className="text-sm font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>{desc}</p>
                 </div>
               </div>
             ))}

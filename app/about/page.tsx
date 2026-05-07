@@ -1,8 +1,8 @@
-
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import Navbar from "@/components/home/NavigationBar"
 import ServiceHero from "@/components/home/ServiceheroSection"
+
 
 const team = [
   { name: "Dr. Priya Sharma", role: "Chief Audiologist", qual: "M.Sc. Audiology, AIISH", spec: "Paediatric & adult hearing assessment", initials: "PS" },
@@ -13,8 +13,8 @@ const team = [
 const stats = [
   { val: "1200+", label: "Patients served" },
   { val: "12 yrs", label: "Clinical experience" },
-  { val: "4", label: "Premium brands" },
-  { val: "98%", label: "Patient satisfaction" },
+  { val: "4",      label: "Premium brands" },
+  { val: "98%",    label: "Patient satisfaction" },
 ]
 
 const faqs = [
@@ -30,79 +30,142 @@ export default function AboutPage() {
     <>
       <Navbar />
       <ServiceHero
+        eyebrow="Our Story"
         title="Dedicated to better hearing"
         subtitle="Founded in 2012, Ralas is Bengaluru's trusted hearing clinic — combining clinical precision with compassionate, patient-first care."
         imageSrc="/images/clinic-interior.jpg"
       />
 
-      {/* Mission section */}
-      <section style={{ background: "var(--white)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+      {/* ── Mission ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--white)" }}>
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+
+          {/* Text */}
           <div>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Our Mission
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, lineHeight: 1.15, color: "var(--forest)", marginBottom: "24px" }}>
+            <h2
+              className="font-light leading-tight mb-5"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", lineHeight: 1.15, color: "var(--forest)" }}
+            >
               Hearing care that<br />puts people first
             </h2>
-            <p style={{ fontSize: "15px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.8, marginBottom: "20px" }}>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "var(--text-mid)" }}>
               At Ralas, we believe that better hearing transforms lives. Our mission is to provide every patient — from toddlers to the elderly — with precise audiological diagnosis, the right technology, and the ongoing support they need to thrive.
             </p>
-            <p style={{ fontSize: "15px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.8, marginBottom: "36px" }}>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-mid)" }}>
               We are not a retail chain. We are a specialist clinic where every appointment is unhurried, every recommendation is unbiased, and every device is fitted and followed up with the care it deserves.
             </p>
-            <div style={{ display: "flex", gap: "32px" }}>
-              {[{ val: "2012", lbl: "Founded" }, { val: "Jayanagar", lbl: "Location" }, { val: "RCI Reg.", lbl: "Certified" }].map(({ val, lbl }) => (
+            <div className="flex flex-wrap gap-6 md:gap-8">
+              {[
+                { val: "2012", lbl: "Founded" },
+                { val: "Jayanagar", lbl: "Location" },
+                { val: "RCI Reg.", lbl: "Certified" },
+              ].map(({ val, lbl }) => (
                 <div key={lbl}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontWeight: 300, color: "var(--forest)", lineHeight: 1 }}>{val}</div>
-                  <div style={{ fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-lt)", marginTop: "4px" }}>{lbl}</div>
+                  <div
+                    className="font-light leading-none"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(22px,3vw,28px)", color: "var(--forest)" }}
+                  >
+                    {val}
+                  </div>
+                  <div className="text-xs tracking-widest uppercase mt-1" style={{ color: "var(--text-lt)" }}>{lbl}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div style={{ position: "relative", height: "480px", background: "var(--cream-dk)", overflow: "hidden" }}>
-            <img src="/images/clinic-team.jpg" alt="Ralas clinic team" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "3px", background: "var(--gold)" }} />
+
+          {/* Image */}
+          <div
+            className="relative overflow-hidden w-full"
+            style={{ height: "clamp(260px,40vw,480px)", background: "var(--cream-dk)" }}
+          >
+            <img
+              src="/images/clinic-team.jpg"
+              alt="Ralas clinic team"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: "var(--gold)" }} />
           </div>
         </div>
       </section>
 
-      {/* Team section */}
-      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Team ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--cream)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Our Team
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, lineHeight: 1.15, color: "var(--forest)" }}>
+            <h2
+              className="font-light leading-tight"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", lineHeight: 1.15, color: "var(--forest)" }}
+            >
               Meet the specialists
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2px" }}>
+
+          {/* Team cards — 1 col mobile, 3 col desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
             {team.map(({ name, role, qual, spec, initials }) => (
-              <div key={name} style={{ background: "var(--white)", padding: "40px 32px", border: "0.5px solid rgba(26,58,42,0.08)" }}>
-                <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "var(--forest)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "24px" }}>
-                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 300, color: "var(--gold-lt)" }}>{initials}</span>
+              <div
+                key={name}
+                className="p-8 md:p-10"
+                style={{ background: "var(--white)" }}
+              >
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+                  style={{ background: "var(--forest)" }}
+                >
+                  <span
+                    className="text-xl font-light"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", color: "var(--gold-lt)" }}
+                  >
+                    {initials}
+                  </span>
                 </div>
-                <div style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "8px" }}>{role}</div>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, color: "var(--forest)", marginBottom: "8px" }}>{name}</div>
-                <div style={{ fontSize: "12.5px", fontWeight: 300, color: "var(--text-lt)", marginBottom: "12px" }}>{qual}</div>
-                <div style={{ paddingTop: "16px", borderTop: "0.5px solid rgba(26,58,42,0.1)", fontSize: "13px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.6 }}>{spec}</div>
+                <div className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--gold)" }}>{role}</div>
+                <div
+                  className="text-xl font-normal mb-2"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", color: "var(--forest)" }}
+                >
+                  {name}
+                </div>
+                <div className="text-xs font-light mb-3" style={{ color: "var(--text-lt)" }}>{qual}</div>
+                <div
+                  className="pt-4 text-sm font-light leading-relaxed"
+                  style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)", color: "var(--text-mid)" }}
+                >
+                  {spec}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats bar */}
+      {/* ── Stats bar — 2×2 on mobile, 4 col on desktop ── */}
       <section style={{ background: "var(--forest)" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}>
+        <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4">
           {stats.map(({ val, label }, i) => (
-            <div key={label} style={{ padding: "48px 40px", borderRight: i < stats.length - 1 ? "0.5px solid rgba(255,255,255,0.1)" : "none" }}>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "52px", fontWeight: 300, color: "var(--gold)", lineHeight: 1, marginBottom: "8px" }}>{val}</div>
-              <div style={{ fontSize: "13px", fontWeight: 300, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em" }}>{label}</div>
+            <div
+              key={label}
+              className="px-6 py-10 md:px-10 md:py-12"
+              style={{
+                borderRight: (i % 2 === 0) ? "0.5px solid rgba(255,255,255,0.1)" : "none",
+                borderBottom: i < 2 ? "0.5px solid rgba(255,255,255,0.1)" : "none",
+              }}
+            >
+              <div
+                className="font-light leading-none mb-2"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,52px)", color: "var(--gold)" }}
+              >
+                {val}
+              </div>
+              <div className="text-xs font-light tracking-wider" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</div>
             </div>
           ))}
         </div>

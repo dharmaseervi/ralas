@@ -4,12 +4,12 @@ import { useState, useRef, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 
 const frequencies = [
-  { label: "250 Hz",  pct: 82, status: "Normal",   statusColor: "#6BAF7C" },
-  { label: "500 Hz",  pct: 75, status: "Normal",   statusColor: "#6BAF7C" },
-  { label: "1 kHz",   pct: 68, status: "Normal",   statusColor: "#6BAF7C" },
-  { label: "2 kHz",   pct: 52, status: "Mild",     statusColor: "var(--gold)" },
-  { label: "4 kHz",   pct: 36, status: "Moderate", statusColor: "#E08040" },
-  { label: "8 kHz",   pct: 18, status: "Sig. Loss", statusColor: "#C44" },
+  { label: "250 Hz",  pct: 82, status: "Normal",    statusColor: "#6BAF7C" },
+  { label: "500 Hz",  pct: 75, status: "Normal",    statusColor: "#6BAF7C" },
+  { label: "1 kHz",   pct: 68, status: "Normal",    statusColor: "#6BAF7C" },
+  { label: "2 kHz",   pct: 52, status: "Mild",      statusColor: "var(--gold)" },
+  { label: "4 kHz",   pct: 36, status: "Moderate",  statusColor: "#E08040" },
+  { label: "8 kHz",   pct: 18, status: "Sig. Loss",  statusColor: "#C44" },
 ]
 
 export default function HearingTestSection() {
@@ -22,126 +22,148 @@ export default function HearingTestSection() {
   }, [inView])
 
   return (
-    <section style={{ background: "var(--forest)", padding: "96px 48px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start", maxWidth: "1200px", margin: "0 auto" }}>
+    <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--forest)" }}>
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
 
-        {/* Left — copy */}
+        {/* ── Left — copy ── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
         >
-          <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-            <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+          <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+            <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
             Quick Screening
           </div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 300, lineHeight: 1.15, color: "white", marginBottom: "20px" }}>
+          <h2
+            className="font-light text-white leading-tight mb-4"
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.15 }}
+          >
             Take a preliminary<br />hearing check
           </h2>
-          <p style={{ fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, marginBottom: "24px" }}>
+          <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
             Use headphones in a quiet space. This is a screener only — not a substitute for a clinical evaluation by a qualified audiologist.
           </p>
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", lineHeight: 1.7, marginBottom: "40px" }}>
+          <p className="text-xs md:text-sm font-light leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.35)" }}>
             Our audiologists recommend a full diagnostic test every 2 years. Book yours at the clinic for a complete, calibrated audiogram.
           </p>
 
-          {/* Stats */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", marginBottom: "40px" }}>
+          {/* Stats grid */}
+          <div className="grid grid-cols-2 gap-px mb-8">
             {[
               { val: "30 min", lbl: "Test duration" },
-              { val: "Free", lbl: "First visit" },
+              { val: "Free",   lbl: "First visit" },
               { val: "Same day", lbl: "Audiogram report" },
               { val: "All ages", lbl: "We test everyone" },
             ].map(({ val, lbl }) => (
-              <div key={lbl} style={{ background: "rgba(255,255,255,0.04)", padding: "18px 20px", border: "0.5px solid rgba(255,255,255,0.07)" }}>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px", fontWeight: 300, color: "white", lineHeight: 1 }}>{val}</div>
-                <div style={{ fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginTop: "6px" }}>{lbl}</div>
+              <div
+                key={lbl}
+                className="p-4 md:p-5"
+                style={{ background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.07)" }}
+              >
+                <div
+                  className="font-light text-white leading-none mb-1.5"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(20px,3vw,26px)" }}
+                >
+                  {val}
+                </div>
+                <div className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>
+                  {lbl}
+                </div>
               </div>
             ))}
           </div>
 
           <a
             href="/contact"
-            style={{
-              display: "inline-block",
-              background: "var(--gold)",
-              color: "var(--forest)",
-              fontSize: "12px",
-              fontWeight: 500,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              padding: "14px 32px",
-              textDecoration: "none",
-            }}
+            className="inline-block text-xs font-medium tracking-widest uppercase px-7 py-3.5 no-underline"
+            style={{ background: "var(--gold)", color: "var(--forest)", textDecoration: "none" }}
           >
             Schedule Full Test →
           </a>
         </motion.div>
 
-        {/* Right — audiogram screener card */}
+        {/* ── Right — audiogram screener card ── */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, delay: 0.15 }}
-          style={{
-            background: "rgba(255,255,255,0.05)",
-            border: "0.5px solid rgba(255,255,255,0.12)",
-            padding: "40px",
-          }}
+          className="p-6 md:p-10"
+          style={{ background: "rgba(255,255,255,0.05)", border: "0.5px solid rgba(255,255,255,0.12)" }}
         >
-          <div style={{ fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "8px" }}>
+          <div className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--gold)" }}>
             Frequency Response Screener
           </div>
-          <p style={{ fontSize: "12.5px", color: "rgba(255,255,255,0.4)", marginBottom: "32px", lineHeight: 1.55 }}>
+          <p className="text-xs font-light leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.4)" }}>
             Demo audiogram illustrating typical age-related high-frequency loss. Your actual thresholds will differ.
           </p>
 
           {/* Frequency bars */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+          <div className="flex flex-col gap-4">
             {frequencies.map(({ label, pct, status, statusColor }, i) => (
-              <div key={label} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)", width: "58px", textAlign: "right", flexShrink: 0 }}>{label}</div>
-                <div style={{ flex: 1, height: "4px", background: "rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+              <div key={label} className="flex items-center gap-3">
+                <div
+                  className="text-xs text-right flex-shrink-0 w-14"
+                  style={{ color: "rgba(255,255,255,0.45)" }}
+                >
+                  {label}
+                </div>
+                <div
+                  className="flex-1 h-1 relative overflow-hidden"
+                  style={{ background: "rgba(255,255,255,0.1)" }}
+                >
                   <motion.div
                     initial={{ width: 0 }}
                     animate={animated ? { width: `${pct}%` } : { width: 0 }}
                     transition={{ duration: 1.2, delay: i * 0.12, ease: "easeOut" }}
-                    style={{ height: "100%", background: "var(--gold)", position: "absolute", top: 0, left: 0 }}
+                    className="absolute top-0 left-0 h-full"
+                    style={{ background: "var(--gold)" }}
                   />
                 </div>
-                <div style={{ fontSize: "11.5px", color: statusColor, width: "58px", flexShrink: 0, fontWeight: 400 }}>{status}</div>
+                <div
+                  className="text-xs flex-shrink-0 w-14 font-normal"
+                  style={{ color: statusColor }}
+                >
+                  {status}
+                </div>
               </div>
             ))}
           </div>
 
           {/* Legend */}
-          <div style={{ marginTop: "32px", paddingTop: "24px", borderTop: "0.5px solid rgba(255,255,255,0.1)" }}>
-            <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px" }}>Hearing thresholds</div>
-            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+          <div className="mt-7 pt-5" style={{ borderTop: "0.5px solid rgba(255,255,255,0.1)" }}>
+            <div className="text-xs tracking-widest uppercase mb-3" style={{ color: "rgba(255,255,255,0.3)" }}>
+              Hearing thresholds
+            </div>
+            <div className="flex flex-wrap gap-3 md:gap-4">
               {[
-                { label: "Normal", color: "#6BAF7C" },
-                { label: "Mild loss", color: "var(--gold)" },
-                { label: "Moderate", color: "#E08040" },
+                { label: "Normal",      color: "#6BAF7C" },
+                { label: "Mild loss",   color: "var(--gold)" },
+                { label: "Moderate",    color: "#E08040" },
                 { label: "Significant", color: "#C44" },
               ].map(({ label, color }) => (
-                <div key={label} style={{ display: "flex", alignItems: "center", gap: "7px" }}>
-                  <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: color, flexShrink: 0 }} />
-                  <span style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.4)" }}>{label}</span>
+                <div key={label} className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: color }} />
+                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{label}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Disclaimer */}
-          <div style={{ marginTop: "24px", padding: "14px 16px", background: "rgba(201,168,76,0.08)", border: "0.5px solid rgba(201,168,76,0.2)" }}>
-            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)", lineHeight: 1.6 }}>
+          <div
+            className="mt-5 p-3.5"
+            style={{ background: "rgba(201,168,76,0.08)", border: "0.5px solid rgba(201,168,76,0.2)" }}
+          >
+            <p className="text-xs font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
               This screener does not replace a professional audiological evaluation. Visit our clinic for a calibrated, certified audiogram.
             </p>
           </div>
         </motion.div>
+
       </div>
     </section>
   )

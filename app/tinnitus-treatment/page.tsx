@@ -1,9 +1,9 @@
-
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import { BookAppointment } from "@/components/Bookappointment"
 import Navbar from "@/components/home/NavigationBar"
 import ServiceHero from "@/components/home/ServiceheroSection"
+
 
 const symptoms = ["Ringing or buzzing in ears", "Hissing or whistling sounds", "Clicking or pulsing sounds", "Sound only you can hear", "Worse in quiet environments", "Difficulty sleeping", "Concentration problems", "Anxiety or distress from sound"]
 
@@ -16,20 +16,17 @@ const causes = [
 
 const treatments = [
   {
-    title: "Sound Therapy",
-    tag: "First line",
+    title: "Sound Therapy", tag: "First line",
     desc: "Uses external sounds (white noise, nature sounds, notched music) to partially mask or distract the brain from tinnitus signals. Delivered via a dedicated sound generator or hearing aids with built-in tinnitus programmes.",
     outcomes: ["Reduces perceived loudness", "Improves sleep quality", "Effective for 60–70% of patients"],
   },
   {
-    title: "Tinnitus Retraining Therapy (TRT)",
-    tag: "Gold standard",
+    title: "Tinnitus Retraining Therapy (TRT)", tag: "Gold standard",
     desc: "A structured programme combining sound therapy with directive counselling. Aims to habituate the brain to the tinnitus signal so it is no longer perceived as threatening — and eventually becomes background noise.",
     outcomes: ["Long-term habituation", "Reduces emotional distress", "18–24 month programme"],
   },
   {
-    title: "Hearing Aids with Tinnitus Features",
-    tag: "Device-based",
+    title: "Hearing Aids with Tinnitus Features", tag: "Device-based",
     desc: "For patients with co-existing hearing loss (most tinnitus patients), modern hearing aids amplify real sounds and simultaneously play masking sounds. Brands like Signia and Widex have dedicated tinnitus programmes.",
     outcomes: ["Addresses underlying hearing loss", "Built-in masking sounds", "Daily wearable solution"],
   },
@@ -54,30 +51,48 @@ export default function TinnitusPage() {
         imageSrc="/images/tinnitus-hero.jpg"
       />
 
-      {/* What is tinnitus */}
-      <section style={{ background: "var(--white)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+      {/* ── What is tinnitus — stacks on mobile ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--white)" }}>
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+
+          {/* Left */}
           <div>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Understanding Tinnitus
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)", marginBottom: "24px" }}>What is tinnitus?</h2>
-            <p style={{ fontSize: "15px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.8, marginBottom: "20px" }}>
+            <h2
+              className="font-light mb-5"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}
+            >
+              What is tinnitus?
+            </h2>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "var(--text-mid)" }}>
               Tinnitus is the perception of sound — ringing, buzzing, hissing, or clicking — in the absence of an external source. It affects approximately 10–15% of adults and can range from mildly annoying to severely debilitating.
             </p>
-            <p style={{ fontSize: "15px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.8, marginBottom: "36px" }}>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-mid)" }}>
               While tinnitus itself is a symptom rather than a disease, it is often linked to hearing loss, noise exposure, or other conditions. An audiological assessment is the essential first step.
             </p>
             <BookAppointment />
           </div>
+
+          {/* Right — symptoms */}
           <div>
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, color: "var(--forest)", marginBottom: "20px" }}>Common symptoms</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <div
+              className="font-normal mb-5"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", color: "var(--forest)" }}
+            >
+              Common symptoms
+            </div>
+            <div className="flex flex-col gap-2">
               {symptoms.map((s) => (
-                <div key={s} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px 16px", background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.08)" }}>
-                  <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
-                  <span style={{ fontSize: "13.5px", fontWeight: 300, color: "var(--text-mid)" }}>{s}</span>
+                <div
+                  key={s}
+                  className="flex items-center gap-3 px-4 py-3"
+                  style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.08)" }}
+                >
+                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--gold)" }} />
+                  <span className="text-sm font-light" style={{ color: "var(--text-mid)" }}>{s}</span>
                 </div>
               ))}
             </div>
@@ -85,30 +100,43 @@ export default function TinnitusPage() {
         </div>
       </section>
 
-      {/* Treatment options */}
-      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Treatment options — 1 col mobile, 3 col desktop ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--cream)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Treatment Options
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>Evidence-based approaches</h2>
+            <h2
+              className="font-light"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}
+            >
+              Evidence-based approaches
+            </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2px" }}>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
             {treatments.map(({ title, tag, desc, outcomes }) => (
-              <div key={title} style={{ background: "var(--white)", padding: "40px 32px", border: "0.5px solid rgba(26,58,42,0.08)" }}>
-                <div style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "10px" }}>{tag}</div>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", fontWeight: 400, color: "var(--forest)", marginBottom: "14px", lineHeight: 1.25 }}>{title}</div>
-                <p style={{ fontSize: "13px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.7, marginBottom: "24px" }}>{desc}</p>
-                <div style={{ paddingTop: "20px", borderTop: "0.5px solid rgba(26,58,42,0.1)" }}>
-                  <div style={{ fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-lt)", marginBottom: "10px" }}>Outcomes</div>
-                  {outcomes.map((o) => (
-                    <div key={o} style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: "8px" }}>
-                      <div style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--gold)", flexShrink: 0, marginTop: "6px" }} />
-                      <span style={{ fontSize: "12.5px", fontWeight: 300, color: "var(--text-mid)" }}>{o}</span>
-                    </div>
-                  ))}
+              <div key={title} className="p-7 md:p-9" style={{ background: "var(--white)" }}>
+                <div className="text-xs tracking-widest uppercase mb-2.5" style={{ color: "var(--gold)" }}>{tag}</div>
+                <div
+                  className="font-normal leading-snug mb-3"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", color: "var(--forest)" }}
+                >
+                  {title}
+                </div>
+                <p className="text-sm font-light leading-relaxed mb-5" style={{ color: "var(--text-mid)" }}>{desc}</p>
+                <div className="pt-4" style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)" }}>
+                  <div className="text-xs tracking-widest uppercase mb-3" style={{ color: "var(--text-lt)" }}>Outcomes</div>
+                  <div className="flex flex-col gap-2">
+                    {outcomes.map((o) => (
+                      <div key={o} className="flex items-start gap-2">
+                        <div className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: "var(--gold)" }} />
+                        <span className="text-xs font-light" style={{ color: "var(--text-mid)" }}>{o}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -116,24 +144,36 @@ export default function TinnitusPage() {
         </div>
       </section>
 
-      {/* Causes */}
-      <section style={{ background: "var(--forest)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Causes — 2 col mobile, 4 col desktop ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--forest)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Common Causes
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "white" }}>What triggers tinnitus?</h2>
+            <h2
+              className="font-light text-white"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300 }}
+            >
+              What triggers tinnitus?
+            </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
+
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 gap-px"
+            style={{ background: "rgba(255,255,255,0.06)" }}
+          >
             {causes.map(({ title, desc }) => (
-              <div key={title} style={{ background: "var(--forest)", padding: "32px 28px" }}>
-                <div style={{ width: "36px", height: "36px", border: "1px solid rgba(201,168,76,0.3)", borderRadius: "50%", marginBottom: "20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--gold)" }} />
+              <div key={title} className="p-6 md:p-7" style={{ background: "var(--forest)" }}>
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center mb-5"
+                  style={{ border: "1px solid rgba(201,168,76,0.3)" }}
+                >
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--gold)" }} />
                 </div>
-                <div style={{ fontSize: "14px", fontWeight: 500, color: "white", marginBottom: "10px" }}>{title}</div>
-                <div style={{ fontSize: "13px", fontWeight: 300, color: "rgba(255,255,255,0.5)", lineHeight: 1.65 }}>{desc}</div>
+                <div className="text-sm font-medium text-white mb-2">{title}</div>
+                <div className="text-xs font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{desc}</div>
               </div>
             ))}
           </div>

@@ -1,4 +1,3 @@
-
 import { BookAppointment } from "@/components/Bookappointment"
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
@@ -6,13 +5,12 @@ import Navbar from "@/components/home/NavigationBar"
 import ServiceHero from "@/components/home/ServiceheroSection"
 
 
-
 const conditions = ["Stuttering & fluency", "Articulation disorders", "Voice disorders", "Language delay", "Post-stroke aphasia", "Autism spectrum", "Swallowing (dysphagia)", "Cleft palate speech", "Selective mutism", "Cognitive-communication"]
 
 const ageGroups = [
   {
     group: "Children (2–12 years)",
-    color: "var(--cream)",
+    dark: false,
     points: [
       { title: "Early intervention", desc: "The earlier therapy starts, the better the outcomes. We work with children as young as 18 months." },
       { title: "Play-based sessions", desc: "All paediatric sessions use age-appropriate play techniques that keep children engaged and motivated." },
@@ -22,7 +20,6 @@ const ageGroups = [
   },
   {
     group: "Adults (13+ years)",
-    color: "var(--forest)",
     dark: true,
     points: [
       { title: "Post-stroke rehab", desc: "We work with stroke and brain injury survivors to regain speech and language function." },
@@ -59,45 +56,87 @@ export default function SpeechTherapyPage() {
         imageSrc="/images/speech-therapy-hero.jpg"
       />
 
-      {/* Conditions */}
-      <section style={{ background: "var(--white)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "48px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Conditions ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--white)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-8 md:mb-12">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Conditions Treated
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)", marginBottom: "16px" }}>We treat a wide range<br />of communication disorders</h2>
+            <h2
+              className="font-light"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}
+            >
+              We treat a wide range<br />of communication disorders
+            </h2>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+          <div className="flex flex-wrap gap-2">
             {conditions.map((c) => (
-              <div key={c} style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.12)", padding: "10px 18px", fontSize: "13.5px", fontWeight: 300, color: "var(--text-mid)" }}>{c}</div>
+              <div
+                key={c}
+                className="text-sm font-light px-4 py-2"
+                style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.12)", color: "var(--text-mid)" }}
+              >
+                {c}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Age groups */}
-      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Age groups — 1 col mobile, 2 col desktop ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--cream)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Our Approach
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>Tailored to every stage of life</h2>
+            <h2
+              className="font-light"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}
+            >
+              Tailored to every stage of life
+            </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}>
-            {ageGroups.map(({ group, color, dark, points }) => (
-              <div key={group} style={{ background: color, padding: "48px 40px", border: dark ? "none" : "0.5px solid rgba(26,58,42,0.08)" }}>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px", fontWeight: 300, color: dark ? "white" : "var(--forest)", marginBottom: "32px" }}>{group}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
+            {ageGroups.map(({ group, dark, points }) => (
+              <div
+                key={group}
+                className="p-8 md:p-10"
+                style={{
+                  background: dark ? "var(--forest)" : "var(--cream)",
+                  border: dark ? "none" : "0.5px solid rgba(26,58,42,0.08)",
+                }}
+              >
+                <div
+                  className="font-light mb-8"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(22px,3vw,26px)", color: dark ? "white" : "var(--forest)" }}
+                >
+                  {group}
+                </div>
+                <div className="flex flex-col gap-5">
                   {points.map(({ title, desc }) => (
-                    <div key={title} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                      <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--gold)", flexShrink: 0, marginTop: "7px" }} />
+                    <div key={title} className="flex gap-4 items-start">
+                      <div
+                        className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2"
+                        style={{ background: "var(--gold)" }}
+                      />
                       <div>
-                        <div style={{ fontSize: "14px", fontWeight: 500, color: dark ? "white" : "var(--forest)", marginBottom: "4px" }}>{title}</div>
-                        <div style={{ fontSize: "13px", fontWeight: 300, color: dark ? "rgba(255,255,255,0.58)" : "var(--text-mid)", lineHeight: 1.65 }}>{desc}</div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: dark ? "white" : "var(--forest)" }}
+                        >
+                          {title}
+                        </div>
+                        <div
+                          className="text-sm font-light leading-relaxed"
+                          style={{ color: dark ? "rgba(255,255,255,0.58)" : "var(--text-mid)" }}
+                        >
+                          {desc}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -108,26 +147,45 @@ export default function SpeechTherapyPage() {
         </div>
       </section>
 
-      {/* Session process */}
-      <section style={{ background: "var(--forest)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+      {/* ── Session process — 2 col mobile, 4 col desktop ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--forest)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               How It Works
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "white" }}>Your therapy journey</h2>
+            <h2
+              className="font-light text-white"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300 }}
+            >
+              Your therapy journey
+            </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", background: "rgba(255,255,255,0.05)" }}>
+
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 gap-px"
+            style={{ background: "rgba(255,255,255,0.05)" }}
+          >
             {steps.map(({ num, title, desc }) => (
-              <div key={num} style={{ background: "var(--forest)", padding: "36px 28px" }}>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "48px", fontWeight: 300, color: "rgba(201,168,76,0.25)", lineHeight: 1, marginBottom: "16px" }}>{num}</div>
-                <div style={{ fontSize: "14px", fontWeight: 500, color: "white", marginBottom: "10px" }}>{title}</div>
-                <div style={{ fontSize: "13px", fontWeight: 300, color: "rgba(255,255,255,0.5)", lineHeight: 1.65 }}>{desc}</div>
+              <div
+                key={num}
+                className="p-6 md:p-8"
+                style={{ background: "var(--forest)" }}
+              >
+                <div
+                  className="font-light leading-none mb-4"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", color: "rgba(201,168,76,0.25)" }}
+                >
+                  {num}
+                </div>
+                <div className="text-sm font-medium text-white mb-2">{title}</div>
+                <div className="text-xs font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{desc}</div>
               </div>
             ))}
           </div>
-          <div style={{ marginTop: "48px" }}>
+
+          <div className="mt-10">
             <BookAppointment />
           </div>
         </div>

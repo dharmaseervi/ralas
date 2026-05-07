@@ -2,8 +2,9 @@ import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import { BookAppointment } from "@/components/Bookappointment"
 import HearingTestSection from "@/components/home/HearingTest"
-import Navbar from "@/components/home/NavigationBar"
 import ServiceHero from "@/components/home/ServiceheroSection"
+import Navbar from "@/components/home/NavigationBar"
+
 
 const testTypes = [
   { tag: "Standard", title: "Pure Tone Audiometry", desc: "The core hearing test. You'll hear tones at different frequencies and volumes through headphones and indicate when you can hear them. Results are plotted on an audiogram.", duration: "20 min" },
@@ -50,36 +51,62 @@ export default function HearingTestsPage() {
         imageSrc="/images/hearing-test-hero.jpg"
       />
 
-      {/* Test types */}
-      <section style={{ background: "var(--white)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "56px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "end" }}>
+      {/* ── Test types ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--white)" }}>
+        <div className="max-w-[1200px] mx-auto">
+
+          {/* Section header — stacks on mobile */}
+          <div className="mb-10 md:mb-14 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-end">
             <div>
-              <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "10px" }}>
-                <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+              <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+                <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
                 What's Included
               </div>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>Four tests, one visit</h2>
+              <h2
+                className="font-light"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}
+              >
+                Four tests, one visit
+              </h2>
             </div>
-            <p style={{ fontSize: "15px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.75 }}>
+            <p className="text-sm md:text-base font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>
               A full diagnostic evaluation at Ralas covers all four core tests. You leave with a complete audiogram and a clear explanation of your results.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "2px" }}>
+
+          {/* Test cards — 1 col mobile, 2 col desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
             {testTypes.map(({ tag, title, desc, duration }) => (
-              <div key={title} style={{ background: "var(--cream)", padding: "36px 32px", border: "0.5px solid rgba(26,58,42,0.08)", display: "flex", gap: "24px" }}>
-                <div style={{ width: "48px", height: "48px", border: "1px solid rgba(26,58,42,0.15)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}><path d="M12 2a5 5 0 0 1 5 5c0 3-2 5-4 7C12 15 11 16 11 16s-1-1-2-2C7 12 5 10 5 7a5 5 0 0 1 7-4.58V7" /><circle cx="12" cy="7" r="1.5" /></svg>
+              <div
+                key={title}
+                className="flex gap-4 md:gap-6 p-6 md:p-8"
+                style={{ background: "var(--cream)" }}
+              >
+                {/* Icon */}
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ border: "1px solid rgba(26,58,42,0.15)" }}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
+                    <path d="M12 2a5 5 0 0 1 5 5c0 3-2 5-4 7C12 15 11 16 11 16s-1-1-2-2C7 12 5 10 5 7a5 5 0 0 1 7-4.58V7" />
+                    <circle cx="12" cy="7" r="1.5" />
+                  </svg>
                 </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px" }}>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex justify-between items-start gap-3 mb-2">
                     <div>
-                      <div style={{ fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "4px" }}>{tag}</div>
-                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, color: "var(--forest)" }}>{title}</div>
+                      <div className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--gold)" }}>{tag}</div>
+                      <div
+                        className="font-normal leading-snug"
+                        style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", color: "var(--forest)" }}
+                      >
+                        {title}
+                      </div>
                     </div>
-                    <div style={{ fontSize: "11px", color: "var(--text-lt)", whiteSpace: "nowrap", marginLeft: "16px", paddingTop: "2px" }}>{duration}</div>
+                    <div className="text-xs flex-shrink-0 pt-0.5" style={{ color: "var(--text-lt)" }}>{duration}</div>
                   </div>
-                  <p style={{ fontSize: "13px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.65 }}>{desc}</p>
+                  <p className="text-sm font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>{desc}</p>
                 </div>
               </div>
             ))}
@@ -89,34 +116,56 @@ export default function HearingTestsPage() {
 
       <HearingTestSection />
 
-      {/* Who should get tested */}
-      <section style={{ background: "var(--white)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "56px" }}>
-            <div style={{ fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
+      {/* ── Who should get tested ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--white)" }}>
+        <div className="max-w-[1200px] mx-auto">
+
+          <div className="text-center mb-10 md:mb-14">
+            <div className="flex items-center justify-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px" style={{ background: "var(--gold)" }} />
               Warning Signs
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
+              <span className="block w-6 h-px" style={{ background: "var(--gold)" }} />
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}>Who should get tested?</h2>
+            <h2
+              className="font-light"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 300, color: "var(--forest)" }}
+            >
+              Who should get tested?
+            </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2px" }}>
+
+          {/* Age group cards — 1 col mobile, 3 col desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
             {ageGroups.map(({ group, signs, note }) => (
-              <div key={group} style={{ background: "var(--cream)", padding: "40px 32px", border: "0.5px solid rgba(26,58,42,0.08)" }}>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 400, color: "var(--forest)", marginBottom: "24px" }}>{group}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "24px" }}>
+              <div key={group} className="p-7 md:p-8" style={{ background: "var(--cream)" }}>
+                <div
+                  className="font-normal mb-5"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", color: "var(--forest)" }}
+                >
+                  {group}
+                </div>
+                <div className="flex flex-col gap-2.5 mb-5">
                   {signs.map((s) => (
-                    <div key={s} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                      <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--gold)", flexShrink: 0, marginTop: "6px" }} />
-                      <span style={{ fontSize: "13px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.6 }}>{s}</span>
+                    <div key={s} className="flex items-start gap-2.5">
+                      <div
+                        className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
+                        style={{ background: "var(--gold)" }}
+                      />
+                      <span className="text-sm font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>{s}</span>
                     </div>
                   ))}
                 </div>
-                <div style={{ paddingTop: "16px", borderTop: "0.5px solid rgba(26,58,42,0.1)", fontSize: "12.5px", fontWeight: 300, color: "var(--text-lt)", lineHeight: 1.6 }}>{note}</div>
+                <div
+                  className="pt-4 text-xs font-light leading-relaxed"
+                  style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)", color: "var(--text-lt)" }}
+                >
+                  {note}
+                </div>
               </div>
             ))}
           </div>
-          <div style={{ textAlign: "center", marginTop: "48px" }}>
+
+          <div className="text-center mt-10 md:mt-12">
             <BookAppointment />
           </div>
         </div>

@@ -63,12 +63,17 @@ const features = [
 
 export default function Features() {
   return (
-    <section style={{ background: "var(--forest)", padding: "96px 48px", position: "relative", overflow: "hidden" }}>
+    <section
+      className="py-14 md:py-24 px-5 md:px-12 relative overflow-hidden"
+      style={{ background: "var(--forest)" }}
+    >
+      {/* Bg texture */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(circle at 80% 20%, rgba(201,168,76,0.06) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(255,255,255,0.03) 0%, transparent 50%)" }}
+      />
 
-      {/* Subtle bg texture */}
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 80% 20%, rgba(201,168,76,0.06) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(255,255,255,0.03) 0%, transparent 50%)", pointerEvents: "none" }} />
-
-      <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative" }}>
+      <div className="max-w-[1200px] mx-auto relative">
 
         {/* ── Header ── */}
         <motion.div
@@ -76,40 +81,38 @@ export default function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
-          style={{ marginBottom: "64px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "end" }}
+          className="mb-12 md:mb-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-end"
         >
           <div>
-            <div style={{
-              fontSize: "10.5px", letterSpacing: "0.2em", textTransform: "uppercase",
-              color: "var(--gold)", marginBottom: "14px",
-              display: "flex", alignItems: "center", gap: "10px",
-            }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Oticon More™ Platform
             </div>
-            <h2 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
-              fontWeight: 300, lineHeight: 1.15, color: "white",
-            }}>
+            <h2
+              className="font-light text-white leading-tight"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.15 }}
+            >
               Revolutionary<br />hearing technology
             </h2>
           </div>
           <div>
-            <p style={{ fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.58)", lineHeight: 1.75, marginBottom: "20px" }}>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.58)" }}>
               Clinical-grade performance powered by Oticon's patented More™ platform — FDA-cleared and backed by 3 years of warranty on every device.
             </p>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
-              <span style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.32)", letterSpacing: "0.05em" }}>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--gold)" }} />
+              <span className="text-xs tracking-wider" style={{ color: "rgba(255,255,255,0.32)" }}>
                 FDA-Cleared Medical Device · 3-year warranty included
               </span>
             </div>
           </div>
         </motion.div>
 
-        {/* ── Feature grid — 3 col, dark cards ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(255,255,255,0.06)", marginBottom: "1px" }}>
+        {/* ── Feature grid — 1 col mobile, 2 col tablet, 3 col desktop ── */}
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-px"
+          style={{ gap: "1px", background: "rgba(255,255,255,0.06)" }}
+        >
           {features.map(({ Icon, tag, title, stat, statLabel, description, specs }, i) => (
             <motion.div
               key={title}
@@ -117,14 +120,8 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              style={{
-                background: "var(--forest)",
-                padding: "36px 32px",
-                position: "relative",
-                overflow: "hidden",
-                cursor: "default",
-                transition: "background 0.25s",
-              }}
+              className="p-7 md:p-8 relative overflow-hidden transition-colors duration-300 hover:bg-white/5"
+              style={{ background: "var(--forest)" }}
               whileHover={{ backgroundColor: "rgba(255,255,255,0.04)" } as any}
             >
               {/* Gold left border on hover */}
@@ -132,72 +129,57 @@ export default function Features() {
                 initial={{ scaleY: 0 }}
                 whileHover={{ scaleY: 1 }}
                 transition={{ duration: 0.22 }}
-                style={{
-                  position: "absolute", top: 0, left: 0, bottom: 0,
-                  width: "2px", background: "var(--gold)", transformOrigin: "top",
-                }}
+                className="absolute top-0 left-0 bottom-0 w-0.5"
+                style={{ background: "var(--gold)", transformOrigin: "top" }}
               />
 
               {/* Icon + stat row */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "24px" }}>
-                <div style={{
-                  width: "42px", height: "42px",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  borderRadius: "50%",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
+              <div className="flex justify-between items-start mb-6">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+                >
                   <Icon size={17} color="rgba(255,255,255,0.75)" strokeWidth={1.5} />
                 </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "30px", fontWeight: 300,
-                    color: "var(--gold)", lineHeight: 1,
-                  }}>
+                <div className="text-right">
+                  <div
+                    className="font-light leading-none"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "30px", color: "var(--gold)" }}
+                  >
                     {stat}
                   </div>
-                  <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.06em", marginTop: "2px" }}>
+                  <div className="text-xs tracking-wider mt-0.5" style={{ color: "rgba(255,255,255,0.3)" }}>
                     {statLabel}
                   </div>
                 </div>
               </div>
 
               {/* Tag */}
-              <div style={{
-                fontSize: "10px", letterSpacing: "0.16em",
-                textTransform: "uppercase", color: "var(--gold)",
-                marginBottom: "7px", opacity: 0.8,
-              }}>
+              <div className="text-xs tracking-widest uppercase mb-2 opacity-80" style={{ color: "var(--gold)" }}>
                 {tag}
               </div>
 
               {/* Title */}
-              <h3 style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "19px", fontWeight: 400,
-                color: "white", marginBottom: "10px", lineHeight: 1.3,
-              }}>
+              <h3
+                className="font-normal text-white mb-2.5 leading-snug"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "19px" }}
+              >
                 {title}
               </h3>
 
               {/* Description */}
-              <p style={{
-                fontSize: "13px", fontWeight: 300,
-                color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: "22px",
-              }}>
+              <p className="text-sm font-light leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
                 {description}
               </p>
 
               {/* Spec pills */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              <div className="flex flex-wrap gap-1.5">
                 {specs.map((spec) => (
-                  <span key={spec} style={{
-                    fontSize: "10.5px", fontWeight: 300,
-                    color: "rgba(255,255,255,0.4)",
-                    border: "0.5px solid rgba(255,255,255,0.1)",
-                    padding: "4px 10px",
-                    letterSpacing: "0.04em",
-                  }}>
+                  <span
+                    key={spec}
+                    className="text-xs font-light px-2.5 py-1 tracking-wider"
+                    style={{ color: "rgba(255,255,255,0.4)", border: "0.5px solid rgba(255,255,255,0.1)" }}
+                  >
                     {spec}
                   </span>
                 ))}
@@ -206,53 +188,38 @@ export default function Features() {
           ))}
         </div>
 
-        {/* ── Bottom CTA — cream strip on dark bg ── */}
+        {/* ── Bottom CTA ── */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          style={{
-            background: "var(--gold)",
-            padding: "32px 48px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
+          className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 px-6 md:px-12 py-8 md:py-8"
+          style={{ background: "var(--gold)" }}
         >
           <div>
-            <div style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "22px", fontWeight: 400,
-              color: "var(--forest)", marginBottom: "4px",
-            }}>
+            <div
+              className="font-normal mb-1"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(18px,3vw,22px)", color: "var(--forest)" }}
+            >
               Experience these features for yourself
             </div>
-            <p style={{ fontSize: "13px", fontWeight: 300, color: "rgba(26,58,42,0.65)" }}>
+            <p className="text-sm font-light" style={{ color: "rgba(26,58,42,0.65)" }}>
               Free demo · No obligation · Jayanagar clinic, Bengaluru
             </p>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", flexShrink: 0, marginLeft: "40px" }}>
+          <div className="flex items-center gap-4 flex-shrink-0">
             <Link
               href="/contact"
-              style={{
-                background: "var(--forest)", color: "white",
-                fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em",
-                textTransform: "uppercase", padding: "13px 28px",
-                textDecoration: "none", whiteSpace: "nowrap",
-              }}
+              className="text-xs font-medium tracking-widest uppercase px-6 py-3 no-underline whitespace-nowrap text-white"
+              style={{ background: "var(--forest)", textDecoration: "none" }}
             >
               Schedule Free Demo
             </Link>
             <Link
               href="/hearing-aids"
-              style={{
-                fontSize: "12px", letterSpacing: "0.1em",
-                textTransform: "uppercase", color: "var(--forest)",
-                textDecoration: "none",
-                borderBottom: "1px solid rgba(26,58,42,0.4)",
-                paddingBottom: "2px", fontWeight: 400, whiteSpace: "nowrap",
-              }}
+              className="hidden sm:inline text-xs tracking-widest uppercase font-normal whitespace-nowrap no-underline pb-0.5"
+              style={{ color: "var(--forest)", borderBottom: "1px solid rgba(26,58,42,0.4)", textDecoration: "none" }}
             >
               View all aids →
             </Link>

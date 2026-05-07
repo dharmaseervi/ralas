@@ -6,15 +6,13 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Phone, MapPin, Clock, ChevronLeft, ChevronRight, Menu, X } from "lucide-react"
 import { BookAppointment } from "../Bookappointment"
 
-
 const slides = [
   {
     image: "/images/feature-comfort.jpg",
     eyebrow: "Advanced Audiological Care",
     title: ["Hear the World", "with Clarity"],
     titleItalic: "Clarity",
-    subtitle:
-      "Cutting-edge hearing aids and personalised audiological care — crafted for your unique hearing profile and lifestyle.",
+    subtitle: "Cutting-edge hearing aids and personalised audiological care — crafted for your unique hearing profile and lifestyle.",
     cta: "Book a Consultation",
     ctaLink: "/contact",
     secondaryCta: "View Hearing Aids",
@@ -25,8 +23,7 @@ const slides = [
     eyebrow: "Speech & Language Therapy",
     title: ["Find Your", "Voice Again"],
     titleItalic: "Voice",
-    subtitle:
-      "Personalised speech therapy sessions designed to restore confidence and communication for all ages.",
+    subtitle: "Personalised speech therapy sessions designed to restore confidence and communication for all ages.",
     cta: "Speech Therapy",
     ctaLink: "/speech-therapy",
     secondaryCta: "Meet Our Team",
@@ -37,8 +34,7 @@ const slides = [
     eyebrow: "Diagnostic Services",
     title: ["Comprehensive", "Hearing Tests"],
     titleItalic: "Hearing",
-    subtitle:
-      "State-of-the-art audiometric evaluations for every stage of life — precise, thorough, and compassionate.",
+    subtitle: "State-of-the-art audiometric evaluations for every stage of life — precise, thorough, and compassionate.",
     cta: "Book a Test",
     ctaLink: "/hearing-tests",
     secondaryCta: "Learn More",
@@ -48,43 +44,20 @@ const slides = [
 
 const stripItems = [
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}>
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-    title: "Same-Day",
-    sub: "Appointments available",
+    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>),
+    title: "Same-Day", sub: "Appointments available",
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}>
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
-    title: "All Ages",
-    sub: "Children to elderly",
+    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>),
+    title: "All Ages", sub: "Children to elderly",
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}>
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-    title: "Expert Audiologists",
-    sub: "12+ years of care",
+    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>),
+    title: "Expert Audiologists", sub: "12+ years of care",
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}>
-        <path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
-      </svg>
-    ),
-    title: "GST Billing",
-    sub: "Insurance-friendly",
+    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>),
+    title: "GST Billing", sub: "Insurance-friendly",
   },
 ]
 
@@ -109,36 +82,26 @@ export default function Header() {
 
   return (
     <header className="relative">
-      {/* ── TOP BAR ── */}
+
+      {/* ── TOP BAR — fixed at very top, desktop only ── */}
       <div
-        style={{
-          background: "var(--forest)",
-          color: "#B8CDB4",
-          fontSize: "11.5px",
-          letterSpacing: "0.06em",
-          padding: "7px 48px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+        className="hidden md:flex fixed top-0 left-0 right-0 z-[110] items-center justify-between px-12 py-2 text-xs tracking-widest"
+        style={{ background: "var(--forest)", color: "#B8CDB4" }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: "7px" }}>
-            <Clock size={12} />
-            Mon – Sat: 10:00 AM – 7:30 PM
+        <div className="flex items-center gap-5">
+          <span className="flex items-center gap-1.5">
+            <Clock size={12} /> Mon – Sat: 10:00 AM – 7:30 PM
           </span>
-          <span style={{ width: "1px", height: "12px", background: "rgba(255,255,255,.15)" }} />
-          <span style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+          <span className="w-px h-3" style={{ background: "rgba(255,255,255,.15)" }} />
+          <span className="flex items-center gap-1.5">
             <MapPin size={12} />
-            <Link
-              href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x3bae152b5f787543:0x32fcd6ff153aaa20"
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
+            <Link href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x3bae152b5f787543:0x32fcd6ff153aaa20"
+              style={{ color: "inherit", textDecoration: "none" }}>
               2nd Floor, 121, 6th C Main Rd, Jayanagar, Bengaluru – 560011
             </Link>
           </span>
         </div>
-        <span style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+        <span className="flex items-center gap-1.5">
           <Phone size={12} />
           <a href="tel:+916366638452" style={{ color: "inherit", textDecoration: "none" }}>
             +91 6366-638452
@@ -151,38 +114,20 @@ export default function Header() {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 280, damping: 28 }}
+        className="fixed left-0 right-0 z-[100] flex items-center justify-between h-16 md:h-[72px] px-5 md:px-12 transition-all duration-300"
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
+          top: scrolled ? 0 : "36px",
           background: scrolled ? "rgba(250,247,242,0.97)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           borderBottom: scrolled ? "0.5px solid rgba(26,58,42,0.12)" : "none",
-          padding: "0 48px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: "72px",
-          transition: "background 0.35s ease, border-color 0.35s ease",
-          marginTop: scrolled ? 0 : "36px",
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "11px", textDecoration: "none" }}>
+        <Link href="/" className="flex items-center gap-2.5" style={{ textDecoration: "none" }}>
           <motion.div
             whileHover={{ scale: 1.05 }}
-            style={{
-              width: "36px",
-              height: "36px",
-              border: `1.5px solid ${scrolled ? "var(--forest)" : "rgba(255,255,255,0.6)"}`,
-              borderRadius: "50%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "border-color 0.3s",
-            }}
+            className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300"
+            style={{ border: `1.5px solid ${scrolled ? "var(--forest)" : "rgba(255,255,255,0.6)"}` }}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke={scrolled ? "var(--forest)" : "white"} strokeWidth="1.5" width={16} height={16}>
               <path d="M12 2a7 7 0 0 1 7 7c0 4-3 7-5 9.5C12.5 20 12 21 12 21s-.5-1-2-2.5C8 16 5 13 5 9a7 7 0 0 1 7-7z" />
@@ -190,14 +135,8 @@ export default function Header() {
             </svg>
           </motion.div>
           <span
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "22px",
-              fontWeight: 600,
-              color: scrolled ? "var(--forest)" : "white",
-              letterSpacing: "0.05em",
-              transition: "color 0.3s",
-            }}
+            className="text-xl md:text-2xl font-semibold tracking-wide transition-colors duration-300"
+            style={{ fontFamily: "'Cormorant Garamond', serif", color: scrolled ? "var(--forest)" : "white" }}
           >
             Ralas
           </span>
@@ -209,16 +148,10 @@ export default function Header() {
             <Link
               key={item}
               href={`/${item.toLowerCase().replace(" ", "-")}`}
-              className="nav-link-item"
+              className="px-3.5 py-2 text-xs tracking-widest uppercase transition-colors duration-200 hover:opacity-70"
               style={{
-                fontSize: "13px",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
                 color: scrolled ? "var(--text-mid)" : "rgba(255,255,255,0.85)",
                 textDecoration: "none",
-                padding: "8px 14px",
-                position: "relative",
-                transition: "color 0.2s",
               }}
             >
               {item}
@@ -227,19 +160,15 @@ export default function Header() {
         </nav>
 
         {/* Right actions */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <BookAppointment />
-          {/* Mobile menu toggle */}
+        <div className="flex items-center gap-3">
+          {/* Hide on mobile — shown inside drawer */}
+          <div className="hidden sm:block">
+            <BookAppointment />
+          </div>
           <button
-            className="lg:hidden"
+            className="lg:hidden p-1 bg-transparent border-none cursor-pointer"
             onClick={() => setMobileOpen(true)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: scrolled ? "var(--text)" : "white",
-              padding: "4px",
-            }}
+            style={{ color: scrolled ? "var(--text)" : "white" }}
           >
             <Menu size={22} />
           </button>
@@ -251,48 +180,30 @@ export default function Header() {
         {mobileOpen && (
           <>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[200] bg-black/40"
               onClick={() => setMobileOpen(false)}
-              style={{
-                position: "fixed",
-                inset: 0,
-                background: "rgba(0,0,0,0.4)",
-                zIndex: 200,
-              }}
             />
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 32 }}
-              style={{
-                position: "fixed",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                width: "300px",
-                background: "var(--white)",
-                zIndex: 300,
-                padding: "32px 28px",
-                display: "flex",
-                flexDirection: "column",
-              }}
+              className="fixed top-0 right-0 bottom-0 z-[300] w-[300px] flex flex-col p-7"
+              style={{ background: "var(--white)" }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "40px" }}>
-                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 600, color: "var(--forest)" }}>
+              <div className="flex items-center justify-between mb-10">
+                <span className="text-xl font-semibold tracking-wide"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", color: "var(--forest)" }}>
                   Ralas
                 </span>
-                <button onClick={() => setMobileOpen(false)} style={{ background: "none", border: "none", cursor: "pointer" }}>
+                <button onClick={() => setMobileOpen(false)} className="bg-transparent border-none cursor-pointer p-1">
                   <X size={20} color="var(--text-mid)" />
                 </button>
               </div>
 
-              <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: "4px" }}>
+              <nav className="flex-1 flex flex-col gap-1 overflow-y-auto">
                 {[
                   { label: "Home", href: "/" },
-                  { label: "Services", href: "/services", sub: true },
+                  { label: "Services", href: "/services" },
                   { label: "Hearing Tests", href: "/hearing-tests", indent: true },
                   { label: "Speech Therapy", href: "/speech-therapy", indent: true },
                   { label: "Hearing Aids", href: "/hearing-aids", indent: true },
@@ -305,14 +216,15 @@ export default function Header() {
                     key={label}
                     href={href}
                     onClick={() => setMobileOpen(false)}
+                    className={`block no-underline transition-colors ${
+                      indent
+                        ? "py-1.5 pl-4 text-sm font-light"
+                        : "py-2.5 text-base font-normal border-b"
+                    }`}
                     style={{
-                      display: "block",
-                      padding: `${indent ? "6px" : "10px"} 0 ${indent ? "6px" : "10px"} ${indent ? "16px" : "0"}`,
-                      fontSize: indent ? "13px" : "15px",
-                      fontWeight: indent ? 300 : 400,
                       color: indent ? "var(--text-lt)" : "var(--forest)",
                       textDecoration: "none",
-                      borderBottom: indent ? "none" : "0.5px solid var(--border)",
+                      borderColor: "var(--border)",
                     }}
                   >
                     {label}
@@ -320,12 +232,14 @@ export default function Header() {
                 ))}
               </nav>
 
-              <div style={{ paddingTop: "28px", borderTop: "0.5px solid var(--border)" }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-                  <a href="tel:+916366638452" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-mid)", textDecoration: "none" }}>
+              <div className="pt-6 border-t" style={{ borderColor: "var(--border)" }}>
+                <div className="flex flex-col gap-3 mb-5">
+                  <a href="tel:+916366638452"
+                    className="flex items-center gap-2.5 text-sm no-underline"
+                    style={{ color: "var(--text-mid)", textDecoration: "none" }}>
                     <Phone size={14} color="var(--gold)" /> +91 6366-638452
                   </a>
-                  <span style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--text-mid)" }}>
+                  <span className="flex items-center gap-2.5 text-sm" style={{ color: "var(--text-mid)" }}>
                     <Clock size={14} color="var(--gold)" /> Mon–Sat, 10 AM – 7:30 PM
                   </span>
                 </div>
@@ -337,101 +251,75 @@ export default function Header() {
       </AnimatePresence>
 
       {/* ── HERO CAROUSEL ── */}
-      <div style={{ position: "relative", height: "100vh", minHeight: "600px", background: "var(--forest-deep)", overflow: "hidden" }}>
+      <div className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px", background: "var(--forest-deep)" }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.65 }}
-            style={{ position: "absolute", inset: 0 }}
+            className="absolute inset-0"
           >
-            {/* Background */}
+            {/* BG */}
             <motion.div
-              initial={{ scale: 1.06 }}
-              animate={{ scale: 1 }}
+              initial={{ scale: 1.06 }} animate={{ scale: 1 }}
               transition={{ duration: 7, ease: "easeOut" }}
-              style={{
-                position: "absolute",
-                inset: 0,
-                backgroundImage: `url(${slides[current].image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                opacity: 0.45,
-              }}
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${slides[current].image})`, opacity: 0.45 }}
             />
             {/* Overlay */}
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(110deg, rgba(10,25,15,0.88) 0%, rgba(10,25,15,0.35) 60%, transparent 100%)" }} />
+            <div className="absolute inset-0"
+              style={{ background: "linear-gradient(110deg, rgba(10,25,15,0.88) 0%, rgba(10,25,15,0.35) 60%, transparent 100%)" }} />
 
-            {/* Content */}
-            <div style={{ position: "relative", height: "100%", display: "flex", alignItems: "center", padding: "0 48px" }}>
-              <div style={{ maxWidth: "580px" }}>
+            {/* Hero content */}
+            <div className="relative h-full flex items-center px-5 md:px-12">
+              <div className="w-full max-w-xl">
+
+                {/* Eyebrow */}
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  style={{ fontSize: "11px", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "18px", display: "flex", alignItems: "center", gap: "10px" }}
+                  initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                  className="flex items-center gap-2.5 mb-4 text-xs tracking-[0.22em] uppercase"
+                  style={{ color: "var(--gold)" }}
                 >
-                  <span style={{ width: "28px", height: "1px", background: "var(--gold)", display: "block" }} />
+                  <span className="block w-7 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
                   {slides[current].eyebrow}
                 </motion.div>
 
+                {/* H1 */}
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(42px, 5.5vw, 72px)", fontWeight: 300, color: "white", lineHeight: 1.1, marginBottom: "20px" }}
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                  className="font-light text-white leading-tight mb-4"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 6vw, 72px)", lineHeight: 1.1 }}
                 >
-                  {slides[current].title[0]}
-                  <br />
-                  <em style={{ fontStyle: "italic", color: "var(--gold-lt)" }}>{slides[current].title[1]}</em>
+                  {slides[current].title[0]}<br />
+                  <em className="italic" style={{ color: "var(--gold-lt)" }}>{slides[current].title[1]}</em>
                 </motion.h1>
 
+                {/* Subtitle */}
                 <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  style={{ fontSize: "16px", fontWeight: 300, color: "rgba(255,255,255,0.72)", lineHeight: 1.7, marginBottom: "36px", maxWidth: "440px" }}
+                  initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+                  className="text-sm md:text-base font-light leading-relaxed mb-8 max-w-md"
+                  style={{ color: "rgba(255,255,255,0.72)" }}
                 >
                   {slides[current].subtitle}
                 </motion.p>
 
+                {/* CTAs */}
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.42 }}
-                  style={{ display: "flex", alignItems: "center", gap: "20px" }}
+                  initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.42 }}
+                  className="flex flex-wrap items-center gap-4"
                 >
                   <Link
                     href={slides[current].ctaLink}
-                    style={{
-                      background: "var(--gold)",
-                      color: "var(--forest)",
-                      fontSize: "12px",
-                      fontWeight: 500,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      padding: "14px 32px",
-                      textDecoration: "none",
-                      transition: "background 0.2s",
-                      display: "inline-block",
-                    }}
+                    className="inline-block text-xs font-medium tracking-widest uppercase px-6 py-3.5 no-underline transition-colors"
+                    style={{ background: "var(--gold)", color: "var(--forest)", textDecoration: "none" }}
                   >
                     {slides[current].cta}
                   </Link>
+                  {/* Hide secondary CTA on very small screens */}
                   <Link
                     href={slides[current].secondaryLink}
-                    style={{
-                      fontSize: "12px",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.7)",
-                      textDecoration: "none",
-                      borderBottom: "1px solid rgba(255,255,255,0.3)",
-                      paddingBottom: "2px",
-                      transition: "color 0.2s",
-                    }}
+                    className="hidden sm:inline text-xs tracking-widest uppercase pb-0.5 no-underline transition-colors"
+                    style={{ color: "rgba(255,255,255,0.7)", borderBottom: "1px solid rgba(255,255,255,0.3)", textDecoration: "none" }}
                   >
                     {slides[current].secondaryCta} →
                   </Link>
@@ -441,89 +329,72 @@ export default function Header() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Right service panel */}
-        <div style={{ position: "absolute", right: "48px", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: 10 }} className="hidden lg:flex">
+        {/* Right service panel — desktop only */}
+        <div className="hidden lg:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-0.5 z-10">
           {[
             { label: "Service", title: "Hearing Tests", href: "/hearing-tests" },
             { label: "Service", title: "Speech Therapy", href: "/speech-therapy" },
             { label: "Service", title: "Tinnitus Care", href: "/tinnitus-treatment" },
           ].map(({ label, title, href }) => (
-            <Link
-              key={title}
-              href={href}
-              style={{
-                background: "rgba(255,255,255,0.07)",
-                backdropFilter: "blur(10px)",
-                border: "0.5px solid rgba(255,255,255,0.15)",
-                padding: "14px 20px",
-                textDecoration: "none",
-                textAlign: "right",
-                minWidth: "170px",
-                transition: "background 0.2s",
-              }}
+            <Link key={title} href={href}
+              className="block text-right px-5 py-3.5 min-w-[160px] no-underline transition-colors hover:bg-white/10"
+              style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(10px)", border: "0.5px solid rgba(255,255,255,0.15)", textDecoration: "none" }}
             >
-              <div style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "3px" }}>{label}</div>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "14px", color: "white", fontWeight: 400 }}>{title}</div>
+              <div className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "var(--gold)" }}>{label}</div>
+              <div className="text-sm font-light text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{title}</div>
             </Link>
           ))}
         </div>
 
         {/* Dots */}
-        <div style={{ position: "absolute", bottom: "96px", left: "48px", display: "flex", gap: "8px", alignItems: "center", zIndex: 10 }}>
+        <div className="absolute bottom-24 left-5 md:left-12 flex gap-2 items-center z-10">
           {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
+            <button key={i} onClick={() => setCurrent(i)}
+              className="h-1.5 border-none cursor-pointer p-0 transition-all duration-300"
               style={{
                 width: current === i ? "22px" : "6px",
-                height: "6px",
                 borderRadius: current === i ? "3px" : "50%",
                 background: current === i ? "var(--gold)" : "rgba(255,255,255,0.3)",
-                border: "none",
-                cursor: "pointer",
-                transition: "all 0.3s",
-                padding: 0,
               }}
             />
           ))}
         </div>
 
         {/* Prev / Next */}
-        <div style={{ position: "absolute", bottom: "88px", left: "48px", display: "flex", gap: "8px", alignItems: "center", marginLeft: "80px", zIndex: 10 }}>
-          <button onClick={prev} style={{ width: "34px", height: "34px", background: "rgba(255,255,255,0.1)", border: "0.5px solid rgba(255,255,255,0.25)", color: "white", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }}>
-            <ChevronLeft size={16} />
+        <div className="absolute bottom-[86px] flex gap-2 z-10 left-5 md:left-12 ml-16 md:ml-20">
+          <button onClick={prev}
+            className="w-8 h-8 flex items-center justify-center cursor-pointer transition-colors hover:bg-white/20"
+            style={{ background: "rgba(255,255,255,0.1)", border: "0.5px solid rgba(255,255,255,0.25)", color: "white" }}>
+            <ChevronLeft size={15} />
           </button>
-          <button onClick={next} style={{ width: "34px", height: "34px", background: "rgba(255,255,255,0.1)", border: "0.5px solid rgba(255,255,255,0.25)", color: "white", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }}>
-            <ChevronRight size={16} />
+          <button onClick={next}
+            className="w-8 h-8 flex items-center justify-center cursor-pointer transition-colors hover:bg-white/20"
+            style={{ background: "rgba(255,255,255,0.1)", border: "0.5px solid rgba(255,255,255,0.25)", color: "white" }}>
+            <ChevronRight size={15} />
           </button>
         </div>
 
-        {/* Counter */}
-        <div style={{ position: "absolute", bottom: "96px", right: "48px", fontSize: "11px", letterSpacing: "0.12em", color: "rgba(255,255,255,0.4)", fontWeight: 300, zIndex: 10 }}>
-          <strong style={{ color: "white", fontWeight: 400 }}>0{current + 1}</strong> / 0{slides.length}
+        {/* Counter — desktop only */}
+        <div className="hidden md:block absolute bottom-24 right-12 text-xs tracking-widest font-light z-10"
+          style={{ color: "rgba(255,255,255,0.4)" }}>
+          <strong className="font-normal text-white">0{current + 1}</strong> / 0{slides.length}
         </div>
 
-        {/* Bottom strip */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "rgba(10,20,14,0.9)", backdropFilter: "blur(8px)", display: "flex", height: "76px", borderTop: "0.5px solid rgba(201,168,76,0.2)", zIndex: 10 }}>
-          {stripItems.map(({ icon, title, sub }) => (
-            <div
-              key={title}
-              style={{
-                flex: 1,
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                padding: "0 24px",
-                borderRight: "0.5px solid rgba(255,255,255,0.08)",
-                cursor: "pointer",
-              }}
+        {/* Bottom strip — 2 col on mobile, 4 col on desktop */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 grid grid-cols-2 md:grid-cols-4"
+          style={{ background: "rgba(10,20,14,0.9)", backdropFilter: "blur(8px)", borderTop: "0.5px solid rgba(201,168,76,0.2)" }}>
+          {stripItems.map(({ icon, title, sub }, i) => (
+            <div key={title}
+              className="flex items-center gap-3 px-4 md:px-6 py-4 md:py-0 md:h-[76px] cursor-pointer hover:bg-white/5 transition-colors"
+              style={{ borderRight: i !== 1 && i !== 3 ? "0.5px solid rgba(255,255,255,0.08)" : "none" }}
             >
-              <div style={{ width: "30px", height: "30px", border: "1px solid rgba(201,168,76,0.35)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+                style={{ border: "1px solid rgba(201,168,76,0.35)" }}>
                 {icon}
               </div>
               <div>
-                <div style={{ fontSize: "12px", fontWeight: 500, color: "white", marginBottom: "1px" }}>{title}</div>
-                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.45)", letterSpacing: "0.03em" }}>{sub}</div>
+                <div className="text-xs font-medium text-white mb-0.5">{title}</div>
+                <div className="text-xs font-light" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
               </div>
             </div>
           ))}

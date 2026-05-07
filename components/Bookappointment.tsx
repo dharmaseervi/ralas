@@ -25,38 +25,9 @@ const timeSlots = [
 
 const steps = ["Personal Details", "Service & Schedule", "Confirm"]
 
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "11px 14px",
-  fontSize: "14px",
-  fontWeight: 300,
-  fontFamily: "'DM Sans', sans-serif",
-  color: "var(--text)",
-  background: "var(--cream)",
-  border: "0.5px solid rgba(26,58,42,0.18)",
-  outline: "none",
-  transition: "border-color 0.2s",
-  boxSizing: "border-box",
-}
-
-const labelStyle: React.CSSProperties = {
-  display: "block",
-  fontSize: "10.5px",
-  letterSpacing: "0.12em",
-  textTransform: "uppercase",
-  color: "var(--text-lt)",
-  marginBottom: "7px",
-}
-
 interface FormData {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  service: string
-  date: Date | undefined
-  time: string
-  notes: string
+  firstName: string; lastName: string; email: string; phone: string
+  service: string; date: Date | undefined; time: string; notes: string
 }
 
 interface BookAppointmentProps {
@@ -71,14 +42,13 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
   const [success, setSuccess] = useState(false)
   const [focused, setFocused] = useState<string | null>(null)
   const [formData, setFormData] = useState<FormData>({
-    firstName: "", lastName: "", email: "",
-    phone: "", service: "", date: undefined,
-    time: "", notes: "",
+    firstName: "", lastName: "", email: "", phone: "",
+    service: "", date: undefined, time: "", notes: "",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target
-    setFormData((prev) => ({ ...prev, [id]: value }))
+    setFormData(p => ({ ...p, [id]: value }))
   }
 
   const handleSubmit = async () => {
@@ -89,14 +59,11 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
-    } catch (_) {}
+    } catch (_) { }
     setTimeout(() => {
-      setLoading(false)
-      setSuccess(true)
+      setLoading(false); setSuccess(true)
       setTimeout(() => {
-        setSuccess(false)
-        setOpen(false)
-        setStep(1)
+        setSuccess(false); setOpen(false); setStep(1)
         setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", date: undefined, time: "", notes: "" })
       }, 2800)
     }, 1400)
@@ -104,59 +71,38 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
 
   const canProceed =
     step === 1 ? !!(formData.firstName && formData.lastName && formData.email && formData.phone)
-    : step === 2 ? !!(formData.service && formData.date && formData.time)
-    : true
+      : step === 2 ? !!(formData.service && formData.date && formData.time)
+        : true
+
+  const inputCls = (id: string) =>
+    `w-full px-3.5 py-3 text-sm font-light outline-none transition-colors duration-200 bg-[var(--cream)] border ${focused === id ? "border-[var(--gold)]" : "border-[rgba(26,58,42,0.18)]"
+    }`
 
   return (
     <>
-      {/* ── Trigger ── */}
+      {/* ── Trigger button ── */}
       <button
         onClick={() => setOpen(true)}
+        className={`text-xs font-medium tracking-widest uppercase cursor-pointer transition-all duration-200 hover:-translate-y-px whitespace-nowrap ${fullWidth ? "w-full" : ""}`}
         style={{
           background: variant === "gold" ? "var(--gold)" : "transparent",
           color: "var(--forest)",
           border: variant === "outline" ? "1px solid var(--forest)" : "none",
-          fontSize: "12px",
-          fontWeight: 500,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          fontFamily: "'DM Sans', sans-serif",
           padding: "10px 22px",
-          cursor: "pointer",
-          transition: "background 0.2s, transform 0.15s",
-          width: fullWidth ? "100%" : "auto",
-          whiteSpace: "nowrap",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = variant === "gold" ? "#D4B560" : "rgba(26,58,42,0.06)"
-          e.currentTarget.style.transform = "translateY(-1px)"
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = variant === "gold" ? "var(--gold)" : "transparent"
-          e.currentTarget.style.transform = "none"
+          fontFamily: "'DM Sans', sans-serif",
         }}
       >
         Book Appointment
       </button>
 
-      {/* ── Modal ── */}
+      {/* ── Modal overlay ── */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => !loading && setOpen(false)}
-            style={{
-              position: "fixed", inset: 0,
-              background: "rgba(10,20,14,0.6)",
-              backdropFilter: "blur(4px)",
-              zIndex: 500,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "16px",
-            }}
+            className="fixed inset-0 z-[500] flex items-center justify-center p-4"
+            style={{ background: "rgba(10,20,14,0.6)", backdropFilter: "blur(4px)" }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -164,97 +110,73 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", stiffness: 320, damping: 30 }}
               onClick={(e) => e.stopPropagation()}
-              style={{
-                background: "var(--white)",
-                width: "100%",
-                maxWidth: "520px",
-                overflow: "hidden",
-                maxHeight: "90vh",
-                overflowY: "auto",
-              }}
+              className="w-full max-w-[520px] overflow-hidden overflow-y-auto"
+              style={{ background: "var(--white)", maxHeight: "90svh" }}
             >
               <AnimatePresence mode="wait">
 
                 {/* ── SUCCESS ── */}
                 {success ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    style={{
-                      display: "flex", flexDirection: "column",
-                      alignItems: "center", justifyContent: "center",
-                      padding: "64px 48px", textAlign: "center",
-                    }}
+                  <motion.div key="success"
+                    initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                    className="flex flex-col items-center justify-center px-8 py-16 text-center"
                   >
-                    <div style={{
-                      width: "68px", height: "68px",
-                      border: "1px solid rgba(107,175,124,0.35)",
-                      borderRadius: "50%",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      marginBottom: "24px",
-                      background: "rgba(107,175,124,0.07)",
-                    }}>
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+                      style={{ border: "1px solid rgba(107,175,124,0.35)", background: "rgba(107,175,124,0.07)" }}>
                       <CheckCircle size={28} color="#6BAF7C" strokeWidth={1.5} />
                     </div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "32px", fontWeight: 300, color: "var(--forest)", marginBottom: "12px" }}>
+                    <div className="font-light mb-3" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "32px", color: "var(--forest)" }}>
                       Appointment Requested
                     </div>
-                    <p style={{ fontSize: "14px", fontWeight: 300, color: "var(--text-mid)", lineHeight: 1.75, maxWidth: "300px" }}>
-                      We'll confirm your slot within 2 hours during clinic hours and send a confirmation to <strong style={{ fontWeight: 500 }}>{formData.email}</strong>.
+                    <p className="text-sm font-light leading-relaxed max-w-[280px]" style={{ color: "var(--text-mid)" }}>
+                      We'll confirm your slot within 2 hours during clinic hours and send a confirmation to{" "}
+                      <strong className="font-medium">{formData.email}</strong>.
                     </p>
-                    <div style={{ marginTop: "28px", width: "40px", height: "1.5px", background: "var(--gold)" }} />
+                    <div className="mt-7 w-10 h-px" style={{ background: "var(--gold)" }} />
                   </motion.div>
-                ) : (
 
+                ) : (
                   /* ── FORM ── */
                   <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
 
-                    {/* Modal header */}
-                    <div style={{ background: "var(--forest)", padding: "28px 32px 26px", position: "relative" }}>
-                      <div style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "5px" }}>
+                    {/* Header */}
+                    <div className="relative px-6 md:px-8 pt-6 pb-5" style={{ background: "var(--forest)" }}>
+                      <div className="text-xs tracking-[0.2em] uppercase mb-1" style={{ color: "var(--gold)" }}>
                         Ralas Hearing Clinic
                       </div>
-                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px", fontWeight: 300, color: "white", marginBottom: "22px" }}>
+                      <div className="font-light text-white mb-5" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px" }}>
                         Book an Appointment
                       </div>
 
                       {/* Step tracker */}
-                      <div style={{ display: "flex", alignItems: "flex-start" }}>
+                      <div className="flex items-start">
                         {steps.map((label, i) => {
                           const n = i + 1
                           const done = step > n
                           const active = step === n
                           return (
-                            <div key={label} style={{ display: "flex", alignItems: "center", flex: i < steps.length - 1 ? 1 : "none" }}>
-                              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                                <div style={{
-                                  width: "26px", height: "26px", borderRadius: "50%",
-                                  border: `1px solid ${done ? "var(--gold)" : active ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.2)"}`,
-                                  background: done ? "var(--gold)" : active ? "rgba(255,255,255,0.1)" : "transparent",
-                                  display: "flex", alignItems: "center", justifyContent: "center",
-                                  fontSize: "11px", fontWeight: 500,
-                                  color: done ? "var(--forest)" : active ? "white" : "rgba(255,255,255,0.35)",
-                                  transition: "all 0.3s",
-                                }}>
+                            <div key={label} className="flex items-center" style={{ flex: i < steps.length - 1 ? 1 : "none" }}>
+                              <div className="flex flex-col items-center gap-1.5">
+                                <div
+                                  className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium transition-all duration-300"
+                                  style={{
+                                    border: `1px solid ${done ? "var(--gold)" : active ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.2)"}`,
+                                    background: done ? "var(--gold)" : active ? "rgba(255,255,255,0.1)" : "transparent",
+                                    color: done ? "var(--forest)" : active ? "white" : "rgba(255,255,255,0.35)",
+                                  }}
+                                >
                                   {done ? "✓" : n}
                                 </div>
-                                <div style={{
-                                  fontSize: "9.5px", letterSpacing: "0.07em", textTransform: "uppercase",
-                                  color: active ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.28)",
-                                  whiteSpace: "nowrap",
-                                }}>
+                                <div
+                                  className="text-[9px] tracking-wider uppercase whitespace-nowrap"
+                                  style={{ color: active ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.28)" }}
+                                >
                                   {label}
                                 </div>
                               </div>
                               {i < steps.length - 1 && (
-                                <div style={{
-                                  flex: 1, height: "0.5px",
-                                  background: done ? "var(--gold)" : "rgba(255,255,255,0.12)",
-                                  margin: "0 10px", marginBottom: "22px",
-                                  transition: "background 0.3s",
-                                }} />
+                                <div className="flex-1 h-px mx-2.5 mb-5 transition-colors duration-300"
+                                  style={{ background: done ? "var(--gold)" : "rgba(255,255,255,0.12)" }} />
                               )}
                             </div>
                           )
@@ -262,35 +184,37 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                       </div>
 
                       {/* Close */}
-                      <button
-                        onClick={() => setOpen(false)}
-                        style={{ position: "absolute", top: "18px", right: "20px", background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.45)", padding: "4px" }}
-                      >
+                      <button onClick={() => setOpen(false)}
+                        className="absolute top-4 right-4 p-1 bg-transparent border-none cursor-pointer"
+                        style={{ color: "rgba(255,255,255,0.45)" }}>
                         <X size={17} />
                       </button>
                     </div>
 
                     {/* Form body */}
-                    <div style={{ padding: "36px 32px" }}>
+                    <div className="px-6 md:px-8 py-7">
                       <AnimatePresence mode="wait">
 
-                        {/* Step 1 — Personal */}
+                        {/* Step 1 */}
                         {step === 1 && (
                           <motion.div key="s1"
                             initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }}
                             transition={{ duration: 0.2 }}
-                            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+                            className="flex flex-col gap-4"
                           >
-                            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", fontWeight: 400, color: "var(--forest)", marginBottom: "2px" }}>
+                            <div className="font-normal mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", color: "var(--forest)" }}>
                               Personal Information
                             </div>
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                            {/* Name row — 1 col on mobile, 2 col on sm */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               {(["firstName", "lastName"] as const).map((id) => (
                                 <div key={id}>
-                                  <label htmlFor={id} style={labelStyle}>{id === "firstName" ? "First Name" : "Last Name"}</label>
+                                  <label htmlFor={id} className="block text-xs tracking-widest uppercase mb-1.5" style={{ color: "var(--text-lt)" }}>
+                                    {id === "firstName" ? "First Name" : "Last Name"}
+                                  </label>
                                   <input id={id} type="text" value={formData[id]} onChange={handleChange}
                                     onFocus={() => setFocused(id)} onBlur={() => setFocused(null)}
-                                    style={{ ...inputStyle, borderColor: focused === id ? "var(--gold)" : "rgba(26,58,42,0.18)" }}
+                                    className={inputCls(id)} style={{ fontFamily: "'DM Sans', sans-serif" }}
                                   />
                                 </div>
                               ))}
@@ -300,43 +224,47 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                               { id: "phone" as const, label: "Phone Number", type: "tel" },
                             ]).map(({ id, label, type }) => (
                               <div key={id}>
-                                <label htmlFor={id} style={labelStyle}>{label}</label>
+                                <label htmlFor={id} className="block text-xs tracking-widest uppercase mb-1.5" style={{ color: "var(--text-lt)" }}>
+                                  {label}
+                                </label>
                                 <input id={id} type={type} value={formData[id]} onChange={handleChange}
                                   onFocus={() => setFocused(id)} onBlur={() => setFocused(null)}
-                                  style={{ ...inputStyle, borderColor: focused === id ? "var(--gold)" : "rgba(26,58,42,0.18)" }}
+                                  className={inputCls(id)} style={{ fontFamily: "'DM Sans', sans-serif" }}
                                 />
                               </div>
                             ))}
                           </motion.div>
                         )}
 
-                        {/* Step 2 — Service & Schedule */}
+                        {/* Step 2 */}
                         {step === 2 && (
                           <motion.div key="s2"
                             initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }}
                             transition={{ duration: 0.2 }}
-                            style={{ display: "flex", flexDirection: "column", gap: "22px" }}
+                            className="flex flex-col gap-5"
                           >
-                            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", fontWeight: 400, color: "var(--forest)", marginBottom: "2px" }}>
+                            <div className="font-normal mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", color: "var(--forest)" }}>
                               Service & Schedule
                             </div>
 
-                            {/* Service buttons */}
+                            {/* Services */}
                             <div>
-                              <label style={labelStyle}>Service Type</label>
-                              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
+                              <label className="block text-xs tracking-widest uppercase mb-2" style={{ color: "var(--text-lt)" }}>
+                                Service Type
+                              </label>
+                              <div className="grid grid-cols-2 gap-1.5">
                                 {services.map(({ value, label }) => {
                                   const sel = formData.service === value
                                   return (
                                     <button key={value} type="button"
                                       onClick={() => setFormData(p => ({ ...p, service: value }))}
+                                      className="text-left px-3 py-2.5 text-xs cursor-pointer transition-all duration-200"
                                       style={{
-                                        padding: "11px 14px", fontSize: "13px", fontWeight: sel ? 500 : 300,
-                                        fontFamily: "'DM Sans', sans-serif", textAlign: "left", cursor: "pointer",
+                                        fontFamily: "'DM Sans', sans-serif",
+                                        fontWeight: sel ? 500 : 300,
                                         background: sel ? "var(--forest)" : "var(--cream)",
                                         color: sel ? "white" : "var(--text-mid)",
                                         border: `0.5px solid ${sel ? "var(--forest)" : "rgba(26,58,42,0.15)"}`,
-                                        transition: "all 0.18s",
                                       }}
                                     >
                                       {label}
@@ -346,22 +274,34 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                               </div>
                             </div>
 
-                            {/* Date */}
+                            {/* Date picker — PopoverContent uses z-[600] to sit above modal */}
                             <div>
-                              <label style={labelStyle}>Preferred Date</label>
+                              <label className="block text-xs tracking-widest uppercase mb-2" style={{ color: "var(--text-lt)" }}>
+                                Preferred Date
+                              </label>
                               <Popover>
                                 <PopoverTrigger asChild>
-                                  <button type="button" style={{ ...inputStyle, display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
+                                  <button type="button"
+                                    className="w-full flex items-center gap-2.5 px-3.5 py-3 text-sm font-light outline-none cursor-pointer transition-colors bg-[var(--cream)] border border-[rgba(26,58,42,0.18)]"
+                                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                                  >
                                     <CalendarIcon size={13} color="var(--gold)" />
-                                    <span style={{ color: formData.date ? "var(--text)" : "var(--text-lt)", fontWeight: 300 }}>
+                                    <span style={{ color: formData.date ? "var(--text)" : "var(--text-lt)" }}>
                                       {formData.date ? format(formData.date, "EEEE, d MMMM yyyy") : "Select a date"}
                                     </span>
                                   </button>
                                 </PopoverTrigger>
-                                <PopoverContent style={{ width: "auto", padding: 0, border: "0.5px solid rgba(26,58,42,0.15)", borderRadius: 0 }} align="start">
-                                  <Calendar mode="single" selected={formData.date}
+                                {/* z-[600] ensures calendar renders above the z-[500] modal */}
+                                <PopoverContent
+                                  className="w-full p-0 rounded-none z-[600] "
+                                  style={{ border: "0.5px solid rgba(26,58,42,0.15)" }}
+                                  align="start"
+                                  sideOffset={4}
+                                >
+                                  <Calendar
+                                    mode="single"
+                                    selected={formData.date}
                                     onSelect={(d) => setFormData(p => ({ ...p, date: d }))}
-                                    initialFocus
                                     disabled={(date) => {
                                       const day = date.getDay()
                                       const today = new Date(); today.setHours(0, 0, 0, 0)
@@ -374,21 +314,22 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
 
                             {/* Time slots */}
                             <div>
-                              <label style={labelStyle}>Preferred Time</label>
-                              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "6px" }}>
+                              <label className="block text-xs tracking-widest uppercase mb-2" style={{ color: "var(--text-lt)" }}>
+                                Preferred Time
+                              </label>
+                              <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5">
                                 {timeSlots.map((slot) => {
                                   const sel = formData.time === slot
                                   return (
                                     <button key={slot} type="button"
                                       onClick={() => setFormData(p => ({ ...p, time: slot }))}
+                                      className="py-2 text-xs cursor-pointer transition-all duration-200 text-center"
                                       style={{
-                                        padding: "9px 4px", fontSize: "12px", fontFamily: "'DM Sans', sans-serif",
-                                        cursor: "pointer", textAlign: "center",
+                                        fontFamily: "'DM Sans', sans-serif",
+                                        fontWeight: sel ? 500 : 300,
                                         background: sel ? "var(--forest)" : "var(--cream)",
                                         color: sel ? "white" : "var(--text-mid)",
                                         border: `0.5px solid ${sel ? "var(--forest)" : "rgba(26,58,42,0.15)"}`,
-                                        fontWeight: sel ? 500 : 300,
-                                        transition: "all 0.18s",
                                       }}
                                     >
                                       {slot}
@@ -400,35 +341,34 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                           </motion.div>
                         )}
 
-                        {/* Step 3 — Confirm */}
+                        {/* Step 3 */}
                         {step === 3 && (
                           <motion.div key="s3"
                             initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }}
                             transition={{ duration: 0.2 }}
-                            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                            className="flex flex-col gap-5"
                           >
-                            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", fontWeight: 400, color: "var(--forest)", marginBottom: "2px" }}>
+                            <div className="font-normal mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", color: "var(--forest)" }}>
                               Confirm & Notes
                             </div>
 
-                            {/* Notes */}
                             <div>
-                              <label htmlFor="notes" style={labelStyle}>
-                                Special Requests{" "}
-                                <span style={{ color: "var(--text-lt)", fontWeight: 300, letterSpacing: 0, textTransform: "none", fontSize: "11px" }}>(optional)</span>
+                              <label htmlFor="notes" className="block text-xs tracking-widest uppercase mb-2" style={{ color: "var(--text-lt)" }}>
+                                Special Requests <span className="normal-case tracking-normal text-xs font-light" style={{ color: "var(--text-lt)" }}>(optional)</span>
                               </label>
                               <textarea id="notes" rows={3}
                                 placeholder="Share any specific concerns, mobility requirements, or questions…"
                                 value={formData.notes} onChange={handleChange}
                                 onKeyDown={(e) => e.stopPropagation()}
                                 onFocus={() => setFocused("notes")} onBlur={() => setFocused(null)}
-                                style={{ ...inputStyle, resize: "none", lineHeight: 1.65, borderColor: focused === "notes" ? "var(--gold)" : "rgba(26,58,42,0.18)" }}
+                                className={`${inputCls("notes")} resize-none leading-relaxed`}
+                                style={{ fontFamily: "'DM Sans', sans-serif" }}
                               />
                             </div>
 
                             {/* Summary */}
-                            <div style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.1)", padding: "22px 24px" }}>
-                              <div style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "14px" }}>
+                            <div className="p-5" style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.1)" }}>
+                              <div className="text-xs tracking-widest uppercase mb-3" style={{ color: "var(--gold)" }}>
                                 Appointment Summary
                               </div>
                               {[
@@ -438,14 +378,14 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                                 { label: "Date", val: formData.date ? format(formData.date, "EEEE, d MMMM yyyy") : "—" },
                                 { label: "Time", val: formData.time || "—" },
                               ].map(({ label, val }) => (
-                                <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", padding: "7px 0", borderBottom: "0.5px solid rgba(26,58,42,0.07)" }}>
-                                  <span style={{ fontSize: "11.5px", color: "var(--text-lt)" }}>{label}</span>
-                                  <span style={{ fontSize: "13px", fontWeight: 400, color: "var(--forest)", textAlign: "right" }}>{val}</span>
+                                <div key={label} className="flex justify-between items-start py-1.5" style={{ borderBottom: "0.5px solid rgba(26,58,42,0.07)" }}>
+                                  <span className="text-xs" style={{ color: "var(--text-lt)" }}>{label}</span>
+                                  <span className="text-sm font-normal text-right" style={{ color: "var(--forest)" }}>{val}</span>
                                 </div>
                               ))}
                             </div>
 
-                            <p style={{ fontSize: "11.5px", color: "var(--text-lt)", lineHeight: 1.6 }}>
+                            <p className="text-xs font-light leading-relaxed" style={{ color: "var(--text-lt)" }}>
                               By confirming, you agree that Ralas may contact you to confirm or reschedule this appointment.
                             </p>
                           </motion.div>
@@ -453,19 +393,11 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                       </AnimatePresence>
 
                       {/* Nav buttons */}
-                      <div style={{
-                        display: "flex", justifyContent: "space-between", alignItems: "center",
-                        marginTop: "32px", paddingTop: "24px",
-                        borderTop: "0.5px solid rgba(26,58,42,0.1)",
-                      }}>
+                      <div className="flex justify-between items-center mt-8 pt-5" style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)" }}>
                         {step > 1 ? (
                           <button type="button" onClick={() => setStep(p => p - 1)}
-                            style={{
-                              display: "flex", alignItems: "center", gap: "5px",
-                              fontSize: "12px", letterSpacing: "0.08em", textTransform: "uppercase",
-                              color: "var(--text-mid)", background: "none", border: "none", cursor: "pointer",
-                              fontFamily: "'DM Sans', sans-serif",
-                            }}
+                            className="flex items-center gap-1.5 text-xs tracking-widest uppercase bg-transparent border-none cursor-pointer"
+                            style={{ color: "var(--text-mid)", fontFamily: "'DM Sans', sans-serif" }}
                           >
                             <ChevronLeft size={13} /> Back
                           </button>
@@ -473,31 +405,27 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
 
                         {step < 3 ? (
                           <button type="button" onClick={() => setStep(p => p + 1)} disabled={!canProceed}
+                            className="flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase px-6 py-3 border-none transition-colors duration-200"
                             style={{
-                              display: "flex", alignItems: "center", gap: "6px",
                               background: canProceed ? "var(--gold)" : "rgba(26,58,42,0.07)",
                               color: canProceed ? "var(--forest)" : "var(--text-lt)",
-                              fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em",
-                              textTransform: "uppercase", padding: "12px 28px",
-                              border: "none", cursor: canProceed ? "pointer" : "not-allowed",
-                              fontFamily: "'DM Sans', sans-serif", transition: "background 0.2s",
+                              cursor: canProceed ? "pointer" : "not-allowed",
+                              fontFamily: "'DM Sans', sans-serif",
                             }}
                           >
                             Continue <ChevronRight size={13} />
                           </button>
                         ) : (
                           <button type="button" onClick={handleSubmit} disabled={loading}
+                            className="flex items-center gap-2 text-xs font-medium tracking-widest uppercase px-6 py-3 border-none text-white transition-colors duration-200"
                             style={{
-                              display: "flex", alignItems: "center", gap: "8px",
-                              background: "var(--forest)", color: "white",
-                              fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em",
-                              textTransform: "uppercase", padding: "12px 28px",
-                              border: "none", cursor: loading ? "wait" : "pointer",
-                              fontFamily: "'DM Sans', sans-serif", transition: "background 0.2s",
+                              background: "var(--forest)",
+                              cursor: loading ? "wait" : "pointer",
+                              fontFamily: "'DM Sans', sans-serif",
                             }}
                           >
                             {loading
-                              ? <><Loader2 size={13} style={{ animation: "spin 0.8s linear infinite" }} /> Processing…</>
+                              ? <><Loader2 size={13} className="animate-spin" /> Processing…</>
                               : <>Confirm Appointment</>
                             }
                           </button>
@@ -513,7 +441,6 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
       </AnimatePresence>
 
       <style>{`
-        @keyframes spin { to { transform: rotate(360deg); } }
         input::placeholder, textarea::placeholder { color: var(--text-lt); opacity: 1; font-family: 'DM Sans', sans-serif; }
       `}</style>
     </>

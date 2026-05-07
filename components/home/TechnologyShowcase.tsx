@@ -41,9 +41,9 @@ const features = [
 ]
 
 const stats = [
-  { val: "30h", label: "Battery Life", sub: "With wireless charging support" },
-  { val: "–40 dB", label: "Noise Reduction", sub: "Advanced environmental filtering" },
-  { val: "0.5ms", label: "Processing Speed", sub: "Ultra-low latency performance" },
+  { val: "30h",    label: "Battery Life",      sub: "With wireless charging support" },
+  { val: "–40 dB", label: "Noise Reduction",   sub: "Advanced environmental filtering" },
+  { val: "0.5ms",  label: "Processing Speed",  sub: "Ultra-low latency performance" },
 ]
 
 export default function TechnologyShowcase() {
@@ -53,60 +53,37 @@ export default function TechnologyShowcase() {
   return (
     <section
       ref={ref}
-      style={{ background: "var(--white)", padding: "96px 48px", overflow: "hidden" }}
+      className="py-14 md:py-24 px-5 md:px-12 overflow-hidden"
+      style={{ background: "var(--white)" }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <div className="max-w-[1200px] mx-auto">
 
-        {/* Header */}
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65 }}
-          style={{
-            marginBottom: "72px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "40px",
-            alignItems: "end",
-          }}
+          className="mb-12 md:mb-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-end"
         >
           <div>
-            <div style={{
-              fontSize: "10.5px",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "var(--gold)",
-              marginBottom: "14px",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}>
-              <span style={{ width: "24px", height: "1px", background: "var(--gold)", display: "block" }} />
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
               Clinical Technology
             </div>
-            <h2 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
-              fontWeight: 300,
-              lineHeight: 1.15,
-              color: "var(--forest)",
-            }}>
+            <h2
+              className="font-light leading-tight"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.15, color: "var(--forest)" }}
+            >
               Advanced hearing<br />technology, explained
             </h2>
           </div>
-          <p style={{
-            fontSize: "15px",
-            fontWeight: 300,
-            color: "var(--text-mid)",
-            lineHeight: 1.75,
-            maxWidth: "420px",
-          }}>
+          <p className="text-sm md:text-base font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>
             Clinical-grade performance meets intuitive design in the next generation of hearing solutions — fitted precisely to your audiogram by our specialists.
           </p>
         </motion.div>
 
-        {/* Feature Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px", marginBottom: "2px" }}>
+        {/* ── Feature Cards — 1 col mobile, 3 col desktop ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px mb-px" style={{ background: "rgba(26,58,42,0.06)" }}>
           {features.map(({ Icon, title, description, specs }, i) => (
             <motion.div
               key={title}
@@ -114,91 +91,48 @@ export default function TechnologyShowcase() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               whileHover={{ y: -3, boxShadow: "0 16px 48px rgba(26,58,42,0.09)" }}
-              style={{
-                background: "var(--cream)",
-                padding: "36px 32px",
-                position: "relative",
-                overflow: "hidden",
-                border: "0.5px solid rgba(26,58,42,0.08)",
-                transition: "box-shadow 0.3s",
-              }}
+              className="relative overflow-hidden p-7 md:p-9 transition-shadow duration-300"
+              style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.08)" }}
             >
-              {/* Hover top accent bar */}
+              {/* Hover top accent */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.25 }}
-                style={{
-                  position: "absolute",
-                  top: 0, left: 0, right: 0,
-                  height: "2px",
-                  background: "var(--gold)",
-                  transformOrigin: "left",
-                }}
+                className="absolute top-0 left-0 right-0 h-0.5"
+                style={{ background: "var(--gold)", transformOrigin: "left" }}
               />
 
               {/* Icon ring */}
-              <div style={{
-                width: "44px",
-                height: "44px",
-                border: "1px solid rgba(26,58,42,0.15)",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: "20px",
-              }}>
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center mb-5"
+                style={{ border: "1px solid rgba(26,58,42,0.15)" }}
+              >
                 <Icon size={18} color="var(--forest)" strokeWidth={1.5} />
               </div>
 
               {/* Title */}
-              <h3 style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "20px",
-                fontWeight: 400,
-                color: "var(--forest)",
-                marginBottom: "10px",
-                lineHeight: 1.3,
-              }}>
+              <h3
+                className="font-normal leading-snug mb-2.5"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", color: "var(--forest)" }}
+              >
                 {title}
               </h3>
 
               {/* Description */}
-              <p style={{
-                fontSize: "13.5px",
-                fontWeight: 300,
-                color: "var(--text-mid)",
-                lineHeight: 1.65,
-                marginBottom: "24px",
-              }}>
+              <p className="text-sm font-light leading-relaxed mb-6" style={{ color: "var(--text-mid)" }}>
                 {description}
               </p>
 
               {/* Specs */}
-              <div style={{ paddingTop: "20px", borderTop: "0.5px solid rgba(26,58,42,0.1)" }}>
-                <div style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  color: "var(--text-lt)",
-                  marginBottom: "12px",
-                }}>
+              <div className="pt-4" style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)" }}>
+                <div className="text-xs tracking-widest uppercase mb-3" style={{ color: "var(--text-lt)" }}>
                   Key Specifications
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
+                <div className="grid grid-cols-2 gap-2">
                   {specs.map(({ label, icon }) => (
-                    <div
-                      key={label}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px",
-                        fontSize: "12.5px",
-                        fontWeight: 300,
-                        color: "var(--text-mid)",
-                      }}
-                    >
-                      <span style={{ fontSize: "13px" }}>{icon}</span>
+                    <div key={label} className="flex items-center gap-2 text-sm font-light" style={{ color: "var(--text-mid)" }}>
+                      <span className="text-sm">{icon}</span>
                       {label}
                     </div>
                   ))}
@@ -208,102 +142,63 @@ export default function TechnologyShowcase() {
           ))}
         </div>
 
-        {/* Stats bar */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          background: "var(--forest)",
-        }}>
+        {/* ── Stats bar — 1 col mobile, 3 col desktop ── */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-3"
+          style={{ background: "var(--forest)" }}
+        >
           {stats.map(({ val, label, sub }, i) => (
             <motion.div
               key={label}
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.3 + i * 0.1 }}
-              style={{
-                padding: "36px 40px",
-                borderRight: i < stats.length - 1 ? "0.5px solid rgba(255,255,255,0.1)" : "none",
-              }}
+              className="px-7 py-8 md:px-10 md:py-9"
+              style={{ borderBottom: i < stats.length - 1 ? "0.5px solid rgba(255,255,255,0.08)" : "none" }}
             >
-              <div style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "52px",
-                fontWeight: 300,
-                color: "var(--gold)",
-                lineHeight: 1,
-                marginBottom: "8px",
-              }}>
+              <div
+                className="font-light leading-none mb-2"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px,5vw,52px)", color: "var(--gold)" }}
+              >
                 {val}
               </div>
-              <div style={{ fontSize: "13px", fontWeight: 500, color: "white", marginBottom: "4px" }}>
-                {label}
-              </div>
-              <div style={{ fontSize: "12px", fontWeight: 300, color: "rgba(255,255,255,0.42)" }}>
-                {sub}
-              </div>
+              <div className="text-sm font-medium text-white mb-1">{label}</div>
+              <div className="text-xs font-light" style={{ color: "rgba(255,255,255,0.42)" }}>{sub}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA strip */}
+        {/* ── Bottom CTA strip ── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6 }}
-          style={{
-            marginTop: "56px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "32px 40px",
-            background: "var(--cream-dk)",
-            border: "0.5px solid rgba(26,58,42,0.1)",
-          }}
+          className="mt-12 md:mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 p-7 md:p-10"
+          style={{ background: "var(--cream-dk)", border: "0.5px solid rgba(26,58,42,0.1)" }}
         >
           <div>
-            <div style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "22px",
-              fontWeight: 400,
-              color: "var(--forest)",
-              marginBottom: "6px",
-            }}>
+            <div
+              className="font-normal mb-1.5"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(18px,3vw,22px)", color: "var(--forest)" }}
+            >
               Want to experience this technology first-hand?
             </div>
-            <p style={{ fontSize: "13.5px", fontWeight: 300, color: "var(--text-mid)" }}>
+            <p className="text-sm font-light" style={{ color: "var(--text-mid)" }}>
               Book a free demo session at our Jayanagar clinic — no obligation.
             </p>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", flexShrink: 0, marginLeft: "32px" }}>
+          <div className="flex items-center gap-4 flex-shrink-0">
             <a
               href="/contact"
-              style={{
-                background: "var(--gold)",
-                color: "var(--forest)",
-                fontSize: "12px",
-                fontWeight: 500,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                padding: "13px 28px",
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-              }}
+              className="text-xs font-medium tracking-widest uppercase px-6 py-3 no-underline whitespace-nowrap"
+              style={{ background: "var(--gold)", color: "var(--forest)", textDecoration: "none" }}
             >
               Book Free Demo
             </a>
             <a
               href="/hearing-aids"
-              style={{
-                fontSize: "12px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--forest)",
-                textDecoration: "none",
-                borderBottom: "1px solid var(--gold)",
-                paddingBottom: "2px",
-                fontWeight: 400,
-                whiteSpace: "nowrap",
-              }}
+              className="hidden sm:inline text-xs tracking-widest uppercase font-normal whitespace-nowrap no-underline pb-0.5"
+              style={{ color: "var(--forest)", borderBottom: "1px solid var(--gold)", textDecoration: "none" }}
             >
               View all aids →
             </a>
