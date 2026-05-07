@@ -1,8 +1,10 @@
 
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/navbar"
-import ServiceHero from "@/components/home/servicehero"
+import Navbar from "@/components/home/Navbar"
+import ServiceHero from "@/components/home/ServiceHero"
+
+
 
 const team = [
   { name: "Dr. Priya Sharma", role: "Chief Audiologist", qual: "M.Sc. Audiology, AIISH", spec: "Paediatric & adult hearing assessment", initials: "PS" },

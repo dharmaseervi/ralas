@@ -2,8 +2,8 @@
 import { BookAppointment } from "@/components/Bookappointment"
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/navbar"
-import ServiceHero from "@/components/home/servicehero"
+import Navbar from "@/components/home/Navbar"
+import ServiceHero from "@/components/home/ServiceHero"
 
 
 const conditions = ["Stuttering & fluency", "Articulation disorders", "Voice disorders", "Language delay", "Post-stroke aphasia", "Autism spectrum", "Swallowing (dysphagia)", "Cleft palate speech", "Selective mutism", "Cognitive-communication"]

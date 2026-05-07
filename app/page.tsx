@@ -1,9 +1,8 @@
 import Header from "@/components/home/Header"
-
 import VideoSection from "@/components/home/VideoSection"
 import Footer from "@/components/home/Footer"
-import BentoGrid from "@/components/BentoGrid"
-import TechnologyShowcase from "@/components/home/HearingAnimation"
+import BentoGrid from "@/components/home/BentoGrid"
+import TechnologyShowcase from "@/components/home/TechnologyShowcase"
 import Features from "@/components/home/Features"
 import HearingTestSection from "@/components/home/HearingTest"
 

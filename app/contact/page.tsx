@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/navbar"
+import Navbar from "@/components/home/Navbar"
 
 const services = ["Hearing Test", "Speech Therapy", "Hearing Aid Fitting", "Tinnitus Treatment", "Initial Consultation", "Follow-up / Adjustment"]
 
