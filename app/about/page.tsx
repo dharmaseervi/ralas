@@ -5,8 +5,14 @@ import ServiceHero from "@/components/home/ServiceheroSection"
 
 export const metadata = {
   title: "About Us | Ralas Hearing Clinic, Jayanagar Bengaluru",
-  description: "Founded in 2012, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic. RCI-registered audiologists for hearing care and speech therapy.",
+  description: "Founded in 2012, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic. RCI-registered audiologists providing hearing care and speech therapy for all ages.",
   alternates: { canonical: "https://ralasclinic.com/about" },
+  openGraph: {
+    title: "About Ralas Hearing Clinic — Dedicated to Better Hearing",
+    description: "Founded in 2012 in Jayanagar, Bengaluru. RCI-registered audiologists.",
+    url: "https://ralasclinic.com/about",
+    images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Ralas Hearing Clinic team" }],
+  },
 }
 
 const team = [
