@@ -17,11 +17,11 @@ const company = [
 ]
 
 const products = [
-  { label: "Behind-the-Ear Aids", href: "/product/behind-the-ear-aids" },
-  { label: "Rechargeable Aids", href: "/product/rechargeable-aids" },
-  { label: "In-Ear (ITE) Aids", href: "/product/in-ear-aids" },
-  { label: "Smart Hearing Aids", href: "/product/smart-hearing-aids" },
-  { label: "Accessories", href: "/product/accessories" },
+  { label: "Behind-the-Ear Aids", href: "/products/behind-the-ear-aids" },
+  { label: "Rechargeable Aids", href: "/products/rechargeable-aids" },
+  { label: "In-Ear (ITE) Aids", href: "/products/in-ear-aids" },
+  { label: "Smart Hearing Aids", href: "/products/smart-hearing-aids" },
+  { label: "Accessories", href: "/products/accessories" },
 ]
 
 const socials = [

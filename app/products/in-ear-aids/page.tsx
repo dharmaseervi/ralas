@@ -1,112 +1,99 @@
-import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+// app/product/in-ear-aids/page.tsx
+import { generateMetadata } from "@/lib/seo"
+export const metadata = generateMetadata("product-ite")
+import { BookAppointment } from "@/components/Bookappointment";
+import Navbar from "@/components/home/NavigationBar";
+import ServiceHero from "@/components/home/ServiceheroSection";
+import Link from "next/link";
 
+import { Footer } from "react-day-picker";
 
-export const metadata = {
-    title: 'In-Ear Hearing Aids | Ralas',
-    description: 'Discover our range of discreet and comfortable in-ear hearing aids.',
+function ProductSpec({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between items-center py-2.5" style={{ borderBottom: "0.5px solid rgba(26,58,42,0.08)" }}>
+      <span className="text-xs font-light" style={{ color: "var(--text-lt)" }}>{label}</span>
+      <span className="text-sm font-normal" style={{ color: "var(--forest)" }}>{value}</span>
+    </div>
+  )
 }
-
-export default function InEarAidsPage() {
-    return (
-        <div className="container mx-auto py-12 px-4">
-
-            <Breadcrumb>
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>in-ear-aids</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
-
-
-            <h1 className="text-4xl font-bold mb-6 mt-4">In-Ear Hearing Aids</h1>
-
-            <section className="mb-12">
-                <h2 className="text-2xl font-semibold mb-4">Why Choose In-Ear Hearing Aids?</h2>
-                <p className="text-lg mb-4">
-                    In-ear hearing aids are an excellent choice for those seeking a discreet and comfortable solution to hearing loss. These small devices fit snugly inside the ear canal, making them nearly invisible to others.
-                </p>
-                <Image src="/in-ear-2.jpeg" alt="In-Ear Hearing Aid" width={300} height={300} className="rounded-lg mb-4" />
-                <p className="text-lg mb-4">
-                    They are ideal for mild to moderate hearing loss and offer several benefits:
-                </p>
-                <ul className="list-disc list-inside text-lg mb-4">
-                    <li>Discreet and less noticeable</li>
-                    <li>Custom-fit for comfort</li>
-                    <li>Reduced wind noise</li>
-                    <li>Excellent sound quality</li>
-                    <li>Easy to use with phones and other audio devices</li>
-                </ul>
-            </section>
-
-            <section className="mb-12">
-                <h2 className="text-2xl font-semibold mb-4">How Do In-Ear Hearing Aids Work?</h2>
-                <p className="text-lg mb-4">
-                    In-ear hearing aids work by amplifying sound waves entering the ear canal. Here's a simple breakdown of the process:
-                </p>
-                <ol className="list-decimal list-inside text-lg mb-4">
-                    <li>A tiny microphone picks up sounds from the environment</li>
-                    <li>The sound is converted into a digital signal</li>
-                    <li>The digital signal is processed and amplified based on the user's specific hearing loss profile</li>
-                    <li>The amplified sound is sent to a small speaker in the ear canal</li>
-                    <li>The user hears a clearer, amplified version of the original sound</li>
-                </ol>
-                <Image src="/in-the-ear-hearing-aid.jpg" alt="How In-Ear Hearing Aids Work" width={800} height={400} className="rounded-lg mb-4" />
-            </section>
-
-            <section className="mb-12">
-                <h2 className="text-2xl font-semibold mb-4">Top Brands and Models</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Signia Silk X</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Image src="/Signia.png" alt="Signia Logo" width={200} height={100} className="mb-4" />
-                            <p>The Signia Silk X is one of the smallest in-ear hearing aids available. It offers excellent sound quality and is ready to wear right out of the box.</p>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Phonak Lyric</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Image src="/phonak-logo.svg" alt="Phonak Logo" width={200} height={100} className="mb-4" />
-                            <p>The Phonak Lyric is a unique, 100% invisible hearing aid that can be worn 24/7 for months at a time. It's placed deep in the ear canal by a hearing professional.</p>
-                        </CardContent>
-                    </Card>
-                </div>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-semibold mb-4">Is an In-Ear Hearing Aid Right for You?</h2>
-                <p className="text-lg mb-4">
-                    In-ear hearing aids are an excellent choice if:
-                </p>
-                <ul className="list-disc list-inside text-lg mb-4">
-                    <li>You have mild to moderate hearing loss</li>
-                    <li>You want a discreet hearing solution</li>
-                    <li>You don't have issues with earwax buildup</li>
-                    <li>You have good dexterity for handling small devices</li>
-                </ul>
-                <p className="text-lg">
-                    To determine if an in-ear hearing aid is the best option for you, we recommend scheduling a consultation with one of our hearing specialists. They can assess your specific needs and recommend the most suitable solution.
-                </p>
-            </section>
+ 
+function RelatedProducts({ current }: { current: string }) {
+  const all = [
+    { label: "Behind-the-Ear", href: "/products/behind-the-ear-aids" },
+    { label: "Rechargeable", href: "/products/rechargeable-aids" },
+    { label: "In-the-Ear (ITE)", href: "/products/in-ear-aids" },
+    { label: "Smart Hearing Aids", href: "/products/smart-hearing-aids" },
+    { label: "Accessories", href: "/products/accessories" },
+  ]
+  return (
+    <section className="py-10 px-5 md:px-12" style={{ background: "var(--cream-dk)" }}>
+      <div className="max-w-[1200px] mx-auto">
+        <div className="text-xs tracking-widest uppercase mb-4" style={{ color: "var(--text-lt)" }}>Other Products</div>
+        <div className="flex flex-wrap gap-2">
+          {all.filter(p => p.label !== current).map(({ label, href }) => (
+            <Link key={label} href={href} className="px-4 py-2 text-xs font-light no-underline transition-colors hover:bg-[var(--white)]"
+              style={{ background: "var(--white)", border: "0.5px solid rgba(26,58,42,0.12)", color: "var(--forest)", textDecoration: "none" }}>
+              {label} →
+            </Link>
+          ))}
         </div>
-    )
+      </div>
+    </section>
+  )
 }
-
+ export default function InEarPage() {
+  return (
+    <>
+      <Navbar />
+      <ServiceHero eyebrow="Hearing Aids" title="In-the-Ear (ITE) Aids" subtitle="Custom-made to fit your ear exactly — discreet, comfortable, and easy to insert." imageSrc="/images/hearing-aids-hero.jpg" />
+ 
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--white)" }}>
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+          <div>
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
+              About ITE Aids
+            </div>
+            <h2 className="font-light leading-tight mb-5" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(26px,4vw,42px)", color: "var(--forest)" }}>
+              Custom-fitted for comfort and discretion
+            </h2>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "var(--text-mid)" }}>
+              In-the-Ear hearing aids are custom-made from an impression of your ear canal, so they fit perfectly and sit entirely within the ear. Depending on the style (ITE, ITC, CIC, or IIC), they range from filling the outer ear to being virtually invisible.
+            </p>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-mid)" }}>
+              ITE aids are ideal for patients who want a discreet device that is easy to insert and remove. They are suitable for mild to severe hearing loss and are available in a range of skin tones.
+            </p>
+            <div className="flex flex-col gap-1 mb-8">
+              <ProductSpec label="Suitable for" value="Mild to severe hearing loss" />
+              <ProductSpec label="Price range" value="₹22,000 – ₹1,80,000" />
+              <ProductSpec label="Custom fitting" value="Made from ear impression" />
+              <ProductSpec label="Styles" value="ITE, ITC, CIC, IIC" />
+              <ProductSpec label="Brands available" value="Oticon, Phonak, Signia, Widex" />
+            </div>
+            <BookAppointment />
+          </div>
+          <div className="flex flex-col gap-3">
+            {[
+              { title: "Truly custom fit", desc: "Made from an impression of your ear canal, ITE aids fit like no other device — comfortable, secure, and tailored to your exact anatomy." },
+              { title: "Discreet appearance", desc: "Smaller styles like CIC and IIC sit entirely within the ear canal and are virtually invisible to others." },
+              { title: "Easy insertion", desc: "The device is inserted and removed as a single unit — no tubes, wires, or separate components to manage." },
+              { title: "Natural sound", desc: "The microphone placement close to the eardrum provides a more natural sound experience, especially for directionality." },
+              { title: "Multiple styles", desc: "Choose from ITE (fills outer ear), ITC (half shell), CIC (in-canal), or IIC (invisible-in-canal) depending on your preference and loss level." },
+            ].map(({ title, desc }) => (
+              <div key={title} className="flex gap-4 p-5" style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.08)" }}>
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style={{ background: "var(--gold)" }} />
+                <div>
+                  <div className="text-sm font-medium mb-1" style={{ color: "var(--forest)" }}>{title}</div>
+                  <p className="text-sm font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+ 
+      <RelatedProducts current="In-the-Ear (ITE)" />
+      <Footer />
+    </>
+  )
+}

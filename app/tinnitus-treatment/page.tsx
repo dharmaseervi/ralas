@@ -1,3 +1,6 @@
+// app/tinnitus-treatment/page.tsx
+import { generateMetadata } from "@/lib/seo"
+export const metadata = generateMetadata("tinnitus-treatment")
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import { BookAppointment } from "@/components/Bookappointment"
@@ -48,7 +51,7 @@ export default function TinnitusPage() {
         eyebrow="Tinnitus Management"
         title="Quiet the noise, reclaim your life"
         subtitle="Advanced tinnitus management combining sound therapy, TRT, and hearing device solutions — personalised to your experience and severity."
-        imageSrc="/images/tinnitus-hero.jpg"
+        imageSrc="/images/tinnitus-treatment-2.jpg"
       />
 
       {/* ── What is tinnitus — stacks on mobile ── */}

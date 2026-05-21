@@ -1,8 +1,11 @@
+// app/hearing-aids/page.tsx
+export const metadata = generateMetadata("hearing-aids")
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import Navbar from "@/components/home/NavigationBar"
 import ServiceHero from "@/components/home/ServiceheroSection"
 import TechnologyShowcase from "@/components/home/TechnologyShowcase"
+import { generateMetadata } from "@/lib/seo"
 
 
 const products = [
@@ -35,7 +38,7 @@ export default function HearingAidsPage() {
         eyebrow="Hearing Aids"
         title="The right hearing aid, fitted for you"
         subtitle="Authorised dealer for Oticon, Phonak, Signia, and Widex. Every device is precisely calibrated to your audiogram by our certified audiologists."
-        imageSrc="/images/hearing-aids-hero.jpg"
+        imageSrc="/images/oticon-3.png"
       />
 
       {/* ── Product types — 1 col mobile, 2 col desktop ── */}

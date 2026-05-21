@@ -65,11 +65,19 @@ export default function Header() {
   const [current, setCurrent] = useState(0)
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
 
   const next = useCallback(() => setCurrent((p) => (p + 1) % slides.length), [])
@@ -85,7 +93,7 @@ export default function Header() {
 
       {/* ── TOP BAR — fixed at very top, desktop only ── */}
       <div
-        className="hidden md:flex fixed top-0 left-0 right-0 z-[110] items-center justify-between px-12 py-2 text-xs tracking-widest"
+          className={`hidden md:flex fixed top-0 left-0 right-0 z-[110] items-center justify-between px-12 py-2 text-xs tracking-widest transition-transform duration-300 ${scrolled ? "-translate-y-full" : "translate-y-0"}`}
         style={{ background: "var(--forest)", color: "#B8CDB4" }}
       >
         <div className="flex items-center gap-5">
@@ -116,7 +124,7 @@ export default function Header() {
         transition={{ type: "spring", stiffness: 280, damping: 28 }}
         className="fixed left-0 right-0 z-[100] flex items-center justify-between h-16 md:h-[72px] px-5 md:px-12 transition-all duration-300"
         style={{
-          top: scrolled ? 0 : "36px",
+          top: (scrolled || isMobile) ? 0 : "36px",
           background: scrolled ? "rgba(250,247,242,0.97)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           borderBottom: scrolled ? "0.5px solid rgba(26,58,42,0.12)" : "none",
@@ -144,15 +152,60 @@ export default function Header() {
 
         {/* Desktop nav links */}
         <nav className="hidden lg:flex items-center gap-1">
-          {["Services", "Hearing Aids", "About", "Resources", "Contact"].map((item) => (
+          {/* Services with dropdown */}
+          <div className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
+            <button
+              className="flex items-center gap-1 px-3.5 py-2 text-xs tracking-widest uppercase bg-transparent border-none cursor-pointer transition-colors duration-200 hover:opacity-70"
+              style={{ color: scrolled ? "var(--text-mid)" : "rgba(255,255,255,0.85)" }}
+            >
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width={11} height={11}>
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <AnimatePresence>
+              {servicesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute top-full left-0 z-50 w-[480px] p-2 grid grid-cols-2 gap-0.5"
+                  style={{
+                    background: "var(--white)",
+                    border: "0.5px solid var(--border)",
+                    boxShadow: "0 12px 40px rgba(26,58,42,0.1)",
+                  }}
+                >
+                  {[
+                    { label: "Hearing Tests",      desc: "Comprehensive audiological evaluations",  href: "/hearing-tests" },
+                    { label: "Speech Therapy",     desc: "Professional speech-language services",   href: "/speech-therapy" },
+                    { label: "Hearing Aids",       desc: "Latest hearing aid technology",           href: "/hearing-aids" },
+                    { label: "Tinnitus Treatment", desc: "Advanced tinnitus management",            href: "/tinnitus-treatment" },
+                  ].map((sub) => (
+                    <Link key={sub.label} href={sub.href}
+                      className="block p-3.5 transition-colors hover:bg-[var(--cream)]"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div className="text-sm font-medium mb-0.5" style={{ color: "var(--forest)" }}>{sub.label}</div>
+                      <div className="text-xs font-light" style={{ color: "var(--text-lt)" }}>{sub.desc}</div>
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Other nav links */}
+          {["Hearing Aids", "About", "Resources", "Contact"].map((item) => (
             <Link
               key={item}
               href={`/${item.toLowerCase().replace(" ", "-")}`}
               className="px-3.5 py-2 text-xs tracking-widest uppercase transition-colors duration-200 hover:opacity-70"
-              style={{
-                color: scrolled ? "var(--text-mid)" : "rgba(255,255,255,0.85)",
-                textDecoration: "none",
-              }}
+              style={{ color: scrolled ? "var(--text-mid)" : "rgba(255,255,255,0.85)", textDecoration: "none" }}
             >
               {item}
             </Link>

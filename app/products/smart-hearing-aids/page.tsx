@@ -1,175 +1,126 @@
-import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+// app/product/smart-hearing-aids/page.tsx
+import { generateMetadata } from "@/lib/seo"
+export const metadata = generateMetadata("product-smart")
+import { BookAppointment } from "@/components/Bookappointment";
+import FAQ from "@/components/home/FAQ";
+import Navbar from "@/components/home/NavigationBar";
+import ServiceHero from "@/components/home/ServiceheroSection";
 
-export const metadata = {
-    title: 'Smart Hearing Aids | Ralas',
-    description: 'Experience AI-powered hearing aids for optimal performance.',
+import { Footer } from "react-day-picker";
+
+import Link from "next/link"
+
+export function ProductSpec({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between items-center py-2.5" style={{ borderBottom: "0.5px solid rgba(26,58,42,0.08)" }}>
+      <span className="text-xs font-light" style={{ color: "var(--text-lt)" }}>{label}</span>
+      <span className="text-sm font-normal" style={{ color: "var(--forest)" }}>{value}</span>
+    </div>
+  )
 }
 
-export default function SmartHearingAidsPage() {
-    return (
-        <div className="container mx-auto py-12 px-4">
-            {/* Breadcrumb */}
-            <Breadcrumb className="bg-gray-100 py-2 px-4 rounded-md mb-6">
-                <BreadcrumbList className="flex gap-2 text-sm text-gray-600">
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/" className="hover:text-blue-600">
-                            Home
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage className="font-semibold">
-                            Behind-the-Ear Aids
-                        </BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
+const all = [
+  { label: "Behind-the-Ear",     href: "/products/behind-the-ear-aids" },
+  { label: "Rechargeable",       href: "/products/rechargeable-aids" },
+  { label: "In-the-Ear (ITE)",   href: "/products/in-ear-aids" },
+  { label: "Smart Hearing Aids", href: "/products/smart-hearing-aids" },
+  { label: "Accessories",        href: "/products/accessories" },
+]
 
-            {/* Page Header */}
-            <h1 className="text-4xl font-bold text-gray-800 mb-6">
-                Smart Hearing Aids
-            </h1>
-
-            {/* Section: Why Choose Smart Hearing Aids */}
-            <section className="bg-gray-50 py-12 px-4 rounded-lg mb-12">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                    Why Choose Smart Hearing Aids?
-                </h2>
-                <p className="text-lg text-gray-700 mb-4">
-                    Smart hearing aids represent the cutting edge of hearing technology, offering advanced features and connectivity options that go beyond traditional amplification. These devices use artificial intelligence and machine learning to provide an optimized listening experience.
-                </p>
-                <Image
-                    src="/smart-2.jpg"
-                    alt="Smart Hearing Aid"
-                    width={600}
-                    height={400}
-                    className="rounded-lg shadow-md mx-auto mb-6"
-                />
-                <p className="text-lg text-gray-700 mb-4">
-                    Benefits of smart hearing aids include:
-                </p>
-                <ul className="list-disc list-inside text-lg text-gray-700 mb-4 space-y-2">
-                    <li>Adaptive sound processing for various environments</li>
-                    <li>Bluetooth connectivity for streaming audio and calls</li>
-                    <li>Smartphone app control for easy adjustments</li>
-                    <li>AI-powered noise reduction and speech enhancement</li>
-                    <li>Health tracking features (in some models)</li>
-                </ul>
-            </section>
-
-            {/* Section: How Do Smart Hearing Aids Work */}
-            <section className="py-12 px-4 mb-12">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                    How Do Smart Hearing Aids Work?
-                </h2>
-                <p className="text-lg text-gray-700 mb-4">
-                    Smart hearing aids combine traditional hearing aid technology with advanced digital features:
-                </p>
-                <ol className="list-decimal list-inside text-lg text-gray-700 mb-4 space-y-2">
-                    <li>Multiple microphones capture sound from the environment</li>
-                    <li>Advanced processors analyze the sound in real-time</li>
-                    <li>AI algorithms identify and enhance speech while reducing background noise</li>
-                    <li>The processed sound is delivered to the ear</li>
-                    <li>Bluetooth connectivity allows for audio streaming and app control</li>
-                    <li>Machine learning continuously improves performance based on user preferences</li>
-                </ol>
-                <Image
-                    src="/smart.jpg"
-                    alt="How Smart Hearing Aids Work"
-                    width={800}
-                    height={400}
-                    className="rounded-lg shadow-md mx-auto mb-6 border"
-                />
-            </section>
-
-            {/* Section: Top Brands and Models */}
-            <section className="bg-gray-50 py-12 px-4 rounded-lg mb-12">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                    Top Brands and Models
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <Card className="hover:shadow-lg border border-gray-200 rounded-lg">
-                        <CardHeader>
-                            <CardTitle className="text-lg font-semibold text-gray-800">
-                                Signia Xperience
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Image
-                                src="/Signia.png"
-                                alt="Signia Logo"
-                                width={200}
-                                height={100}
-                                className="rounded-lg mb-4"
-                            />
-                            <p className="text-gray-600">
-                                The Signia Xperience line features acoustic-motion sensors and AI technology for a natural sound experience in any environment.
-                            </p>
-                        </CardContent>
-                    </Card>
-                    <Card className="hover:shadow-lg border border-gray-200 rounded-lg">
-                        <CardHeader>
-                            <CardTitle className="text-lg font-semibold text-gray-800">
-                                Phonak Paradise
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Image
-                                src="/Phonak-logo.svg"
-                                alt="Phonak Logo"
-                                width={200}
-                                height={100}
-                                className="rounded-lg mb-4"
-                            />
-                            <p className="text-gray-600">
-                                Phonak Paradise hearing aids offer unrivaled sound quality, multi-device connectivity, and tap control for hands-free calls and voice assistant access.
-                            </p>
-                        </CardContent>
-                    </Card>
-                </div>
-            </section>
-
-            {/* Section: Is a Smart Hearing Aid Right for You? */}
-            <section className="py-12 px-4">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                    Is a Smart Hearing Aid Right for You?
-                </h2>
-                <p className="text-lg text-gray-700 mb-4">
-                    Smart hearing aids might be the ideal choice if:
-                </p>
-                <ul className="list-disc list-inside text-lg text-gray-700 mb-4 space-y-2">
-                    <li>You want the most advanced hearing technology available</li>
-                    <li>You lead an active lifestyle with varied listening environments</li>
-                    <li>You frequently use smartphones or other Bluetooth-enabled devices</li>
-                    <li>You want the ability to fine-tune your hearing aids yourself</li>
-                    <li>You're interested in tracking health metrics through your hearing aids</li>
-                </ul>
-                <p className="text-lg text-gray-700">
-                    To explore whether smart hearing aids are the best solution for your hearing needs and lifestyle, we recommend scheduling a consultation with our hearing care experts. They can demonstrate the features of smart hearing aids and help you make an informed decision.
-                </p>
-            </section>
-
-            {/* Call to Action */}
-            <div className="bg-blue-600 text-white py-6 px-8 rounded-lg text-center mt-12">
-                <h3 className="text-2xl font-semibold mb-4">
-                    Schedule Your Consultation
-                </h3>
-                <p className="text-lg mb-6">
-                    Talk to our experts and experience the benefits of smart hearing aids firsthand.
-                </p>
-                <button className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100">
-                    Book Now
-                </button>
-            </div>
+export function RelatedProducts({ current }: { current: string }) {
+  return (
+    <section className="py-10 px-5 md:px-12" style={{ background: "var(--cream)" }}>
+      <div className="max-w-[1200px] mx-auto">
+        <div className="text-xs tracking-widest uppercase mb-4" style={{ color: "var(--text-lt)" }}>
+          Other Products
         </div>
-    )
+        <div className="flex flex-wrap gap-2">
+          {all.filter(p => p.label !== current).map(({ label, href }) => (
+            <Link
+              key={label}
+              href={href}
+              className="px-4 py-2 text-xs font-light no-underline transition-colors"
+              style={{
+                background: "#FFFEF9",
+                border: "0.5px solid rgba(26,58,42,0.12)",
+                color: "#1A3A2A",
+                textDecoration: "none",
+                display: "inline-block",
+              }}
+            >
+              {label} →
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+ 
+
+export default function SmartHearingAidsPage() {
+  const faqs = [
+    { question: "Do smart hearing aids work with Android phones?", answer: "Yes. Modern smart hearing aids support both iOS and Android via Bluetooth. Some premium models offer direct streaming from both platforms without an intermediary streamer device." },
+    { question: "Can I control my hearing aids from my phone?", answer: "Yes. All smart hearing aids come with a companion app that lets you adjust volume, switch programs, check battery levels, and in some cases fine-tune your hearing profile." },
+    { question: "What is remote fine-tuning?", answer: "Remote fine-tuning allows your audiologist to adjust your hearing aid settings remotely via the app, without a clinic visit. This is particularly convenient for minor adjustments after the initial fitting." },
+    { question: "Are smart hearing aids harder to use?", answer: "Not necessarily. The automatic features (like AutoSense OS in Phonak) mean the aid adjusts itself without you needing to do anything. The app is there if you want control, but it is not required." },
+  ]
+ 
+  return (
+    <>
+      <Navbar />
+      <ServiceHero eyebrow="Hearing Aids" title="Smart Hearing Aids" subtitle="AI-powered, app-controlled hearing aids that learn your preferences and adapt to every environment automatically." imageSrc="/images/hearing-aids-hero.jpg" />
+ 
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--white)" }}>
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+          <div>
+            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
+              About Smart Aids
+            </div>
+            <h2 className="font-light leading-tight mb-5" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(26px,4vw,42px)", color: "var(--forest)" }}>
+              The most advanced hearing technology available
+            </h2>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "var(--text-mid)" }}>
+              Smart hearing aids combine neural-network AI processing with Bluetooth connectivity, app control, and automatic environment adaptation. They represent the pinnacle of hearing aid technology — and what was premium-only five years ago is now available across a wider price range.
+            </p>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-mid)" }}>
+              Our authorised brands — Oticon (More™), Phonak (Lumity), Signia (IX), and Widex (Moment) — all offer flagship smart platforms with their own unique approach to sound processing.
+            </p>
+            <div className="flex flex-col gap-1 mb-8">
+              <ProductSpec label="Price range" value="₹60,000 – ₹3,50,000" />
+              <ProductSpec label="Connectivity" value="Bluetooth 5.2, iOS & Android" />
+              <ProductSpec label="Processing" value="AI / neural network" />
+              <ProductSpec label="App control" value="Volume, programs, EQ, remote tune" />
+              <ProductSpec label="Brands" value="Oticon More™, Phonak Lumity, Signia IX, Widex Moment" />
+            </div>
+            <BookAppointment />
+          </div>
+ 
+          <div className="flex flex-col gap-3">
+            {[
+              { title: "AI sound processing", desc: "Neural network platforms trained on millions of real-world sound scenes classify and process your environment in milliseconds — faster than the human brain." },
+              { title: "Automatic adaptation", desc: "Smart aids switch automatically between programs for speech in noise, music, outdoor environments, phone calls, and more — without you lifting a finger." },
+              { title: "Direct streaming", desc: "Stream phone calls, music, podcasts, and TV audio directly into your hearing aids from iOS and Android devices." },
+              { title: "Remote fine-tuning", desc: "Your audiologist can adjust your settings remotely via the app — no clinic visit needed for minor tune-ups." },
+              { title: "Health tracking", desc: "Some models include step counting, fall detection, and cognitive engagement tracking as additional health features." },
+              { title: "Tinnitus management", desc: "Built-in tinnitus masking programmes (Signia, Widex) provide relief alongside amplification in a single device." },
+            ].map(({ title, desc }) => (
+              <div key={title} className="flex gap-4 p-5" style={{ background: "var(--cream)", border: "0.5px solid rgba(26,58,42,0.08)" }}>
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style={{ background: "var(--gold)" }} />
+                <div>
+                  <div className="text-sm font-medium mb-1" style={{ color: "var(--forest)" }}>{title}</div>
+                  <p className="text-sm font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+ 
+      <FAQ title="Smart hearing aid questions" questions={faqs} />
+      <RelatedProducts current="Smart Hearing Aids" />
+      <Footer />
+    </>
+  )
 }

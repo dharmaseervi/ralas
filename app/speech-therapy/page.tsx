@@ -1,3 +1,6 @@
+// app/speech-therapy/page.tsx
+import { generateMetadata } from "@/lib/seo"
+export const metadata = generateMetadata("speech-therapy")
 import { BookAppointment } from "@/components/Bookappointment"
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
@@ -53,7 +56,7 @@ export default function SpeechTherapyPage() {
         eyebrow="Speech & Language Therapy"
         title="Find your voice, again"
         subtitle="Personalised speech and language therapy for children and adults — evidence-based, compassionate, and goal-driven from day one."
-        imageSrc="/images/speech-therapy-hero.jpg"
+        imageSrc="/images/speech-therapy-session.jpg"
       />
 
       {/* ── Conditions ── */}

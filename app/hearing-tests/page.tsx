@@ -1,3 +1,6 @@
+// app/hearing-tests/page.tsx
+import { generateMetadata } from "@/lib/seo"
+export const metadata = generateMetadata("hearing-tests")
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import { BookAppointment } from "@/components/Bookappointment"
