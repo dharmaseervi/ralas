@@ -1,8 +1,3 @@
-import FAQ from "@/components/home/FAQ"
-import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/NavigationBar"
-import ServiceHero from "@/components/home/ServiceheroSection"
-
 export const metadata = {
   title: "About Us | Ralas Hearing Clinic, Jayanagar Bengaluru",
   description: "Founded in 2012, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic. RCI-registered audiologists providing hearing care and speech therapy for all ages.",
@@ -14,6 +9,11 @@ export const metadata = {
     images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Ralas Hearing Clinic team" }],
   },
 }
+import FAQ from "@/components/home/FAQ"
+import Footer from "@/components/home/Footer"
+import Navbar from "@/components/home/NavigationBar"
+import ServiceHero from "@/components/home/ServiceheroSection"
+
 
 const team = [
   { name: "Dr. Priya Sharma", role: "Chief Audiologist", qual: "M.Sc. Audiology, AIISH", spec: "Paediatric & adult hearing assessment", initials: "PS" },
