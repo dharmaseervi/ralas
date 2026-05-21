@@ -51,7 +51,7 @@ export default function HearingTestsPage() {
         eyebrow="Diagnostic Services"
         title="Comprehensive hearing tests"
         subtitle="State-of-the-art audiometric evaluations for every stage of life. Walk in for a test — your audiogram and consultation are ready the same day."
-        imageSrc="/images/hearing-test-hero.jpg"
+        imageSrc="/hearing-test-hero.jpg"
       />
 
       {/* ── Test types ── */}

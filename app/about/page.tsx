@@ -1,3 +1,9 @@
+// app/about/page.tsx
+import FAQ from "@/components/home/FAQ"
+import Footer from "@/components/home/Footer"
+import Navbar from "@/components/home/NavigationBar"
+import ServiceHero from "@/components/home/ServiceheroSection"
+
 export const metadata = {
   title: "About Us | Ralas Hearing Clinic, Jayanagar Bengaluru",
   description: "Founded in 2012, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic. RCI-registered audiologists providing hearing care and speech therapy for all ages.",
@@ -9,11 +15,6 @@ export const metadata = {
     images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Ralas Hearing Clinic team" }],
   },
 }
-import FAQ from "@/components/home/FAQ"
-import Footer from "@/components/home/Footer"
-import Navbar from "@/components/home/NavigationBar"
-import ServiceHero from "@/components/home/ServiceheroSection"
-
 
 const team = [
   { name: "Dr. Priya Sharma", role: "Chief Audiologist", qual: "M.Sc. Audiology, AIISH", spec: "Paediatric & adult hearing assessment", initials: "PS" },
@@ -24,8 +25,8 @@ const team = [
 const stats = [
   { val: "1200+", label: "Patients served" },
   { val: "12 yrs", label: "Clinical experience" },
-  { val: "4",      label: "Premium brands" },
-  { val: "98%",    label: "Patient satisfaction" },
+  { val: "4", label: "Premium brands" },
+  { val: "98%", label: "Patient satisfaction" },
 ]
 
 const faqs = [
@@ -44,7 +45,7 @@ export default function AboutPage() {
         eyebrow="Our Story"
         title="Dedicated to better hearing"
         subtitle="Founded in 2012, Ralas is Bengaluru's trusted hearing clinic — combining clinical precision with compassionate, patient-first care."
-        imageSrc="/images/clinic-interior.jpg"
+        imageSrc="https://lh3.googleusercontent.com/p/AF1QipNXNZrBhsjFJqQxgaTYNVZxzfkpLOS5lQv3-hed=s680-w680-h510-rw"
       />
 
       {/* ── Mission ── */}
@@ -94,9 +95,9 @@ export default function AboutPage() {
             style={{ height: "clamp(260px,40vw,480px)", background: "var(--cream-dk)" }}
           >
             <img
-              src="/images/clinic-team.jpg"
+              src="https://lh3.googleusercontent.com/p/AF1QipMvdMAJh5VvbAZhGL9Jg4RlcFN_Dh6btL5f4c24=s680-w680-h510-rw"
               alt="Ralas clinic team"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover border border-[var(--gold)] rounded-lg "
             />
             <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: "var(--gold)" }} />
           </div>
