@@ -1,4 +1,4 @@
-"use client"
+
 // app/contact/page.tsx
 import { generateMetadata } from "@/lib/seo"
 export const metadata = generateMetadata("contact")
