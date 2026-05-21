@@ -5,7 +5,11 @@ import BentoGrid from "@/components/home/BentoGrid"
 import TechnologyShowcase from "@/components/home/TechnologyShowcase"
 import Features from "@/components/home/Features"
 import HearingTestSection from "@/components/home/HearingTest"
-
+export const metadata = {
+  title: "Ralas Hearing Clinic — Hearing Aids & Audiology, Bengaluru",
+  description: "Ralas Hearing Clinic in Jayanagar, Bengaluru offers hearing tests, hearing aids (Oticon, Phonak, Signia, Widex), speech therapy, and tinnitus treatment. Free first consultation.",
+  alternates: { canonical: "https://ralasclinic.com" },
+}
 export default function HomePage() {
   return (
     <main>

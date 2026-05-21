@@ -1,5 +1,7 @@
 "use client"
-
+// app/contact/page.tsx
+import { generateMetadata } from "@/lib/seo"
+export const metadata = generateMetadata("contact")
 import Footer from "@/components/home/Footer"
 import Navbar from "@/components/home/NavigationBar"
 
