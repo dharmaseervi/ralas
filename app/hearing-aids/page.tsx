@@ -17,14 +17,14 @@ const products = [
 
 const brands = [
   { name: "Oticon", desc: "Pioneers of BrainHearing™ technology. Their More™ platform is trained on 12M sound scenes for unmatched clarity." },
-  { name: "Phonak", desc: "Swiss-engineered hearing solutions known for AutoSense OS™ — adapts automatically to every listening environment." },
+  { name: "ReSound", desc: "Danish-engineered devices with M&RIE receiver technology, delivering natural directional hearing from the ear." },
   { name: "Signia", desc: "Innovative Own Voice Processing (OVP™) makes your own voice sound completely natural. Ideal for first-time wearers." },
   { name: "Widex", desc: "Leaders in natural sound processing. Their ZeroDelay™ technology delivers the fastest signal processing available." },
 ]
 
 const faqs = [
   { question: "How do I know which hearing aid is right for me?", answer: "The right device depends on your audiogram, lifestyle, dexterity, and budget. Our audiologists will recommend options after a full hearing test — we never push a particular brand or model." },
-  { question: "Do you offer a trial period?", answer: "Yes. All hearing aids come with a 30-day trial. If you are not satisfied for any reason, you can return the device for a full refund within 30 days of fitting." },
+  { question: "Do you offer a trial period?", answer: "We offer an adjustment period after fitting. If the device is not performing as expected, we will re-tune or exchange it. Contact us within the manufacturer's warranty period." },
   { question: "What is included in the price?", answer: "All prices include the device, professional fitting, a follow-up fine-tuning session at 2–4 weeks, and a manufacturer's warranty (typically 2–3 years). Batteries or charging cables are included for the first year." },
   { question: "Can I get my existing hearing aid serviced here?", answer: "Yes. We service and repair all major brands, including devices purchased elsewhere. Call us to check if we support your specific model." },
   { question: "Is GST billing available?", answer: "Yes. We provide GST-compliant invoices for all purchases, accepted by most health insurance providers for reimbursement claims." },
@@ -37,7 +37,7 @@ export default function HearingAidsPage() {
       <ServiceHero
         eyebrow="Hearing Aids"
         title="The right hearing aid, fitted for you"
-        subtitle="Authorised dealer for Oticon, Phonak, Signia, and Widex. Every device is precisely calibrated to your audiogram by our certified audiologists."
+        subtitle="Authorised dealer for Oticon, Signia, Widex, and ReSound. Every device is precisely calibrated to your audiogram by our certified audiologists."
         imageSrc="/images/oticon-3.png"
       />
 

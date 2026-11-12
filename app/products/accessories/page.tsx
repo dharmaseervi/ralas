@@ -4,7 +4,7 @@ import { BookAppointment } from "@/components/Bookappointment"
 
 export const metadata = {
   title: "Hearing Aid Accessories — Batteries, Cleaning Kits & More",
-  description: "Shop hearing aid accessories at Ralas Hearing Clinic, Bengaluru. Batteries, cleaning kits, Bluetooth streamers, domes, ear tips and more for Oticon, Phonak, Signia and Widex devices.",
+  description: "Shop hearing aid accessories at Ralas Hearing Clinic, Bengaluru. Batteries, cleaning kits, Bluetooth streamers, domes, ear tips and more for Oticon, Signia, Widex and ReSound devices.",
 }
 
 const categories = [
@@ -14,7 +14,7 @@ const categories = [
       { name: "Zinc-Air Batteries (Size 10)", detail: "For small ITE & CIC devices · Pack of 60" },
       { name: "Zinc-Air Batteries (Size 312)", detail: "Most common BTE size · Pack of 60" },
       { name: "Zinc-Air Batteries (Size 13)", detail: "High-drain BTE devices · Pack of 40" },
-      { name: "Wireless Charging Case", detail: "Compatible with Oticon & Phonak rechargeable aids" },
+      { name: "Wireless Charging Case", detail: "Compatible with Oticon & Signia rechargeable aids" },
     ],
   },
   {
@@ -65,7 +65,7 @@ export default function AccessoriesPage() {
             Hearing Aid<br />Accessories
           </h1>
           <p className="text-sm md:text-base font-light leading-relaxed max-w-lg" style={{ color: "rgba(255,255,255,0.6)" }}>
-            Genuine accessories for Oticon, Phonak, Signia, Widex and ReSound devices. Available in-clinic or by enquiry. Call or WhatsApp us to check availability before visiting.
+            Genuine accessories for Oticon, Signia, Widex and ReSound devices. Available in-clinic or by enquiry. Call or WhatsApp us to check availability before visiting.
           </p>
           <div className="flex flex-wrap gap-4 mt-8">
             <a

@@ -22,9 +22,9 @@ const highlights = [
     desc: "Across all age groups and hearing profiles",
   },
   {
-    num: "30-day",
-    label: "Return guarantee",
-    desc: "Try your hearing aid at home, risk-free",
+    num: "GST",
+    label: "Tax invoice",
+    desc: "GST-compliant invoice for insurance claims",
   },
 ]
 

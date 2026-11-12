@@ -28,11 +28,11 @@ const faqs = [
   },
   {
     question: "What hearing aid brands do you carry?",
-    answer: "We fit and service hearing aids from Oticon, Phonak, Signia, Widex, Starkey, and Resound. We recommend the right brand and model based on your audiogram and lifestyle.",
+    answer: "We fit and service hearing aids from Oticon, Signia, Widex, Starkey, and ReSound. We recommend the right brand and model based on your audiogram and lifestyle.",
   },
   {
     question: "Is there a trial period for hearing aids?",
-    answer: "Yes. We offer a 30-day trial period on most hearing aids. If you are not satisfied, we will adjust the fitting or discuss alternatives.",
+    answer: "We offer an adjustment period after fitting. If you are not satisfied with the sound quality or comfort, our audiologist will re-programme, exchange, or escalate to the manufacturer within the warranty period.",
   },
   {
     question: "Do you service hearing aids from other clinics?",

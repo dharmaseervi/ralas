@@ -21,7 +21,7 @@ export default function WarrantyPage() {
             <h2 className="text-sm font-medium uppercase tracking-widest mb-4" style={{ color: "var(--forest)" }}>Manufacturer warranty</h2>
             <div className="flex flex-col gap-4 text-sm font-light leading-relaxed" style={{ color: "var(--text-mid)" }}>
               <p>All hearing aids sold at Ralas carry the <strong style={{ color: "var(--forest)", fontWeight: 500 }}>manufacturer&apos;s warranty</strong> — typically 1 to 3 years depending on the brand and model. The warranty covers defects in materials and workmanship under normal use conditions.</p>
-              <p>Warranty terms vary by brand (Oticon, Phonak, Signia, Widex, etc.). We will provide the specific warranty card and documentation at the time of purchase.</p>
+              <p>Warranty terms vary by brand (Oticon, Signia, Widex, ReSound, etc.). We will provide the specific warranty card and documentation at the time of purchase.</p>
             </div>
           </div>
 

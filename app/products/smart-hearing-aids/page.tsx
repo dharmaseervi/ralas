@@ -63,7 +63,7 @@ export default function SmartHearingAidsPage() {
     { question: "Do smart hearing aids work with Android phones?", answer: "Yes. Modern smart hearing aids support both iOS and Android via Bluetooth. Some premium models offer direct streaming from both platforms without an intermediary streamer device." },
     { question: "Can I control my hearing aids from my phone?", answer: "Yes. All smart hearing aids come with a companion app that lets you adjust volume, switch programs, check battery levels, and in some cases fine-tune your hearing profile." },
     { question: "What is remote fine-tuning?", answer: "Remote fine-tuning allows your audiologist to adjust your hearing aid settings remotely via the app, without a clinic visit. This is particularly convenient for minor adjustments after the initial fitting." },
-    { question: "Are smart hearing aids harder to use?", answer: "Not necessarily. The automatic features (like AutoSense OS in Phonak) mean the aid adjusts itself without you needing to do anything. The app is there if you want control, but it is not required." },
+    { question: "Are smart hearing aids harder to use?", answer: "Not necessarily. The automatic environment detection features mean the aid adjusts itself without you needing to do anything. The app is there if you want control, but it is not required." },
   ]
  
   return (
@@ -85,14 +85,14 @@ export default function SmartHearingAidsPage() {
               Smart hearing aids combine neural-network AI processing with Bluetooth connectivity, app control, and automatic environment adaptation. They represent the pinnacle of hearing aid technology — and what was premium-only five years ago is now available across a wider price range.
             </p>
             <p className="text-sm md:text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-mid)" }}>
-              Our authorised brands — Oticon (More™), Phonak (Lumity), Signia (IX), and Widex (Moment) — all offer flagship smart platforms with their own unique approach to sound processing.
+              Our authorised brands — Oticon (More™), Signia (IX), Widex (Moment) and ReSound — all offer flagship smart platforms with their own unique approach to sound processing.
             </p>
             <div className="flex flex-col gap-1 mb-8">
               <ProductSpec label="Price range" value="₹60,000 – ₹3,50,000" />
               <ProductSpec label="Connectivity" value="Bluetooth 5.2, iOS & Android" />
               <ProductSpec label="Processing" value="AI / neural network" />
               <ProductSpec label="App control" value="Volume, programs, EQ, remote tune" />
-              <ProductSpec label="Brands" value="Oticon More™, Phonak Lumity, Signia IX, Widex Moment" />
+              <ProductSpec label="Brands" value="Oticon More™, Signia IX, Widex Moment, ReSound" />
             </div>
             <BookAppointment />
           </div>

@@ -9,7 +9,7 @@ const features = [
     Icon: BrainCircuit,
     tag: "Signal Processing",
     title: "Smart background noise reduction",
-    description: "Modern hearing aids from Oticon, Phonak and Signia process sound in real time, reducing background noise while preserving the speech you want to hear.",
+    description: "Modern hearing aids from Oticon, Signia and Widex process sound in real time, reducing background noise while preserving the speech you want to hear.",
     specs: ["Background noise filtering", "Speech enhancement", "Auto environment detection", "Real-time processing"],
   },
   {
@@ -38,7 +38,7 @@ const features = [
     tag: "Clinical Fitting",
     title: "Fitted to your exact audiogram",
     description: "Every device we fit is calibrated to your personal audiogram by our certified audiologist. We include follow-up adjustments until the sound is right for you.",
-    specs: ["Audiogram-matched fitting", "RCI-certified audiologist", "Free follow-up visits", "30-day trial period"],
+    specs: ["Audiogram-matched fitting", "RCI-certified audiologist", "Free follow-up visits", "GST invoice included"],
   },
   {
     Icon: Volume2,
@@ -85,7 +85,7 @@ export default function Features() {
           </div>
           <div>
             <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.58)" }}>
-              The latest devices from Oticon, Phonak, Signia and Widex are a far cry from the hearing aids of the past — smaller, smarter, and fitted precisely to your audiogram.
+              The latest devices from Oticon, Signia, Widex and ReSound are a far cry from the hearing aids of the past — smaller, smarter, and fitted precisely to your audiogram.
             </p>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--gold)" }} />

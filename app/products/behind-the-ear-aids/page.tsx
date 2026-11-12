@@ -70,7 +70,7 @@ export default function BehindTheEarPage() {
               <ProductSpec label="Suitable for" value="Mild to profound hearing loss" />
               <ProductSpec label="Price range" value="₹18,000 – ₹2,20,000" />
               <ProductSpec label="Battery" value="Disposable or rechargeable" />
-              <ProductSpec label="Brands available" value="Oticon, Phonak, Signia, Widex" />
+              <ProductSpec label="Brands available" value="Oticon, Signia, Widex, ReSound" />
               <ProductSpec label="Warranty" value="2–3 years manufacturer warranty" />
             </div>
             <BookAppointment />

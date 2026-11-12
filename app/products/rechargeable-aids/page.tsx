@@ -67,7 +67,7 @@ export default function RechargeablePage() {
               <ProductSpec label="Charge time" value="3–4 hours for full charge" />
               <ProductSpec label="Use per charge" value="16–30 hours" />
               <ProductSpec label="Price range" value="₹35,000 – ₹2,80,000" />
-              <ProductSpec label="Brands available" value="Oticon, Phonak, Signia, Widex" />
+              <ProductSpec label="Brands available" value="Oticon, Signia, Widex, ReSound" />
             </div>
             <BookAppointment />
           </div>

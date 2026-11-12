@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: "Ralas Hearing Clinic — Hearing Aids & Audiology, Bengaluru",
     template: "%s | Ralas Hearing Clinic",
   },
-  description: "Specialist hearing clinic in Jayanagar, Bengaluru. Hearing tests, hearing aids (Oticon, Phonak, Signia, Widex), speech therapy, and tinnitus treatment. Free first consultation.",
+  description: "Specialist hearing clinic in Jayanagar, Bengaluru. Hearing tests, hearing aids (Oticon, Signia, Widex, ReSound), speech therapy, and tinnitus treatment. Free first consultation.",
   keywords: ["hearing clinic Bengaluru", "hearing aids Bengaluru", "audiologist Jayanagar", "speech therapy Bengaluru"],
   authors: [{ name: "Ralas Hearing Clinic", url: "https://ralasclinic.com" }],
   creator: "Ralas Hearing Clinic",

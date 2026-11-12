@@ -37,7 +37,7 @@ const sections = [
     title: "Intellectual Property",
     items: [
       { heading: "Website Content", body: "All content on ralasclinic.com — including text, images, logos, and design — is the property of Ralas Hearing Clinic. You may not reproduce, distribute, or commercially exploit any content without prior written permission." },
-      { heading: "Trademarks", body: "Brand names referenced on this website (including Oticon, Phonak, Signia, Widex) are the property of their respective owners. Their mention does not imply endorsement of Ralas Hearing Clinic by those brands." },
+      { heading: "Trademarks", body: "Brand names referenced on this website (including Oticon, Signia, Widex, ReSound) are the property of their respective owners. Their mention does not imply endorsement of Ralas Hearing Clinic by those brands." },
     ],
   },
   {

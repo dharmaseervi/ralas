@@ -12,7 +12,7 @@ import Footer from "@/components/home/Footer"
 
 export const metadata = {
   title: "Ralas Hearing Clinic — Hearing Aids & Audiology, Bengaluru",
-  description: "Ralas Hearing Clinic in Jayanagar, Bengaluru offers hearing tests, hearing aids (Oticon, Phonak, Signia, Widex), speech therapy, and tinnitus treatment. Free first consultation.",
+  description: "Ralas Hearing Clinic in Jayanagar, Bengaluru offers hearing tests, hearing aids (Oticon, Signia, Widex, ReSound), speech therapy, and tinnitus treatment. Free first consultation.",
   alternates: { canonical: "https://ralasclinic.com" },
   openGraph: {
     title: "Ralas Hearing Clinic — Hearing Aids & Audiology, Bengaluru",
@@ -36,12 +36,12 @@ const faqItems = [
   {
     question: "How much do hearing aids cost in Bengaluru?",
     answer:
-      "Hearing aid prices vary widely depending on the technology level and style. At Ralas, devices start from approximately ₹25,000 per unit for basic digital aids, up to ₹1,80,000+ for premium rechargeable models from Oticon, Phonak, Signia, or Widex. All prices include professional fitting, follow-up adjustments, and our 30-day return guarantee. We provide GST-compliant invoices for insurance claims.",
+      "Hearing aid prices vary widely depending on the technology level and style. At Ralas, devices start from approximately ₹25,000 per unit for basic digital aids, up to ₹1,80,000+ for premium rechargeable models from Oticon, Signia, Widex, or ReSound. All prices include professional fitting and follow-up adjustments. We provide GST-compliant invoices for insurance claims.",
   },
   {
     question: "Can I try a hearing aid before purchasing?",
     answer:
-      "Absolutely. We offer a 30-day home trial on all hearing aids. You wear your device in your real-life environments — at work, in restaurants, at family gatherings — and return within 30 days for a full refund if you are not satisfied. No questions asked.",
+      "Yes. After fitting, our audiologist schedules follow-up adjustments to ensure your hearing aid is performing optimally in your daily environments — at work, in restaurants, at family gatherings. Contact us any time if the sound needs re-tuning.",
   },
   {
     question: "Do you offer home visits?",

@@ -28,7 +28,7 @@ const faqs = [
   { question: "Are your audiologists certified?", answer: "Yes. All our audiologists hold Master's degrees from the All India Institute of Speech and Hearing (AIISH), Mysore, and are registered with the Rehabilitation Council of India (RCI)." },
   { question: "Do you accept insurance?", answer: "We provide GST-compliant invoices that are accepted by most insurance providers. We recommend checking with your insurer before your appointment. We can also provide detailed clinical reports for reimbursement." },
   { question: "Do you offer home visits?", answer: "Yes. For elderly patients or those with mobility constraints, our audiologists offer home visit programmes across Bengaluru. Please call us to check availability in your area." },
-  { question: "What brands do you carry?", answer: "We are authorised dealers for Oticon, Phonak, Signia, and Widex — four of the world's leading hearing aid manufacturers. All devices come with a manufacturer's warranty and our in-clinic after-care." },
+  { question: "What brands do you carry?", answer: "We are authorised dealers for Oticon, Signia, Widex, and ReSound — world-leading hearing aid manufacturers. All devices come with a manufacturer's warranty and our in-clinic after-care." },
 ]
 
 export default function AboutPage() {

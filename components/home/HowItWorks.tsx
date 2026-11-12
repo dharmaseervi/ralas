@@ -33,7 +33,7 @@ const steps = [
   {
     num: "03",
     title: "Get Fitted & Go Home Hearing",
-    desc: "Choose from India's top brands, calibrated precisely to your audiogram. Walk out the same day. 30-day return guarantee, no questions asked.",
+    desc: "Choose from India's top brands, calibrated precisely to your audiogram. Walk out the same day with a GST invoice and manufacturer warranty.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" width={22} height={22}>
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />

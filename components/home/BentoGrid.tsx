@@ -23,7 +23,7 @@ const cards: BentoCard[] = [
     num: "01",
     tag: "Smart Hearing Technology",
     title: "Hearing aids that adapt to your world",
-    desc: "Devices from Oticon, Phonak, Signia and Widex automatically adjust to your environment — restaurants, meetings, streets — so you can focus on the conversation, not the noise.",
+    desc: "Devices from Oticon, Signia, Widex and ReSound automatically adjust to your environment — restaurants, meetings, streets — so you can focus on the conversation, not the noise.",
     stats: undefined,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
@@ -61,9 +61,9 @@ const cards: BentoCard[] = [
     colClass: "md:col-span-4",
     variant: "gold",
     num: "04",
-    tag: "Satisfaction Guarantee",
-    title: "30-day trial, no questions asked",
-    desc: "Not happy? Return within 30 days for a full refund. We believe in the product — and in you.",
+    tag: "GST Billing",
+    title: "Tax invoice issued for every purchase",
+    desc: "GST-compliant invoices issued for all devices and services. Accepted by most health insurance providers for reimbursement.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />

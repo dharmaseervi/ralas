@@ -147,23 +147,34 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Address band ── */}
+      {/* ── Address + GST band ── */}
       <div
-        className="flex items-start gap-2.5 py-5 mb-6"
+        className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 py-5 mb-6"
         style={{ borderTop: "0.5px solid rgba(255,255,255,0.07)", borderBottom: "0.5px solid rgba(255,255,255,0.07)" }}
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13} className="flex-shrink-0 mt-0.5">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
-        </svg>
-        <a
-          href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x3bae152b5f787543:0x32fcd6ff153aaa20"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-light leading-relaxed no-underline"
-          style={{ color: "rgba(255,255,255,0.3)", textDecoration: "none", letterSpacing: "0.03em" }}
-        >
-          2nd Floor, 121, 6th C Main Road, 4th Block, Jayanagar, Bengaluru, Karnataka – 560011
-        </a>
+        <div className="flex items-start gap-2.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13} className="flex-shrink-0 mt-0.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+          </svg>
+          <a
+            href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x3bae152b5f787543:0x32fcd6ff153aaa20"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-light leading-relaxed no-underline"
+            style={{ color: "rgba(255,255,255,0.3)", textDecoration: "none", letterSpacing: "0.03em" }}
+          >
+            2nd Floor, 121, 6th C Main Road, 4th Block, Jayanagar, Bengaluru, Karnataka – 560011
+          </a>
+        </div>
+        {/* GST info — replace GSTIN value once you have your registration number */}
+        <div className="flex flex-col gap-1 flex-shrink-0 text-right">
+          <span className="text-xs font-light" style={{ color: "rgba(255,255,255,0.22)", letterSpacing: "0.05em" }}>
+            GSTIN: 29XXXXXXXXXXXZX {/* ← replace with your GSTIN */}
+          </span>
+          <span className="text-xs font-light" style={{ color: "rgba(255,255,255,0.22)" }}>
+            GST invoices issued for all purchases
+          </span>
+        </div>
       </div>
 
       {/* ── Bottom bar — stacks on mobile ── */}

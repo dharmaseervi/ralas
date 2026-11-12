@@ -68,7 +68,7 @@ function RelatedProducts({ current }: { current: string }) {
               <ProductSpec label="Price range" value="₹22,000 – ₹1,80,000" />
               <ProductSpec label="Custom fitting" value="Made from ear impression" />
               <ProductSpec label="Styles" value="ITE, ITC, CIC, IIC" />
-              <ProductSpec label="Brands available" value="Oticon, Phonak, Signia, Widex" />
+              <ProductSpec label="Brands available" value="Oticon, Signia, Widex, ReSound" />
             </div>
             <BookAppointment />
           </div>
