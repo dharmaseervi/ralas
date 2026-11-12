@@ -89,9 +89,9 @@ export default function AboutPage() {
             style={{ height: "clamp(260px,40vw,480px)", background: "var(--cream-dk)" }}
           >
             <img
-              src="https://lh3.googleusercontent.com/p/AF1QipMvdMAJh5VvbAZhGL9Jg4RlcFN_Dh6btL5f4c24=s680-w680-h510-rw"
-              alt="Ralas clinic team"
-              className="w-full h-full object-cover border border-[var(--gold)] rounded-lg "
+              src="/images/hearing-aid-fitting.jpg"
+              alt="Ralas clinic — hearing aid fitting"
+              className="w-full h-full object-cover"
             />
             <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: "var(--gold)" }} />
           </div>
