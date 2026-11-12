@@ -39,7 +39,7 @@ const faqs = [
   { question: "Is the test painful or uncomfortable?", answer: "Not at all. Hearing tests are completely non-invasive. You'll wear headphones and either press a button or raise your hand when you hear a tone." },
   { question: "Do I need a referral?", answer: "No referral is needed. You can book directly with us by phone, WhatsApp, or our online booking form." },
   { question: "What should I bring to the appointment?", answer: "Just yourself. If you currently wear hearing aids, bring them along. If you have any previous audiograms or ENT reports, those are helpful but not required." },
-  { question: "How much does a hearing test cost?", answer: "Please call or WhatsApp us for current pricing. First consultations include the hearing test and audiogram report. GST invoices are provided." },
+  { question: "How much does a hearing test cost?", answer: "Please call or WhatsApp us for current pricing. First consultations include the hearing test and audiogram report." },
   { question: "Can children be tested?", answer: "Yes. We test all ages including newborns using OAE screening. For children under 4, we use play audiometry techniques that make the test engaging and stress-free." },
 ]
 

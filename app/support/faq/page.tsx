@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     question: "How much does a hearing test cost?",
-    answer: "Please call or WhatsApp us for current pricing. First consultations include the hearing test and audiogram report. GST invoices are issued for all services.",
+    answer: "Please call or WhatsApp us for current pricing. First consultations include the hearing test and audiogram report.",
   },
   {
     question: "Do you offer home visits?",

@@ -26,7 +26,7 @@ const stats = [
 const faqs = [
   { question: "When was Ralas founded?", answer: "Ralas Hearing Clinic was established in 2023 in Jayanagar, Bengaluru. We provide audiological care and speech therapy to patients of all ages." },
   { question: "Are your audiologists certified?", answer: "Yes. All our audiologists hold Master's degrees from the All India Institute of Speech and Hearing (AIISH), Mysore, and are registered with the Rehabilitation Council of India (RCI)." },
-  { question: "Do you accept insurance?", answer: "We provide GST-compliant invoices that are accepted by most insurance providers. We recommend checking with your insurer before your appointment. We can also provide detailed clinical reports for reimbursement." },
+  { question: "Do you accept insurance?", answer: "We provide detailed invoices accepted by most insurance providers. We recommend checking with your insurer before your appointment. We can also provide detailed clinical reports for reimbursement." },
   { question: "Do you offer home visits?", answer: "Yes. For elderly patients or those with mobility constraints, our audiologists offer home visit programmes across Bengaluru. Please call us to check availability in your area." },
   { question: "What brands do you carry?", answer: "We are authorised dealers for Oticon, Signia, Widex, and ReSound — world-leading hearing aid manufacturers. All devices come with a manufacturer's warranty and our in-clinic after-care." },
 ]
