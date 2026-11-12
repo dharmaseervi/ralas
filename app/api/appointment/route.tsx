@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import {
+    getIP, rateCheck, bodySizeOk, originAllowed,
+    VALID_SERVICES, dateOk, timeOk,
+    tooLarge, rateLimited, forbidden,
+} from '../_lib/guard';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -31,6 +36,16 @@ const serviceLabels: Record<string, string> = {
 
 export async function POST(request: NextRequest) {
     try {
+        // CORS
+        const origin = request.headers.get('origin')
+        if (!originAllowed(origin)) return forbidden()
+
+        // Body size
+        if (!bodySizeOk(request)) return tooLarge()
+
+        // Rate limit
+        if (!rateCheck(getIP(request))) return rateLimited()
+
         if (!process.env.RESEND_API_KEY) {
             return NextResponse.json({ message: 'Missing email API key' }, { status: 500 });
         }
@@ -64,6 +79,15 @@ export async function POST(request: NextRequest) {
         }
         if (!PHONE_RE.test(normalisePhone(phone))) {
             return NextResponse.json({ message: 'Invalid phone number' }, { status: 400 });
+        }
+        if (!VALID_SERVICES.has(String(service))) {
+            return NextResponse.json({ message: 'Invalid service' }, { status: 400 });
+        }
+        if (!dateOk(String(date))) {
+            return NextResponse.json({ message: 'Invalid date' }, { status: 400 });
+        }
+        if (!timeOk(String(time))) {
+            return NextResponse.json({ message: 'Invalid time' }, { status: 400 });
         }
 
         const fullName = esc(`${firstName} ${lastName}`)
