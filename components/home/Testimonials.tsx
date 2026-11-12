@@ -16,17 +16,6 @@ const platforms = [
     ),
     action: "Read Reviews",
   },
-  {
-    name: "Practo",
-    href: "https://www.practo.com/bengaluru/clinic/ralas-speech-and-hearing-clinic-jayanagar",
-    icon: (
-      <svg viewBox="0 0 24 24" width={20} height={20} fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round">
-        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
-        <path d="M12 6v6l4 2"/>
-      </svg>
-    ),
-    action: "Find on Practo",
-  },
 ]
 
 export default function Testimonials() {
@@ -55,12 +44,12 @@ export default function Testimonials() {
             </h2>
           </div>
           <p className="text-sm md:text-base font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-            We let our patients speak for themselves. Read genuine reviews on Google and Practo, written by real patients at their own discretion.
+            We let our patients speak for themselves. Read genuine reviews on Google, written by real patients at their own discretion.
           </p>
         </motion.div>
 
         {/* Review platform cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px mb-10" style={{ background: "rgba(255,255,255,0.07)" }}>
+        <div className="grid grid-cols-1 gap-px mb-10" style={{ background: "rgba(255,255,255,0.07)" }}>
           {platforms.map(({ name, href, icon, action }, i) => (
             <motion.a
               key={name}
@@ -90,9 +79,7 @@ export default function Testimonials() {
               </div>
 
               <p className="text-sm font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                {name === "Google"
-                  ? "Find us on Google Maps and read what patients have shared about their experience at Ralas Hearing Clinic."
-                  : "Search for Ralas Hearing Clinic on Practo to read verified patient reviews and book an appointment."}
+                Find us on Google Maps and read what patients have shared about their experience at Ralas Hearing Clinic.
               </p>
 
               <div className="flex items-center gap-2 text-xs tracking-widest uppercase group-hover:gap-3 transition-all" style={{ color: "var(--gold)" }}>
