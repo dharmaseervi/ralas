@@ -27,7 +27,7 @@ const faqs = [
   { question: "Do you offer a trial period?", answer: "We offer an adjustment period after fitting. If the device is not performing as expected, we will re-tune or exchange it. Contact us within the manufacturer's warranty period." },
   { question: "What is included in the price?", answer: "All prices include the device, professional fitting, a follow-up fine-tuning session at 2–4 weeks, and a manufacturer's warranty (typically 2–3 years). Batteries or charging cables are included for the first year." },
   { question: "Can I get my existing hearing aid serviced here?", answer: "Yes. We service and repair all major brands, including devices purchased elsewhere. Call us to check if we support your specific model." },
-  { question: "Is GST billing available?", answer: "Yes. We provide GST-compliant invoices for all purchases, accepted by most health insurance providers for reimbursement claims." },
+  { question: "Do you provide invoices for insurance claims?", answer: "Yes. We provide detailed invoices for all purchases and services. Contact us if your insurer needs a specific format or clinical report." },
 ]
 
 export default function HearingAidsPage() {

@@ -22,9 +22,9 @@ const highlights = [
     desc: "Across all age groups and hearing profiles",
   },
   {
-    num: "GST",
-    label: "Tax invoice",
-    desc: "GST-compliant invoice for insurance claims",
+    num: "Same",
+    label: "Day audiogram",
+    desc: "Full audiogram report on the day of your visit",
   },
 ]
 

@@ -61,9 +61,9 @@ const cards: BentoCard[] = [
     colClass: "md:col-span-4",
     variant: "gold",
     num: "04",
-    tag: "GST Billing",
-    title: "Tax invoice issued for every purchase",
-    desc: "GST-compliant invoices issued for all devices and services. Accepted by most health insurance providers for reimbursement.",
+    tag: "Expert Care",
+    title: "RCI-certified audiologist on every visit",
+    desc: "Every test, fitting, and follow-up is conducted by our RCI-registered clinical audiologist — not a sales consultant.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />

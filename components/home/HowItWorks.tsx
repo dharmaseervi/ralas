@@ -33,7 +33,7 @@ const steps = [
   {
     num: "03",
     title: "Get Fitted & Go Home Hearing",
-    desc: "Choose from India's top brands, calibrated precisely to your audiogram. Walk out the same day with a GST invoice and manufacturer warranty.",
+    desc: "Choose from India's top brands, calibrated precisely to your audiogram. Walk out the same day with a full audiogram report and manufacturer warranty.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" width={22} height={22}>
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -136,7 +136,7 @@ export default function HowItWorks() {
           className="text-center text-xs font-light mt-6"
           style={{ color: "var(--text-lt)" }}
         >
-          Same-day audiogram included · GST billing available · Home visits for eligible patients
+          Same-day audiogram included · Manufacturer warranty on all devices · Home visits for eligible patients
         </motion.p>
 
       </div>

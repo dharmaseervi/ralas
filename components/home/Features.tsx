@@ -38,7 +38,7 @@ const features = [
     tag: "Clinical Fitting",
     title: "Fitted to your exact audiogram",
     description: "Every device we fit is calibrated to your personal audiogram by our certified audiologist. We include follow-up adjustments until the sound is right for you.",
-    specs: ["Audiogram-matched fitting", "RCI-certified audiologist", "Free follow-up visits", "GST invoice included"],
+    specs: ["Audiogram-matched fitting", "RCI-certified audiologist", "Free follow-up visits", "Manufacturer warranty"],
   },
   {
     Icon: Volume2,

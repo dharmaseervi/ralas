@@ -36,7 +36,7 @@ const faqItems = [
   {
     question: "How much do hearing aids cost in Bengaluru?",
     answer:
-      "Hearing aid prices vary widely depending on the technology level and style. At Ralas, devices start from approximately ₹25,000 per unit for basic digital aids, up to ₹1,80,000+ for premium rechargeable models from Oticon, Signia, Widex, or ReSound. All prices include professional fitting and follow-up adjustments. We provide GST-compliant invoices for insurance claims.",
+      "Hearing aid prices vary widely depending on the technology level and style. At Ralas, devices start from approximately ₹25,000 per unit for basic digital aids, up to ₹1,80,000+ for premium rechargeable models from Oticon, Signia, Widex, or ReSound. All prices include professional fitting and follow-up adjustments.",
   },
   {
     question: "Can I try a hearing aid before purchasing?",

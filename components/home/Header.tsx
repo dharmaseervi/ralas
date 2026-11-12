@@ -57,7 +57,7 @@ const stripItems = [
   },
   {
     icon: (<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>),
-    title: "GST Billing", sub: "Insurance-friendly",
+    title: "RCI Certified", sub: "Registered audiologist",
   },
 ]
 

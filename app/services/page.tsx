@@ -24,7 +24,7 @@ const services = [
     title: "Hearing Aids",
     href: "/hearing-aids",
     desc: "India's top hearing aid brands — Oticon, Signia, Widex, ReSound and Starkey — fitted precisely to your audiogram by our certified audiologists. Discreet styles from behind-the-ear to completely-in-canal.",
-    highlights: ["Oticon, Signia, Widex, ReSound", "BTE, RIC, ITE, ITC, CIC styles", "Rechargeable & Bluetooth options", "Manufacturer warranty included", "GST billing for insurance"],
+    highlights: ["Oticon, Signia, Widex, ReSound", "BTE, RIC, ITE, ITC, CIC styles", "Rechargeable & Bluetooth options", "Manufacturer warranty included", "RCI-certified audiologist"],
     cta: "Explore Hearing Aids",
   },
   {
