@@ -26,7 +26,7 @@ const slides = [
     subtitle: "Personalised speech therapy sessions designed to restore confidence and communication for all ages.",
     cta: "Speech Therapy",
     ctaLink: "/speech-therapy",
-    secondaryCta: "Meet Our Team",
+    secondaryCta: "About Ralas",
     secondaryLink: "/about",
   },
   {
@@ -53,7 +53,7 @@ const stripItems = [
   },
   {
     icon: (<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>),
-    title: "Expert Audiologists", sub: "12+ years of care",
+    title: "Expert Audiologists", sub: "Est. 2023",
   },
   {
     icon: (<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" width={13} height={13}><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>),
@@ -324,7 +324,7 @@ export default function Header() {
               style={{ background: "linear-gradient(110deg, rgba(10,25,15,0.88) 0%, rgba(10,25,15,0.35) 60%, transparent 100%)" }} />
 
             {/* Hero content */}
-            <div className="relative h-full flex items-center px-5 md:px-12">
+            <div className="relative h-full flex items-center px-5 md:px-12 pt-20 pb-44 md:pt-0 md:pb-0">
               <div className="w-full max-w-xl">
 
                 {/* Eyebrow */}
@@ -402,7 +402,7 @@ export default function Header() {
         {/* Dots */}
         <div className="absolute bottom-24 left-5 md:left-12 flex gap-2 items-center z-10">
           {slides.map((_, i) => (
-            <button key={i} onClick={() => setCurrent(i)}
+            <button key={i} onClick={() => setCurrent(i)} aria-label={`Go to slide ${i + 1}`}
               className="h-1.5 border-none cursor-pointer p-0 transition-all duration-300"
               style={{
                 width: current === i ? "22px" : "6px",
@@ -415,12 +415,12 @@ export default function Header() {
 
         {/* Prev / Next */}
         <div className="absolute bottom-[86px] flex gap-2 z-10 left-5 md:left-12 ml-16 md:ml-20">
-          <button onClick={prev}
+          <button onClick={prev} aria-label="Previous slide"
             className="w-8 h-8 flex items-center justify-center cursor-pointer transition-colors hover:bg-white/20"
             style={{ background: "rgba(255,255,255,0.1)", border: "0.5px solid rgba(255,255,255,0.25)", color: "white" }}>
             <ChevronLeft size={15} />
           </button>
-          <button onClick={next}
+          <button onClick={next} aria-label="Next slide"
             className="w-8 h-8 flex items-center justify-center cursor-pointer transition-colors hover:bg-white/20"
             style={{ background: "rgba(255,255,255,0.1)", border: "0.5px solid rgba(255,255,255,0.25)", color: "white" }}>
             <ChevronRight size={15} />

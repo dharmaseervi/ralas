@@ -8,6 +8,22 @@ import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const PHONE_RE = /^[6-9]\d{9}$/
+
+function validateEmail(v: string) {
+  if (!v) return "Email is required"
+  if (!EMAIL_RE.test(v.trim())) return "Enter a valid email address"
+  return ""
+}
+function validatePhone(v: string) {
+  if (!v) return "Phone number is required"
+  const digits = v.replace(/[\s\-+]/g, "")
+  const mobile = digits.startsWith("91") ? digits.slice(2) : digits
+  if (!PHONE_RE.test(mobile)) return "Enter a valid 10-digit Indian mobile number"
+  return ""
+}
+
 const services = [
   { value: "hearing-test", label: "Hearing Test" },
   { value: "speech-therapy", label: "Speech Therapy" },
@@ -28,6 +44,7 @@ const steps = ["Personal Details", "Service & Schedule", "Confirm"]
 interface FormData {
   firstName: string; lastName: string; email: string; phone: string
   service: string; date: Date | undefined; time: string; notes: string
+  _honeypot: string
 }
 
 interface BookAppointmentProps {
@@ -40,37 +57,54 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [focused, setFocused] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState({ email: "", phone: "" })
   const [formData, setFormData] = useState<FormData>({
     firstName: "", lastName: "", email: "", phone: "",
-    service: "", date: undefined, time: "", notes: "",
+    service: "", date: undefined, time: "", notes: "", _honeypot: "",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target
     setFormData(p => ({ ...p, [id]: value }))
+    if (id === "email" || id === "phone") setFieldErrors(prev => ({ ...prev, [id]: "" }))
+  }
+
+  const handleFieldBlur = (field: "email" | "phone") => {
+    setFocused(null)
+    setFieldErrors(prev => ({
+      ...prev,
+      [field]: field === "email" ? validateEmail(formData[field]) : validatePhone(formData[field]),
+    }))
   }
 
   const handleSubmit = async () => {
     setLoading(true)
+    setSubmitError(null)
     try {
-      await fetch("/api/appointment", {
+      const res = await fetch("/api/appointment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
-    } catch (_) { }
-    setTimeout(() => {
-      setLoading(false); setSuccess(true)
+      if (!res.ok) throw new Error("server")
+      setLoading(false)
+      setSuccess(true)
       setTimeout(() => {
         setSuccess(false); setOpen(false); setStep(1)
-        setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", date: undefined, time: "", notes: "" })
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", date: undefined, time: "", notes: "", _honeypot: "" })
       }, 2800)
-    }, 1400)
+    } catch (_) {
+      setLoading(false)
+      setSubmitError("Something went wrong. Please call us at +91 6366-638452.")
+    }
   }
 
   const canProceed =
-    step === 1 ? !!(formData.firstName && formData.lastName && formData.email && formData.phone)
+    step === 1
+      ? !!(formData.firstName && formData.lastName && formData.email && formData.phone)
+        && !validateEmail(formData.email) && !validatePhone(formData.phone)
       : step === 2 ? !!(formData.service && formData.date && formData.time)
         : true
 
@@ -220,17 +254,26 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                               ))}
                             </div>
                             {([
-                              { id: "email" as const, label: "Email Address", type: "email" },
-                              { id: "phone" as const, label: "Phone Number", type: "tel" },
-                            ]).map(({ id, label, type }) => (
+                              { id: "email" as const, label: "Email Address", type: "email", placeholder: "you@email.com" },
+                              { id: "phone" as const, label: "Phone Number", type: "tel", placeholder: "10-digit mobile number" },
+                            ]).map(({ id, label, type, placeholder }) => (
                               <div key={id}>
                                 <label htmlFor={id} className="block text-xs tracking-widest uppercase mb-1.5" style={{ color: "var(--text-lt)" }}>
                                   {label}
                                 </label>
                                 <input id={id} type={type} value={formData[id]} onChange={handleChange}
-                                  onFocus={() => setFocused(id)} onBlur={() => setFocused(null)}
-                                  className={inputCls(id)} style={{ fontFamily: "'DM Sans', sans-serif" }}
+                                  placeholder={placeholder}
+                                  onFocus={() => setFocused(id)}
+                                  onBlur={() => handleFieldBlur(id)}
+                                  className={inputCls(id).replace(
+                                    "border-[rgba(26,58,42,0.18)]",
+                                    fieldErrors[id] ? "border-red-400" : "border-[rgba(26,58,42,0.18)]"
+                                  )}
+                                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                                 />
+                                {fieldErrors[id] && (
+                                  <p className="mt-1 text-xs font-light" style={{ color: "#dc2626" }}>{fieldErrors[id]}</p>
+                                )}
                               </div>
                             ))}
                           </motion.div>
@@ -391,6 +434,23 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                           </motion.div>
                         )}
                       </AnimatePresence>
+
+                      {/* Honeypot — hidden from humans, bots fill it in */}
+                      <div style={{ position: "absolute", left: "-9999px", top: 0 }} aria-hidden="true" tabIndex={-1}>
+                        <label htmlFor="_hp_appt">Leave this empty</label>
+                        <input id="_hp_appt" type="text" name="_honeypot"
+                          value={formData._honeypot}
+                          onChange={e => setFormData(p => ({ ...p, _honeypot: e.target.value }))}
+                          autoComplete="off" tabIndex={-1}
+                        />
+                      </div>
+
+                      {/* Error message */}
+                      {submitError && (
+                        <div className="mt-5 px-4 py-3 text-sm font-light" style={{ background: "rgba(220,38,38,0.07)", border: "0.5px solid rgba(220,38,38,0.25)", color: "#b91c1c" }}>
+                          {submitError}
+                        </div>
+                      )}
 
                       {/* Nav buttons */}
                       <div className="flex justify-between items-center mt-8 pt-5" style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)" }}>

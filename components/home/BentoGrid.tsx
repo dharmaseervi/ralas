@@ -1,20 +1,30 @@
 "use client"
 
 import { motion } from "framer-motion"
+import type React from "react"
 
-const cards = [
+type BentoCard = {
+  colClass: string
+  variant: string
+  num?: string
+  tag?: string
+  title?: string
+  desc?: string
+  stats?: { val: string; lbl: string }[]
+  icon?: React.ReactNode
+  statVal?: string
+  statLbl?: string
+}
+
+const cards: BentoCard[] = [
   {
     colClass: "md:col-span-8",
     variant: "light",
     num: "01",
-    tag: "BrainHearing™ Platform",
-    title: "Hearing aids that think like your brain",
-    desc: "Our partnered devices leverage neural-network processing with 12M trained sound scenes, delivering 50% better speech clarity in noisy environments.",
-    stats: [
-      { val: "50%", lbl: "better clarity" },
-      { val: "0.5ms", lbl: "response time" },
-      { val: "30h", lbl: "battery life" },
-    ],
+    tag: "Smart Hearing Technology",
+    title: "Hearing aids that adapt to your world",
+    desc: "Devices from Oticon, Phonak, Signia and Widex automatically adjust to your environment — restaurants, meetings, streets — so you can focus on the conversation, not the noise.",
+    stats: undefined,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="1.5" strokeLinecap="round" width={18} height={18}>
         <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />

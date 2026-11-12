@@ -1,11 +1,11 @@
 // app/hearing-aids/page.tsx
+import { generateMetadata } from "@/lib/seo"
 export const metadata = generateMetadata("hearing-aids")
 import FAQ from "@/components/home/FAQ"
 import Footer from "@/components/home/Footer"
 import Navbar from "@/components/home/NavigationBar"
 import ServiceHero from "@/components/home/ServiceheroSection"
 import TechnologyShowcase from "@/components/home/TechnologyShowcase"
-import { generateMetadata } from "@/lib/seo"
 
 
 const products = [

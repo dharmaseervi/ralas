@@ -2,48 +2,50 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { BrainCircuit, Waves, Bluetooth } from "lucide-react"
+import { BrainCircuit, Waves, Bluetooth, Zap, Target, Volume2, Brain, Globe, Timer, SlidersHorizontal, VolumeX, Wifi, Battery, Smartphone, Headphones } from "lucide-react"
 
-const features = [
+type LucideIcon = React.ComponentType<{ size?: number; color?: string; strokeWidth?: number }>
+
+const features: { Icon: LucideIcon; title: string; description: string; specs: { label: string; Icon: LucideIcon }[] }[] = [
   {
     Icon: BrainCircuit,
-    title: "BrainHearing™ Technology",
-    description: "Supports your brain's natural sound processing for clearer understanding in any environment.",
+    title: "Noise Reduction",
+    description: "Modern hearing aids separate speech from background noise automatically, making conversations easier in busy environments.",
     specs: [
-      { label: "2.4GHz Processor", icon: "⚡" },
-      { label: "12M Sound Scenes", icon: "🎯" },
-      { label: "120 dB Range", icon: "🔊" },
-      { label: "Neural Network", icon: "🧠" },
+      { label: "Background filtering", Icon: VolumeX },
+      { label: "Speech focus", Icon: Volume2 },
+      { label: "Auto scene detection", Icon: Target },
+      { label: "AI processing", Icon: Brain },
     ],
   },
   {
     Icon: Waves,
-    title: "OpenSound Navigator™",
-    description: "Real-time environmental adaptation with 360° sound awareness and near-zero response latency.",
+    title: "Environmental Adaptation",
+    description: "Devices continuously scan your surroundings and switch programmes automatically for restaurants, streets, offices and quiet spaces.",
     specs: [
-      { label: "360° Sound", icon: "🌐" },
-      { label: "0.5ms Response", icon: "⏱️" },
-      { label: "Auto Adjustment", icon: "🎚️" },
-      { label: "Noise Reduction", icon: "🔇" },
+      { label: "360° awareness", Icon: Globe },
+      { label: "Auto programme switch", Icon: SlidersHorizontal },
+      { label: "Wind noise reduction", Icon: Zap },
+      { label: "Comfort in noise", Icon: Timer },
     ],
   },
   {
     Icon: Bluetooth,
-    title: "Connectivity Suite",
-    description: "Seamless integration with modern devices — stream audio directly from iOS and Android.",
+    title: "Wireless Connectivity",
+    description: "Stream calls, music and TV audio directly to your hearing aids from a smartphone or TV streamer, without any additional accessory.",
     specs: [
-      { label: "Bluetooth 5.2", icon: "📶" },
-      { label: "Wireless Charging", icon: "🔋" },
-      { label: "iOS & Android App", icon: "📱" },
-      { label: "Direct Streaming", icon: "🎧" },
+      { label: "Bluetooth streaming", Icon: Wifi },
+      { label: "Rechargeable options", Icon: Battery },
+      { label: "Companion app control", Icon: Smartphone },
+      { label: "TV streamer compatible", Icon: Headphones },
     ],
   },
 ]
 
 const stats = [
-  { val: "30h",    label: "Battery Life",      sub: "With wireless charging support" },
-  { val: "–40 dB", label: "Noise Reduction",   sub: "Advanced environmental filtering" },
-  { val: "0.5ms",  label: "Processing Speed",  sub: "Ultra-low latency performance" },
+  { val: "Rechargeable", label: "Battery Options",    sub: "Full day of wear on a single charge" },
+  { val: "All ages",     label: "Patients Treated",   sub: "Infants to elderly, every hearing profile" },
+  { val: "Same day",     label: "Audiogram Report",   sub: "Results and fitting advice in one visit" },
 ]
 
 export default function TechnologyShowcase() {
@@ -130,9 +132,9 @@ export default function TechnologyShowcase() {
                   Key Specifications
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  {specs.map(({ label, icon }) => (
+                  {specs.map(({ label, Icon: SpecIcon }) => (
                     <div key={label} className="flex items-center gap-2 text-sm font-light" style={{ color: "var(--text-mid)" }}>
-                      <span className="text-sm">{icon}</span>
+                      <SpecIcon size={12} color="var(--gold)" strokeWidth={1.5} />
                       {label}
                     </div>
                   ))}

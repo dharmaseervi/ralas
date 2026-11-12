@@ -3,331 +3,173 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function esc(str: string): string {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;')
+}
+
+const serviceLabels: Record<string, string> = {
+    'hearing-test': 'Hearing Test',
+    'speech-therapy': 'Speech Therapy',
+    'hearing-aid-fitting': 'Hearing Aid Fitting',
+    'tinnitus-treatment': 'Tinnitus Treatment',
+    'language-therapy': 'Language Therapy',
+    'consultation': 'Initial Consultation',
+}
+
 export async function POST(request: NextRequest) {
     try {
         if (!process.env.RESEND_API_KEY) {
             return NextResponse.json({ message: 'Missing email API key' }, { status: 500 });
         }
 
-        const { firstName, lastName, email, phone, service, date, time, notes } = await request.json();
+        const { firstName, lastName, email, phone, service, date, time, notes, _honeypot } = await request.json();
 
-        console.log('Contact form submission:', { firstName, lastName, email, phone, service, date, time, notes });
+        if (_honeypot) {
+            return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
+        }
 
-
-        // Basic validation
-        if (!firstName || !lastName || !email || !service || !date || !time) {
+        if (!firstName || !lastName || !email || !phone || !service || !date || !time) {
             return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
         }
 
-        // Send email to clinic
+        const fullName = esc(`${firstName} ${lastName}`)
+        const safeEmail = esc(email)
+        const safePhone = esc(phone)
+        const serviceLabel = esc(serviceLabels[service] ?? service)
+        const safeNotes = notes ? esc(notes) : ''
+        const formattedDate = new Date(date).toLocaleDateString('en-IN', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+        })
+        const year = new Date().getFullYear()
+
+        const from = process.env.RESEND_FROM_EMAIL || 'Ralas Hearing Clinic <onboarding@resend.dev>'
         const { error } = await resend.emails.send({
-            from: 'contact@ralasclinic.com',
-            to: ['sinchanaravi0201@gmail.com'],
-            subject: `New Contact Form Submission from ${firstName} ${lastName}`,
+            from,
+            to: ['sinchanaravi0201@gmail.com', 'dharmaseervijb18239@gmail.com'],
+            subject: `New appointment: ${fullName} — ${serviceLabel} on ${formattedDate}`,
             html: `
-           <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Appointment Booking</title>
-  <style type="text/css">
-    /* Client-specific styles */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; }
-
-    /* Reset styles */
-    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
-    table { border-collapse: collapse !important; }
-    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
-
-    /* iOS blue links */
-    a[x-apple-data-detectors] {
-      color: inherit !important;
-      text-decoration: none !important;
-      font-size: inherit !important;
-      font-family: inherit !important;
-      font-weight: inherit !important;
-      line-height: inherit !important;
-    }
-
-    /* Gmail blue links */
-    u + #body a {
-      color: inherit;
-      text-decoration: none;
-      font-size: inherit;
-      font-family: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-    }
-
-    /* Samsung Mail blue links */
-    #MessageViewBody a {
-      color: inherit;
-      text-decoration: none;
-      font-size: inherit;
-      font-family: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-    }
-
-    /* Responsive styles */
-    @media screen and (max-width: 600px) {
-      .email-container {
-        width: 100% !important;
-        max-width: 100% !important;
-      }
-      .stack-column,
-      .stack-column-center {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        direction: ltr !important;
-      }
-      .stack-column-center {
-        text-align: center !important;
-      }
-      .center-on-narrow {
-        text-align: center !important;
-        display: block !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        float: none !important;
-      }
-      table.center-on-narrow {
-        display: inline-block !important;
-      }
-      .email-container p {
-        font-size: 16px !important;
-        line-height: 24px !important;
-      }
-      .email-padding {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-      }
-      .mobile-padding-top {
-        padding-top: 15px !important;
-      }
-      .mobile-padding-bottom {
-        padding-bottom: 15px !important;
-      }
-      .mobile-padding {
-        padding: 15px !important;
-      }
-      .mobile-font-16 {
-        font-size: 16px !important;
-      }
-      .mobile-font-14 {
-        font-size: 14px !important;
-      }
-      .mobile-full-width {
-        width: 100% !important;
-      }
-      .mobile-button {
-        width: 100% !important;
-        display: block !important;
-      }
+  <style>
+    @media only screen and (max-width:600px) {
+      .wrap { padding: 12px 8px !important; }
+      .card-header { padding: 20px 16px !important; }
+      .card-body { padding: 20px 16px !important; }
+      .card-footer { padding: 16px !important; }
+      .h1 { font-size: 18px !important; }
+      .appt-strip { padding: 12px 14px !important; }
+      .appt-service { font-size: 16px !important; }
     }
   </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
-  <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
-    New appointment booking details inside...
-  </div>
-  
-  <div style="width: 100%; background-color: #f4f4f4;">
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto; border-spacing: 0; font-family: Arial, sans-serif;" class="email-container">
-      <!-- Email Header : BEGIN -->
-      <tr>
-        <td style="padding: 20px 0; text-align: center">
-          <img src="https://www.ralas.co.in/ralas.png" width="200" height="50" alt="Your Clinic Logo" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
-        </td>
-      </tr>
-      <!-- Email Header : END -->
+<body style="margin:0;padding:0;background:#FAF7F2;font-family:Arial,sans-serif;">
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="wrap" align="center" style="padding:24px 12px;">
+        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:580px;margin:0 auto;">
 
-      <!-- Email Body : BEGIN -->
-      <tr>
-        <td style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
-          <!-- Header Section : BEGIN -->
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-            <tr>
-              <td style="padding: 30px 40px; background-color: #4f46e5; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: left;" class="email-padding">
-                <h1 style="margin: 0; font-family: Arial, sans-serif; font-size: 24px; line-height: 30px; color: #ffffff; font-weight: bold;">New Appointment Booking</h1>
-              </td>
-            </tr>
-          </table>
-          <!-- Header Section : END -->
+          <!-- Header -->
+          <tr>
+            <td class="card-header" style="background:#1A3A2A;padding:24px 28px;border-radius:4px 4px 0 0;">
+              <div style="color:#C9A84C;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">Ralas Hearing Clinic</div>
+              <div class="h1" style="color:white;font-size:22px;font-weight:300;">New appointment booking</div>
+            </td>
+          </tr>
 
-          <!-- Intro Section : BEGIN -->
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-            <tr>
-              <td style="padding: 30px 40px 20px 40px; text-align: left;" class="email-padding">
-                <p style="margin: 0 0 15px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #333333;">
-                  A new appointment has been booked. Here are the details:
-                </p>
-              </td>
-            </tr>
-          </table>
-          <!-- Intro Section : END -->
+          <!-- Body -->
+          <tr>
+            <td class="card-body" style="background:white;padding:24px 28px;border:0.5px solid rgba(26,58,42,0.12);border-top:none;">
 
-          <!-- Patient Info Section : BEGIN -->
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-            <tr>
-              <td style="padding: 0 40px 20px 40px;" class="email-padding">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f9fafb; border-radius: 6px;">
-                  <tr>
-                    <td style="padding: 20px;" class="mobile-padding">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td colspan="2" style="padding-bottom: 15px; font-family: Arial, sans-serif; font-size: 18px; line-height: 24px; color: #4f46e5; font-weight: bold;" class="mobile-font-16">
-                            Patient Information
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="30%" style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #6b7280;" class="mobile-font-14">
-                            Name:
-                          </td>
-                          <td style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #333333; font-weight: 500;" class="mobile-font-14">
-                            ${firstName} ${lastName}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="30%" style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #6b7280;" class="mobile-font-14">
-                            Email:
-                          </td>
-                          <td style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #333333; font-weight: 500; word-break: break-word;" class="mobile-font-14">
-                            ${email}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="30%" style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #6b7280;" class="mobile-font-14">
-                            Phone:
-                          </td>
-                          <td style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #333333; font-weight: 500;" class="mobile-font-14">
-                            ${phone}
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-          <!-- Patient Info Section : END -->
+              <!-- Appointment highlight strip -->
+              <div class="appt-strip" style="background:#FAF7F2;border-left:3px solid #C9A84C;padding:14px 18px;margin-bottom:24px;">
+                <div style="font-size:11px;color:#8C9B8E;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px;">Appointment</div>
+                <div class="appt-service" style="font-size:18px;color:#1A3A2A;font-weight:500;margin-bottom:4px;">${serviceLabel}</div>
+                <div style="font-size:13px;color:#3D4F42;">${formattedDate}<br>${esc(time)}</div>
+              </div>
 
-          <!-- Appointment Details Section : BEGIN -->
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-            <tr>
-              <td style="padding: 0 40px 20px 40px;" class="email-padding">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f9fafb; border-radius: 6px;">
-                  <tr>
-                    <td style="padding: 20px;" class="mobile-padding">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td colspan="2" style="padding-bottom: 15px; font-family: Arial, sans-serif; font-size: 18px; line-height: 24px; color: #4f46e5; font-weight: bold;" class="mobile-font-16">
-                            Appointment Details
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="30%" style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #6b7280;" class="mobile-font-14">
-                            Service:
-                          </td>
-                          <td style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #333333; font-weight: 500;" class="mobile-font-14">
-                            ${service}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="30%" style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #6b7280;" class="mobile-font-14">
-                            Date:
-                          </td>
-                          <td style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #333333; font-weight: 500;" class="mobile-font-14">
-                            ${new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="30%" style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #6b7280;" class="mobile-font-14">
-                            Time:
-                          </td>
-                          <td style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; color: #333333; font-weight: 500;" class="mobile-font-14">
-                            ${time}
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-          <!-- Appointment Details Section : END -->
+              <!-- Patient details -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:24px;">
+                <tr>
+                  <td style="padding:10px 0;border-bottom:0.5px solid #F0EDE8;">
+                    <span style="font-size:11px;color:#8C9B8E;text-transform:uppercase;letter-spacing:0.15em;">Patient</span><br>
+                    <span style="font-size:15px;color:#1A3A2A;font-weight:500;">${fullName}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 0;border-bottom:0.5px solid #F0EDE8;">
+                    <span style="font-size:11px;color:#8C9B8E;text-transform:uppercase;letter-spacing:0.15em;">Phone</span><br>
+                    <a href="tel:${safePhone}" style="font-size:15px;color:#1A3A2A;font-weight:500;text-decoration:none;">${safePhone}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 0;${safeNotes ? 'border-bottom:0.5px solid #F0EDE8;' : ''}">
+                    <span style="font-size:11px;color:#8C9B8E;text-transform:uppercase;letter-spacing:0.15em;">Email</span><br>
+                    <a href="mailto:${safeEmail}" style="font-size:15px;color:#1A3A2A;text-decoration:none;">${safeEmail}</a>
+                  </td>
+                </tr>
+                ${safeNotes ? `
+                <tr>
+                  <td style="padding:10px 0;">
+                    <span style="font-size:11px;color:#8C9B8E;text-transform:uppercase;letter-spacing:0.15em;">Notes</span><br>
+                    <span style="font-size:14px;color:#3D4F42;line-height:1.5;">${safeNotes}</span>
+                  </td>
+                </tr>` : ''}
+              </table>
 
-          <!-- Notes Section : BEGIN (Conditional) -->
-          ${notes ? `
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-            <tr>
-              <td style="padding: 0 40px 20px 40px;" class="email-padding">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f9fafb; border-radius: 6px;">
-                  <tr>
-                    <td style="padding: 20px;" class="mobile-padding">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td style="padding-bottom: 15px; font-family: Arial, sans-serif; font-size: 18px; line-height: 24px; color: #4f46e5; font-weight: bold;" class="mobile-font-16">
-                            Additional Notes
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="padding: 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 22px; color: #333333;" class="mobile-font-14">
-                            ${notes}
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-          ` : ''}
-          <!-- Notes Section : END -->
+              <!-- CTA — stacked buttons, full width on mobile -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="padding-bottom:10px;">
+                    <a href="tel:${safePhone}"
+                       style="display:block;background:#1A3A2A;color:white;padding:14px 24px;
+                              text-align:center;text-decoration:none;font-size:12px;
+                              letter-spacing:0.15em;text-transform:uppercase;font-weight:500;">
+                      Call Patient
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="mailto:${safeEmail}"
+                       style="display:block;background:#C9A84C;color:#1A3A2A;padding:14px 24px;
+                              text-align:center;text-decoration:none;font-size:12px;
+                              letter-spacing:0.15em;text-transform:uppercase;font-weight:500;">
+                      Reply by Email
+                    </a>
+                  </td>
+                </tr>
+              </table>
 
-          <!-- CTA Section : BEGIN -->
-         
-          <!-- CTA Section : END -->
+            </td>
+          </tr>
 
-          <!-- Footer : BEGIN -->
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-            <tr>
-              <td style="padding: 20px 40px; background-color: #f9fafb; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-top: 1px solid #e5e7eb; text-align: center;" class="email-padding">
-                <p style="margin: 0 0 8px 0; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px; color: #6b7280;">
-                  © 2025 Ralas Speech and Hearing. All rights reserved.
-                </p>
-                <p style="margin: 0; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px; color: #6b7280;">
-                  2nd floor, 121, 6th C Main Road,<br>
-                  4th Block, Jayanagar, Bengaluru, Karnataka 560011
-                </p>
-              </td>
-            </tr>
-          </table>
-          <!-- Footer : END -->
-        </td>
-      </tr>
-      <!-- Email Body : END -->
+          <!-- Footer -->
+          <tr>
+            <td class="card-footer" style="background:#1A3A2A;padding:18px 28px;border-radius:0 0 4px 4px;text-align:center;">
+              <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.4);line-height:1.8;">
+                © ${year} Ralas Hearing Clinic<br>
+                2nd Floor, 121, 6th C Main Road, Jayanagar, Bengaluru – 560011<br>
+                <a href="https://ralasclinic.com" style="color:#C9A84C;text-decoration:none;">ralasclinic.com</a>
+                &nbsp;·&nbsp;
+                <a href="tel:+916366638452" style="color:#C9A84C;text-decoration:none;">+91 6366-638452</a>
+              </p>
+            </td>
+          </tr>
 
-      <!-- Unsubscribe : BEGIN -->
-      <tr>
-        <td style="padding: 20px; text-align: center; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px; color: #888888;">
-          <p style="margin: 0;">This email was sent to you because an appointment was booked through your website.</p>
-        </td>
-      </tr>
-      <!-- Unsubscribe : END -->
-    </table>
-  </div>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
-</html>
-           
-            ` ,
+</html>`,
         });
 
         if (error) {

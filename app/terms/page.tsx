@@ -71,7 +71,7 @@ export default function TermsPage() {
             Terms of Use
           </h1>
           <p className="text-sm font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-            Last updated: January 2025. By using our website or services, you agree to these terms.
+            Last updated: November 2026. By using our website or services, you agree to these terms.
           </p>
         </div>
       </section>

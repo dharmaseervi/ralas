@@ -6,7 +6,7 @@ import Navbar from "@/components/home/NavigationBar";
 import ServiceHero from "@/components/home/ServiceheroSection";
 import Link from "next/link";
 
-import { Footer } from "react-day-picker";
+import Footer from "@/components/home/Footer";
 
 function ProductSpec({ label, value }: { label: string; value: string }) {
   return (

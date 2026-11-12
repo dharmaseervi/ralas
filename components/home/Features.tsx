@@ -7,57 +7,45 @@ import Link from "next/link"
 const features = [
   {
     Icon: BrainCircuit,
-    tag: "Neural Processing",
-    title: "BrainHearing™ Technology",
-    stat: "50%",
-    statLabel: "better speech understanding",
-    description: "Supports the brain's natural sound processing with neural network technology trained on 12 million real-world sound scenes.",
-    specs: ["120 dB dynamic range", "2.4GHz processor", "Neural network AI", "12M sound scenes"],
+    tag: "Signal Processing",
+    title: "Smart background noise reduction",
+    description: "Modern hearing aids from Oticon, Phonak and Signia process sound in real time, reducing background noise while preserving the speech you want to hear.",
+    specs: ["Background noise filtering", "Speech enhancement", "Auto environment detection", "Real-time processing"],
   },
   {
     Icon: Waves,
     tag: "360° Awareness",
-    title: "OpenSound Navigator™",
-    stat: "0.5ms",
-    statLabel: "response time",
-    description: "Real-time environmental adaptation scans the full soundscape 100 times per second, balancing every sound for natural listening.",
-    specs: ["Full environment scan", "Smart noise reduction", "Auto-balance", "100Hz refresh"],
+    title: "Full soundscape awareness",
+    description: "Premium devices scan your surroundings continuously, automatically adjusting their programmes to suit restaurants, streets, meetings and quiet rooms.",
+    specs: ["Auto programme switching", "Directional microphones", "Wind noise reduction", "Situational adaptation"],
   },
   {
     Icon: Zap,
-    tag: "Processing Platform",
-    title: "Polite™ Platform",
-    stat: "30%",
-    statLabel: "less listening effort",
-    description: "Ultra-fast processing reduces cognitive load so you can focus on conversations, not straining to hear them.",
-    specs: ["30h battery life", "Wireless charging", "Ultra-low latency", "Adaptive programs"],
+    tag: "Comfort",
+    title: "All-day comfort and battery life",
+    description: "Rechargeable hearing aids from leading brands offer a full day of wear on a single charge — no disposable batteries required.",
+    specs: ["Rechargeable models available", "Disposable battery options", "Lightweight designs", "BTE, RIC, ITE styles"],
   },
   {
     Icon: Bluetooth,
     tag: "Connectivity",
-    title: "Connectivity Suite",
-    stat: "5.2",
-    statLabel: "Bluetooth generation",
-    description: "Stream audio directly from iPhone and Android. Control everything from the companion app — volume, programs, and EQ.",
-    specs: ["iOS & Android app", "Direct streaming", "Remote fine-tune", "Multi-device pairing"],
+    title: "Wireless streaming and control",
+    description: "Many modern hearing aids connect directly to smartphones, allowing you to stream calls and music and adjust settings from an app.",
+    specs: ["iOS & Android compatible", "Direct audio streaming", "Volume control via app", "TV streamer compatible"],
   },
   {
     Icon: Ear,
-    tag: "Fit & Comfort",
-    title: "Precision Fitting",
-    stat: "3yr",
-    statLabel: "warranty included",
-    description: "Every device is calibrated to your exact audiogram by our certified audiologists, with follow-up fine-tuning visits included.",
-    specs: ["Audiogram-matched", "Clinical follow-up", "Custom ear mould", "Trial guarantee"],
+    tag: "Clinical Fitting",
+    title: "Fitted to your exact audiogram",
+    description: "Every device we fit is calibrated to your personal audiogram by our certified audiologist. We include follow-up adjustments until the sound is right for you.",
+    specs: ["Audiogram-matched fitting", "RCI-certified audiologist", "Free follow-up visits", "30-day trial period"],
   },
   {
     Icon: Volume2,
-    tag: "Sound Quality",
-    title: "OpenSound Booster™",
-    stat: "360°",
-    statLabel: "sound processing",
-    description: "Extra processing power for demanding situations — concerts, restaurants, large gatherings — activated at the tap of a button.",
-    specs: ["Manual boost mode", "Surround clarity", "Crowd filter", "Wind suppression"],
+    tag: "Speech Clarity",
+    title: "Clearer speech in difficult situations",
+    description: "High-end hearing aids include dedicated modes for crowded spaces, loud restaurants and group conversations — helping you stay engaged.",
+    specs: ["Crowd listening mode", "Wind suppression", "Surround sound balance", "Manual boost option"],
   },
 ]
 
@@ -86,43 +74,43 @@ export default function Features() {
           <div>
             <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
               <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
-              Oticon More™ Platform
+              Modern Hearing Aids
             </div>
             <h2
               className="font-light text-white leading-tight"
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.15 }}
             >
-              Revolutionary<br />hearing technology
+              What today&apos;s hearing<br />aids can do for you
             </h2>
           </div>
           <div>
             <p className="text-sm md:text-base font-light leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.58)" }}>
-              Clinical-grade performance powered by Oticon's patented More™ platform — FDA-cleared and backed by 3 years of warranty on every device.
+              The latest devices from Oticon, Phonak, Signia and Widex are a far cry from the hearing aids of the past — smaller, smarter, and fitted precisely to your audiogram.
             </p>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--gold)" }} />
               <span className="text-xs tracking-wider" style={{ color: "rgba(255,255,255,0.32)" }}>
-                FDA-Cleared Medical Device · 3-year warranty included
+                All devices come with manufacturer warranty · In-clinic follow-up included
               </span>
             </div>
           </div>
         </motion.div>
 
-        {/* ── Feature grid — 1 col mobile, 2 col tablet, 3 col desktop ── */}
+        {/* ── Feature grid ── */}
         <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-px"
           style={{ gap: "1px", background: "rgba(255,255,255,0.06)" }}
         >
-          {features.map(({ Icon, tag, title, stat, statLabel, description, specs }, i) => (
+          {features.map(({ Icon, tag, title, description, specs }, i) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="p-7 md:p-8 relative overflow-hidden transition-colors duration-300 hover:bg-white/5"
+              className="p-7 md:p-8 relative overflow-hidden"
               style={{ background: "var(--forest)" }}
-              whileHover={{ backgroundColor: "rgba(255,255,255,0.04)" } as any}
+              whileHover={{ backgroundColor: "rgba(255,255,255,0.04)" }}
             >
               {/* Gold left border on hover */}
               <motion.div
@@ -133,25 +121,12 @@ export default function Features() {
                 style={{ background: "var(--gold)", transformOrigin: "top" }}
               />
 
-              {/* Icon + stat row */}
-              <div className="flex justify-between items-start mb-6">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ border: "1px solid rgba(255,255,255,0.15)" }}
-                >
-                  <Icon size={17} color="rgba(255,255,255,0.75)" strokeWidth={1.5} />
-                </div>
-                <div className="text-right">
-                  <div
-                    className="font-light leading-none"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "30px", color: "var(--gold)" }}
-                  >
-                    {stat}
-                  </div>
-                  <div className="text-xs tracking-wider mt-0.5" style={{ color: "rgba(255,255,255,0.3)" }}>
-                    {statLabel}
-                  </div>
-                </div>
+              {/* Icon */}
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center mb-6"
+                style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+              >
+                <Icon size={17} color="rgba(255,255,255,0.75)" strokeWidth={1.5} />
               </div>
 
               {/* Tag */}
@@ -194,7 +169,7 @@ export default function Features() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 px-6 md:px-12 py-8 md:py-8"
+          className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 px-6 md:px-12 py-8"
           style={{ background: "var(--gold)" }}
         >
           <div>
@@ -202,7 +177,7 @@ export default function Features() {
               className="font-normal mb-1"
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(18px,3vw,22px)", color: "var(--forest)" }}
             >
-              Experience these features for yourself
+              Want to try a hearing aid before you buy?
             </div>
             <p className="text-sm font-light" style={{ color: "rgba(26,58,42,0.65)" }}>
               Free demo · No obligation · Jayanagar clinic, Bengaluru
@@ -214,7 +189,7 @@ export default function Features() {
               className="text-xs font-medium tracking-widest uppercase px-6 py-3 no-underline whitespace-nowrap text-white"
               style={{ background: "var(--forest)", textDecoration: "none" }}
             >
-              Schedule Free Demo
+              Book Free Demo
             </Link>
             <Link
               href="/hearing-aids"

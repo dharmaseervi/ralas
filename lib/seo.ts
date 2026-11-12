@@ -47,7 +47,7 @@ type PageKey =
   | "tinnitus-treatment" | "home-visits"
   | "product-bte" | "product-rechargeable" | "product-ite"
   | "product-smart" | "product-accessories"
-  | "privacy" | "terms" | "accessibility"
+  | "privacy" | "terms" | "accessibility" | "faq"
 
 const pages: Record<PageKey, Metadata> = {
 
@@ -75,11 +75,11 @@ const pages: Record<PageKey, Metadata> = {
 
   about: {
     title: `About Us | ${CLINIC_NAME} — Jayanagar, Bengaluru`,
-    description: "Founded in 2012, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic for hearing care and speech therapy. Meet our RCI-registered audiologists in Jayanagar.",
-    keywords: ["about Ralas Hearing Clinic", "audiologist Jayanagar Bengaluru", "RCI registered audiologist", "hearing clinic since 2012"],
+    description: "Founded in 2023, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic for hearing care and speech therapy. Meet our RCI-registered audiologists in Jayanagar.",
+    keywords: ["about Ralas Hearing Clinic", "audiologist Jayanagar Bengaluru", "RCI registered audiologist", "hearing clinic Bengaluru"],
     openGraph: {
       title: `About ${CLINIC_NAME} — Dedicated to Better Hearing`,
-      description: "Founded in 2012 in Jayanagar, Bengaluru. RCI-registered audiologists providing hearing care and speech therapy for all ages.",
+      description: "Founded in 2023 in Jayanagar, Bengaluru. RCI-registered audiologists providing hearing care and speech therapy for all ages.",
       url: `${BASE_URL}/about`,
       type: "website",
       images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Ralas Hearing Clinic team" }],
@@ -257,6 +257,12 @@ const pages: Record<PageKey, Metadata> = {
     title: `Accessibility Statement | ${CLINIC_NAME}`,
     description: "Ralas Hearing Clinic's accessibility statement — how we make our clinic and website accessible to everyone.",
     alternates: { canonical: `${BASE_URL}/accessibility` },
+  },
+
+  faq: {
+    title: `Frequently Asked Questions | ${CLINIC_NAME}`,
+    description: "Answers to common questions about hearing tests, hearing aids, speech therapy, home visits, pricing, and appointments at Ralas Hearing Clinic, Jayanagar, Bengaluru.",
+    alternates: { canonical: `${BASE_URL}/support/faq` },
   },
 }
 

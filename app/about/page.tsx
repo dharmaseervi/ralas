@@ -6,31 +6,25 @@ import ServiceHero from "@/components/home/ServiceheroSection"
 
 export const metadata = {
   title: "About Us | Ralas Hearing Clinic, Jayanagar Bengaluru",
-  description: "Founded in 2012, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic. RCI-registered audiologists providing hearing care and speech therapy for all ages.",
+  description: "Founded in 2023, Ralas Hearing Clinic is Bengaluru's trusted specialist clinic. RCI-registered audiologists providing hearing care and speech therapy for all ages.",
   alternates: { canonical: "https://ralasclinic.com/about" },
   openGraph: {
     title: "About Ralas Hearing Clinic — Dedicated to Better Hearing",
-    description: "Founded in 2012 in Jayanagar, Bengaluru. RCI-registered audiologists.",
+    description: "Founded in 2023 in Jayanagar, Bengaluru. RCI-registered audiologists.",
     url: "https://ralasclinic.com/about",
     images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Ralas Hearing Clinic team" }],
   },
 }
 
-const team = [
-  { name: "Dr. Priya Sharma", role: "Chief Audiologist", qual: "M.Sc. Audiology, AIISH", spec: "Paediatric & adult hearing assessment", initials: "PS" },
-  { name: "Dr. Rajan Menon", role: "Senior Audiologist", qual: "M.Sc. Audiology, MASLP", spec: "Hearing aid fitting & rehabilitation", initials: "RM" },
-  { name: "Ms. Divya Rao", role: "Speech-Language Pathologist", qual: "M.Sc. SLP, AIISH", spec: "Paediatric speech & language therapy", initials: "DR" },
-]
-
 const stats = [
   { val: "1200+", label: "Patients served" },
-  { val: "12 yrs", label: "Clinical experience" },
+  { val: "2023", label: "Year founded" },
   { val: "4", label: "Premium brands" },
-  { val: "98%", label: "Patient satisfaction" },
+  { val: "RCI Reg.", label: "Certified audiologists" },
 ]
 
 const faqs = [
-  { question: "When was Ralas founded?", answer: "Ralas Hearing Clinic was established in 2012 in Jayanagar, Bengaluru. We have been serving the community for over 12 years, providing audiological care and speech therapy to patients of all ages." },
+  { question: "When was Ralas founded?", answer: "Ralas Hearing Clinic was established in 2023 in Jayanagar, Bengaluru. We provide audiological care and speech therapy to patients of all ages." },
   { question: "Are your audiologists certified?", answer: "Yes. All our audiologists hold Master's degrees from the All India Institute of Speech and Hearing (AIISH), Mysore, and are registered with the Rehabilitation Council of India (RCI)." },
   { question: "Do you accept insurance?", answer: "We provide GST-compliant invoices that are accepted by most insurance providers. We recommend checking with your insurer before your appointment. We can also provide detailed clinical reports for reimbursement." },
   { question: "Do you offer home visits?", answer: "Yes. For elderly patients or those with mobility constraints, our audiologists offer home visit programmes across Bengaluru. Please call us to check availability in your area." },
@@ -44,7 +38,7 @@ export default function AboutPage() {
       <ServiceHero
         eyebrow="Our Story"
         title="Dedicated to better hearing"
-        subtitle="Founded in 2012, Ralas is Bengaluru's trusted hearing clinic — combining clinical precision with compassionate, patient-first care."
+        subtitle="Founded in 2023, Ralas is Bengaluru's trusted hearing clinic — combining clinical precision with compassionate, patient-first care."
         imageSrc="https://lh3.googleusercontent.com/p/AF1QipNXNZrBhsjFJqQxgaTYNVZxzfkpLOS5lQv3-hed=s680-w680-h510-rw"
       />
 
@@ -72,7 +66,7 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-wrap gap-6 md:gap-8">
               {[
-                { val: "2012", lbl: "Founded" },
+                { val: "2023", lbl: "Founded" },
                 { val: "Jayanagar", lbl: "Location" },
                 { val: "RCI Reg.", lbl: "Certified" },
               ].map(({ val, lbl }) => (
@@ -100,61 +94,6 @@ export default function AboutPage() {
               className="w-full h-full object-cover border border-[var(--gold)] rounded-lg "
             />
             <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: "var(--gold)" }} />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Team ── */}
-      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--cream)" }}>
-        <div className="max-w-[1200px] mx-auto">
-          <div className="mb-10 md:mb-14">
-            <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
-              <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
-              Our Team
-            </div>
-            <h2
-              className="font-light leading-tight"
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", lineHeight: 1.15, color: "var(--forest)" }}
-            >
-              Meet the specialists
-            </h2>
-          </div>
-
-          {/* Team cards — 1 col mobile, 3 col desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "rgba(26,58,42,0.08)" }}>
-            {team.map(({ name, role, qual, spec, initials }) => (
-              <div
-                key={name}
-                className="p-8 md:p-10"
-                style={{ background: "var(--white)" }}
-              >
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
-                  style={{ background: "var(--forest)" }}
-                >
-                  <span
-                    className="text-xl font-light"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", color: "var(--gold-lt)" }}
-                  >
-                    {initials}
-                  </span>
-                </div>
-                <div className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--gold)" }}>{role}</div>
-                <div
-                  className="text-xl font-normal mb-2"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", color: "var(--forest)" }}
-                >
-                  {name}
-                </div>
-                <div className="text-xs font-light mb-3" style={{ color: "var(--text-lt)" }}>{qual}</div>
-                <div
-                  className="pt-4 text-sm font-light leading-relaxed"
-                  style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)", color: "var(--text-mid)" }}
-                >
-                  {spec}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

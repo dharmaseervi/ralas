@@ -116,7 +116,7 @@ export default function AccessibilityPage() {
 
           <div className="pt-4 border-t" style={{ borderColor: "rgba(26,58,42,0.1)" }}>
             <p className="text-xs font-light" style={{ color: "var(--text-lt)" }}>
-              This statement was last reviewed in January 2025. See also: <Link href="/privacy" style={{ color: "var(--forest)" }}>Privacy Policy</Link> · <Link href="/terms" style={{ color: "var(--forest)" }}>Terms of Use</Link>
+              This statement was last reviewed in November 2026. See also: <Link href="/privacy" style={{ color: "var(--forest)" }}>Privacy Policy</Link> · <Link href="/terms" style={{ color: "var(--forest)" }}>Terms of Use</Link>
             </p>
           </div>
         </div>

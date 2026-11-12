@@ -31,6 +31,18 @@ const sections = [
     ],
   },
   {
+    title: "Data Safety Measures",
+    content: [
+      { heading: "Encryption in Transit", body: "All data transmitted between your browser and our website is encrypted using TLS (HTTPS). Any personal information submitted through our contact or appointment forms is transmitted over a secure, encrypted connection." },
+      { heading: "Access Controls", body: "Patient health records are accessible only to authorised clinical staff (audiologists and clinic administrators) on a need-to-know basis. Staff access is role-based — administrative staff cannot view clinical records, and clinical staff cannot access billing data beyond what is required for their role." },
+      { heading: "No Third-Party Data Sale", body: "We do not sell, rent, or trade your personal or health information to any third party for any purpose, including marketing. Your data is used exclusively to provide and improve your clinical care at Ralas Hearing Clinic." },
+      { heading: "Digital Personal Data Protection Act, 2023", body: "Ralas Hearing Clinic processes personal data in accordance with the Digital Personal Data Protection (DPDP) Act, 2023 (India). We collect only the minimum data necessary for the stated purpose, obtain consent where required, and honour data principal rights including access, correction, and erasure requests." },
+      { heading: "Health Data Sensitivity", body: "Audiological and speech-related health information is treated as sensitive personal data. It is never shared with insurers, employers, or any other third party without your explicit written consent, except where required by law or clinical referral with your knowledge." },
+      { heading: "Security Incident Response", body: "In the event of a data breach that is likely to result in harm to any patient, we will notify affected individuals and the relevant authority as required under applicable Indian law, within the timeframe prescribed by regulation." },
+      { heading: "Secure Communications", body: "When you contact us via WhatsApp or phone, please be aware that these are third-party platforms. We recommend you do not send sensitive health or financial information over WhatsApp unless necessary. For sensitive records, contact us directly by phone or visit the clinic." },
+    ],
+  },
+  {
     title: "Your Rights",
     content: [
       { heading: "Access and Correction", body: "You have the right to request a copy of the personal information we hold about you, and to request corrections if any information is inaccurate." },
@@ -68,7 +80,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-sm font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-            Last updated: January 2025. This policy explains how Ralas Hearing Clinic collects, uses, and protects your personal information.
+            Last updated: November 2026. This policy explains how Ralas Hearing Clinic collects, uses, and protects your personal information.
           </p>
         </div>
       </section>
