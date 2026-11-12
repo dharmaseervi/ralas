@@ -12,6 +12,14 @@ function esc(str: string): string {
         .replace(/'/g, '&#039;')
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const PHONE_RE = /^[6-9]\d{9}$/
+
+function normalisePhone(raw: string): string {
+    const digits = String(raw).replace(/[\s\-+()]/g, '')
+    return digits.startsWith('91') && digits.length === 12 ? digits.slice(2) : digits
+}
+
 const serviceLabels: Record<string, string> = {
     'hearing-test': 'Hearing Test',
     'speech-therapy': 'Speech Therapy',
@@ -29,12 +37,33 @@ export async function POST(request: NextRequest) {
 
         const { firstName, lastName, email, phone, service, date, time, notes, _honeypot } = await request.json();
 
+        // Honeypot
         if (_honeypot) {
             return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
         }
 
+        // Field length limits
+        if (
+            String(firstName || '').length > 60 ||
+            String(lastName || '').length > 60 ||
+            String(email || '').length > 200 ||
+            String(phone || '').length > 20 ||
+            String(notes || '').length > 2000
+        ) {
+            return NextResponse.json({ message: 'Invalid input' }, { status: 400 });
+        }
+
+        // Required fields
         if (!firstName || !lastName || !email || !phone || !service || !date || !time) {
             return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
+        }
+
+        // Format validation
+        if (!EMAIL_RE.test(String(email).trim())) {
+            return NextResponse.json({ message: 'Invalid email address' }, { status: 400 });
+        }
+        if (!PHONE_RE.test(normalisePhone(phone))) {
+            return NextResponse.json({ message: 'Invalid phone number' }, { status: 400 });
         }
 
         const fullName = esc(`${firstName} ${lastName}`)

@@ -12,6 +12,14 @@ function esc(str: string): string {
         .replace(/'/g, '&#039;')
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const PHONE_RE = /^[6-9]\d{9}$/
+
+function normalisePhone(raw: string): string {
+    const digits = String(raw).replace(/[\s\-+()]/g, '')
+    return digits.startsWith('91') && digits.length === 12 ? digits.slice(2) : digits
+}
+
 export async function POST(request: NextRequest) {
     try {
         if (!process.env.RESEND_API_KEY) {
@@ -20,14 +28,34 @@ export async function POST(request: NextRequest) {
 
         const { name, email, phone, city, service, message, _honeypot } = await request.json();
 
-        // Bot trap — if honeypot field is filled, silently discard
+        // Honeypot — silently discard if filled by a bot
         if (_honeypot) {
             return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
         }
 
-        // Basic validation
+        // Field length limits — reject oversized payloads
+        if (
+            String(name || '').length > 120 ||
+            String(email || '').length > 200 ||
+            String(phone || '').length > 20 ||
+            String(city || '').length > 120 ||
+            String(service || '').length > 100 ||
+            String(message || '').length > 3000
+        ) {
+            return NextResponse.json({ message: 'Invalid input' }, { status: 400 });
+        }
+
+        // Required fields
         if (!name || !email || !phone) {
             return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
+        }
+
+        // Format validation — catches bots that bypass the browser
+        if (!EMAIL_RE.test(String(email).trim())) {
+            return NextResponse.json({ message: 'Invalid email address' }, { status: 400 });
+        }
+        if (!PHONE_RE.test(normalisePhone(phone))) {
+            return NextResponse.json({ message: 'Invalid phone number' }, { status: 400 });
         }
 
         const safeName = esc(name)
