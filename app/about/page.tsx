@@ -122,6 +122,39 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Team ── */}
+      <section className="py-14 md:py-24 px-5 md:px-12" style={{ background: "var(--cream)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex items-center gap-2.5 mb-3 text-xs tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+            <span className="block w-6 h-px flex-shrink-0" style={{ background: "var(--gold)" }} />
+            Our Team
+          </div>
+          <h2
+            className="font-light mb-10"
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,48px)", lineHeight: 1.15, color: "var(--forest)" }}
+          >
+            The people behind<br />your care
+          </h2>
+          <div
+            className="flex flex-col items-center justify-center gap-6 py-16 px-8"
+            style={{ background: "var(--white)", border: "0.5px solid rgba(26,58,42,0.1)" }}
+          >
+            <img
+              src="/ralas.png"
+              alt="Ralas Hearing Clinic"
+              className="w-32 h-32 object-contain"
+            />
+            <p className="text-sm md:text-base font-light leading-relaxed text-center max-w-lg" style={{ color: "var(--text-mid)" }}>
+              Our clinic is staffed by RCI-registered audiologists and speech-language pathologists trained at leading institutions. Every member of our team is committed to patient-first, evidence-based hearing care.
+            </p>
+            <div className="flex items-center gap-2 mt-2">
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--gold)" }} />
+              <span className="text-xs tracking-widest uppercase" style={{ color: "var(--text-lt)" }}>Jayanagar, Bengaluru — Est. 2023</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <FAQ title="Questions about Ralas" questions={faqs} />
       <Footer />
     </>
