@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
         })
         const year = new Date().getFullYear()
 
-        const from = process.env.RESEND_FROM_EMAIL || 'Ralas Hearing Clinic <onboarding@resend.dev>'
+        const from = process.env.RESEND_FROM_EMAIL || 'Ralas Hearing Clinic <onreply@ralasclinic.com>'
         const { error } = await resend.emails.send({
             from,
             to: ['sinchanaravi0201@gmail.com', 'dharmaseervijb18239@gmail.com'],

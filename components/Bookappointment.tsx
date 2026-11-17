@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { X, CalendarIcon, CheckCircle, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 const PHONE_RE = /^[6-9]\d{9}$/
@@ -58,6 +57,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [calOpen, setCalOpen] = useState(false)
   const [focused, setFocused] = useState<string | null>(null)
   const [fieldErrors, setFieldErrors] = useState({ email: "", phone: "" })
   const [formData, setFormData] = useState<FormData>({
@@ -86,7 +86,10 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
       const res = await fetch("/api/appointment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          date: formData.date ? format(formData.date, "yyyy-MM-dd") : undefined,
+        }),
       })
       if (!res.ok) throw new Error("server")
       setLoading(false)
@@ -317,42 +320,35 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                               </div>
                             </div>
 
-                            {/* Date picker — PopoverContent uses z-[600] to sit above modal */}
+                            {/* Date picker — inline toggle, no floating popover */}
                             <div>
                               <label className="block text-xs tracking-widest uppercase mb-2" style={{ color: "var(--text-lt)" }}>
                                 Preferred Date
                               </label>
-                              <Popover>
-                                <PopoverTrigger asChild>
-                                  <button type="button"
-                                    className="w-full flex items-center gap-2.5 px-3.5 py-3 text-sm font-light outline-none cursor-pointer transition-colors bg-[var(--cream)] border border-[rgba(26,58,42,0.18)]"
-                                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                                  >
-                                    <CalendarIcon size={13} color="var(--gold)" />
-                                    <span style={{ color: formData.date ? "var(--text)" : "var(--text-lt)" }}>
-                                      {formData.date ? format(formData.date, "EEEE, d MMMM yyyy") : "Select a date"}
-                                    </span>
-                                  </button>
-                                </PopoverTrigger>
-                                {/* z-[600] ensures calendar renders above the z-[500] modal */}
-                                <PopoverContent
-                                  className="w-full p-0 rounded-none z-[600] "
-                                  style={{ border: "0.5px solid rgba(26,58,42,0.15)" }}
-                                  align="start"
-                                  sideOffset={4}
-                                >
+                              <button type="button"
+                                onClick={() => setCalOpen(p => !p)}
+                                className="w-full flex items-center gap-2.5 px-3.5 py-3 text-sm font-light outline-none cursor-pointer transition-colors bg-[var(--cream)] border border-[rgba(26,58,42,0.18)]"
+                                style={{ fontFamily: "'DM Sans', sans-serif" }}
+                              >
+                                <CalendarIcon size={13} color="var(--gold)" />
+                                <span style={{ color: formData.date ? "var(--text)" : "var(--text-lt)" }}>
+                                  {formData.date ? format(formData.date, "EEEE, d MMMM yyyy") : "Select a date"}
+                                </span>
+                              </button>
+                              {calOpen && (
+                                <div style={{ border: "0.5px solid rgba(26,58,42,0.15)", borderTop: "none" }}>
                                   <Calendar
                                     mode="single"
                                     selected={formData.date}
-                                    onSelect={(d) => setFormData(p => ({ ...p, date: d }))}
+                                    onSelect={(d) => { setFormData(p => ({ ...p, date: d })); setCalOpen(false); }}
                                     disabled={(date) => {
                                       const day = date.getDay()
                                       const today = new Date(); today.setHours(0, 0, 0, 0)
                                       return day === 0 || date < today
                                     }}
                                   />
-                                </PopoverContent>
-                              </Popover>
+                                </div>
+                              )}
                             </div>
 
                             {/* Time slots */}

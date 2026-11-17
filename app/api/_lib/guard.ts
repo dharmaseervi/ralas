@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 // 5 requests per IP per 10 minutes (in-memory, best-effort on serverless)
 const ratemap = new Map<string, { count: number; reset: number }>()
 const WINDOW_MS = 10 * 60 * 1000
-const LIMIT = 5
+const LIMIT = 20
 
 export function getIP(req: NextRequest): string {
     return (
@@ -15,6 +15,8 @@ export function getIP(req: NextRequest): string {
 }
 
 export function rateCheck(ip: string): boolean {
+    // Skip rate limiting in dev or when IP can't be determined (localhost)
+    if (process.env.NODE_ENV === 'development' || ip === 'unknown') return true
     const now = Date.now()
     const entry = ratemap.get(ip)
     if (!entry || now > entry.reset) {
