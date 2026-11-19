@@ -93,6 +93,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
       })
       if (!res.ok) throw new Error("server")
       setLoading(false)
+      if (typeof window !== 'undefined') (window as any).gtag?.('event', 'generate_lead', { event_category: 'engagement', event_label: 'book_appointment' })
       setSuccess(true)
       setTimeout(() => {
         setSuccess(false); setOpen(false); setStep(1)

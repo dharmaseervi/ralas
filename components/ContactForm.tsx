@@ -113,6 +113,7 @@ export default function ContactForm() {
       body: JSON.stringify(form),
     }).catch(() => {})
     setLoading(false)
+    if (typeof window !== 'undefined') (window as any).gtag?.('event', 'generate_lead', { event_category: 'engagement', event_label: 'contact_form' })
     setSent(true)
   }
 
