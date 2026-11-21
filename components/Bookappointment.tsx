@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
+import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, CalendarIcon, CheckCircle, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { format } from "date-fns"
@@ -52,6 +53,9 @@ interface BookAppointmentProps {
 }
 
 export function BookAppointment({ fullWidth = false, variant = "gold" }: BookAppointmentProps) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+
   const [open, setOpen] = useState(false)
   const [step, setStep] = useState(1)
   const [displayStep, setDisplayStep] = useState(1)
@@ -134,7 +138,8 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
         Book Appointment
       </button>
 
-      {/* ── Modal overlay ── */}
+      {/* ── Modal overlay — rendered via portal so fixed positioning is never broken by parent transforms ── */}
+      {mounted && createPortal(
       <AnimatePresence>
         {open && (
           <motion.div
@@ -498,6 +503,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body)}
 
       <style>{`
         input::placeholder, textarea::placeholder { color: var(--text-lt); opacity: 1; font-family: 'DM Sans', sans-serif; }
