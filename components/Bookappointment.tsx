@@ -344,7 +344,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                               </button>
                               {calOpen && (
                                 <div ref={(el) => { if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50) }}
-                                  style={{ border: "0.5px solid rgba(26,58,42,0.15)", borderTop: "none" }}>
+                                  style={{ border: "0.5px solid rgba(26,58,42,0.15)", borderTop: "none", display: "flex", justifyContent: "center" }}>
                                   <Calendar
                                     mode="single"
                                     selected={formData.date}
