@@ -54,6 +54,7 @@ interface BookAppointmentProps {
 export function BookAppointment({ fullWidth = false, variant = "gold" }: BookAppointmentProps) {
   const [open, setOpen] = useState(false)
   const [step, setStep] = useState(1)
+  const [displayStep, setDisplayStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
@@ -96,7 +97,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
       if (typeof window !== 'undefined') (window as any).gtag?.('event', 'generate_lead', { event_category: 'engagement', event_label: 'book_appointment' })
       setSuccess(true)
       setTimeout(() => {
-        setSuccess(false); setOpen(false); setStep(1)
+        setSuccess(false); setOpen(false); setStep(1); setDisplayStep(1)
         setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", date: undefined, time: "", notes: "", _honeypot: "" })
       }, 2800)
     } catch (_) {
@@ -190,8 +191,8 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                       <div className="flex items-start">
                         {steps.map((label, i) => {
                           const n = i + 1
-                          const done = step > n
-                          const active = step === n
+                          const done = displayStep > n
+                          const active = displayStep === n
                           return (
                             <div key={label} className="flex items-center" style={{ flex: i < steps.length - 1 ? 1 : "none" }}>
                               <div className="flex flex-col items-center gap-1.5">
@@ -263,7 +264,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                             ]).map(({ id, label, type, placeholder }) => (
                               <div key={id}>
                                 <label htmlFor={id} className="block text-xs tracking-widest uppercase mb-1.5" style={{ color: "var(--text-lt)" }}>
-                                  {label}
+                                  {label} <span style={{ color: "#dc2626" }}>*</span>
                                 </label>
                                 <input id={id} type={type} value={formData[id]} onChange={handleChange}
                                   placeholder={placeholder}
@@ -321,7 +322,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                               </div>
                             </div>
 
-                            {/* Date picker — inline toggle, no floating popover */}
+                            {/* Date picker — inline toggle, scrolls into view on open */}
                             <div>
                               <label className="block text-xs tracking-widest uppercase mb-2" style={{ color: "var(--text-lt)" }}>
                                 Preferred Date
@@ -337,7 +338,8 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                                 </span>
                               </button>
                               {calOpen && (
-                                <div style={{ border: "0.5px solid rgba(26,58,42,0.15)", borderTop: "none" }}>
+                                <div ref={(el) => { if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50) }}
+                                  style={{ border: "0.5px solid rgba(26,58,42,0.15)", borderTop: "none" }}>
                                   <Calendar
                                     mode="single"
                                     selected={formData.date}
@@ -452,7 +454,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                       {/* Nav buttons */}
                       <div className="flex justify-between items-center mt-8 pt-5" style={{ borderTop: "0.5px solid rgba(26,58,42,0.1)" }}>
                         {step > 1 ? (
-                          <button type="button" onClick={() => setStep(p => p - 1)}
+                          <button type="button" onClick={() => { setStep(p => p - 1); setDisplayStep(p => p - 1) }}
                             className="flex items-center gap-1.5 text-xs tracking-widest uppercase bg-transparent border-none cursor-pointer"
                             style={{ color: "var(--text-mid)", fontFamily: "'DM Sans', sans-serif" }}
                           >
@@ -461,7 +463,7 @@ export function BookAppointment({ fullWidth = false, variant = "gold" }: BookApp
                         ) : <div />}
 
                         {step < 3 ? (
-                          <button type="button" onClick={() => setStep(p => p + 1)} disabled={!canProceed}
+                          <button type="button" onClick={() => { setStep(p => p + 1); setTimeout(() => setDisplayStep(p => p + 1), 180) }} disabled={!canProceed}
                             className="flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase px-6 py-3 border-none transition-colors duration-200"
                             style={{
                               background: canProceed ? "var(--gold)" : "rgba(26,58,42,0.07)",
