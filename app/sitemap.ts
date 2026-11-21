@@ -23,11 +23,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/home-visits`,                   lastModified: now, changeFrequency: "monthly", priority: 0.7 },
 
     // ── Product pages ──
-    { url: `${BASE_URL}/product/behind-the-ear-aids`,   lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/product/rechargeable-aids`,     lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/product/in-ear-aids`,           lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/product/smart-hearing-aids`,    lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/product/accessories`,           lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/products/behind-the-ear-aids`,  lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/products/rechargeable-aids`,    lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/products/in-ear-aids`,          lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/products/smart-hearing-aids`,   lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/products/accessories`,          lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+
+    // ── Support ──
+    { url: `${BASE_URL}/support/faq`,                    lastModified: now, changeFrequency: "monthly", priority: 0.8 },
 
     // ── Legal ──
     { url: `${BASE_URL}/privacy`,                       lastModified: now, changeFrequency: "yearly",  priority: 0.3 },

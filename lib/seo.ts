@@ -203,40 +203,40 @@ const pages: Record<PageKey, Metadata> = {
     title: `Behind-the-Ear (BTE) Hearing Aids in Bengaluru | ${CLINIC_NAME}`,
     description: "Behind-the-Ear hearing aids from ₹18,000 in Bengaluru. Suitable for all levels of hearing loss. Oticon, Phonak, Signia, Widex. Expert fitting and 30-day trial.",
     keywords: ["BTE hearing aids Bengaluru", "behind the ear hearing aid price India", "hearing aid Jayanagar"],
-    openGraph: { title: "Behind-the-Ear Hearing Aids — Bengaluru", description: "BTE hearing aids from ₹18,000. All loss levels. Expert fitting.", url: `${BASE_URL}/product/behind-the-ear-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "BTE hearing aids" }] },
-    alternates: { canonical: `${BASE_URL}/product/behind-the-ear-aids` },
+    openGraph: { title: "Behind-the-Ear Hearing Aids — Bengaluru", description: "BTE hearing aids from ₹18,000. All loss levels. Expert fitting.", url: `${BASE_URL}/products/behind-the-ear-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "BTE hearing aids" }] },
+    alternates: { canonical: `${BASE_URL}/products/behind-the-ear-aids` },
   },
 
   "product-rechargeable": {
     title: `Rechargeable Hearing Aids in Bengaluru | ${CLINIC_NAME}`,
     description: "Rechargeable hearing aids from ₹35,000 in Bengaluru. No battery replacement needed. 16–30 hours per charge. Oticon, Phonak, Signia, Widex. 30-day trial.",
     keywords: ["rechargeable hearing aids Bengaluru", "rechargeable hearing aid India", "lithium ion hearing aid Bengaluru"],
-    openGraph: { title: "Rechargeable Hearing Aids — Bengaluru", description: "Rechargeable hearing aids from ₹35,000. Charge overnight, wear all day.", url: `${BASE_URL}/product/rechargeable-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Rechargeable hearing aids" }] },
-    alternates: { canonical: `${BASE_URL}/product/rechargeable-aids` },
+    openGraph: { title: "Rechargeable Hearing Aids — Bengaluru", description: "Rechargeable hearing aids from ₹35,000. Charge overnight, wear all day.", url: `${BASE_URL}/products/rechargeable-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Rechargeable hearing aids" }] },
+    alternates: { canonical: `${BASE_URL}/products/rechargeable-aids` },
   },
 
   "product-ite": {
     title: `In-the-Ear (ITE) Hearing Aids in Bengaluru | ${CLINIC_NAME}`,
     description: "Custom-made In-the-Ear hearing aids from ₹22,000 in Bengaluru. ITE, ITC, CIC, IIC styles. Discreet and comfortable. Expert fitting by RCI audiologists.",
     keywords: ["ITE hearing aids Bengaluru", "invisible hearing aids Bengaluru", "CIC hearing aids India", "custom hearing aids Bengaluru"],
-    openGraph: { title: "In-the-Ear Hearing Aids — Bengaluru", description: "Custom-made ITE aids from ₹22,000. Discreet, comfortable, perfectly fitted.", url: `${BASE_URL}/product/in-ear-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "ITE hearing aids" }] },
-    alternates: { canonical: `${BASE_URL}/product/in-ear-aids` },
+    openGraph: { title: "In-the-Ear Hearing Aids — Bengaluru", description: "Custom-made ITE aids from ₹22,000. Discreet, comfortable, perfectly fitted.", url: `${BASE_URL}/products/in-ear-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "ITE hearing aids" }] },
+    alternates: { canonical: `${BASE_URL}/products/in-ear-aids` },
   },
 
   "product-smart": {
     title: `Smart Hearing Aids in Bengaluru | AI & Bluetooth | ${CLINIC_NAME}`,
     description: "AI-powered smart hearing aids in Bengaluru from ₹60,000. App control, Bluetooth streaming, remote fine-tuning. Oticon More, Phonak Lumity, Signia IX, Widex Moment.",
     keywords: ["smart hearing aids Bengaluru", "Bluetooth hearing aids India", "AI hearing aids Bengaluru", "Oticon More Bengaluru", "Phonak Lumity India"],
-    openGraph: { title: "Smart Hearing Aids — AI & Bluetooth, Bengaluru", description: "AI-powered smart hearing aids from ₹60,000. App control, Bluetooth streaming.", url: `${BASE_URL}/product/smart-hearing-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Smart hearing aids" }] },
-    alternates: { canonical: `${BASE_URL}/product/smart-hearing-aids` },
+    openGraph: { title: "Smart Hearing Aids — AI & Bluetooth, Bengaluru", description: "AI-powered smart hearing aids from ₹60,000. App control, Bluetooth streaming.", url: `${BASE_URL}/products/smart-hearing-aids`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Smart hearing aids" }] },
+    alternates: { canonical: `${BASE_URL}/products/smart-hearing-aids` },
   },
 
   "product-accessories": {
     title: `Hearing Aid Accessories in Bengaluru | ${CLINIC_NAME}`,
     description: "Hearing aid accessories in Bengaluru — batteries, cleaning kits, TV streamers, remote microphones, custom ear plugs. Available at our Jayanagar clinic.",
     keywords: ["hearing aid batteries Bengaluru", "hearing aid accessories India", "TV streamer hearing aid", "hearing aid cleaning kit"],
-    openGraph: { title: "Hearing Aid Accessories — Bengaluru", description: "Batteries, cleaning kits, connectivity devices, and custom ear protection at our Jayanagar clinic.", url: `${BASE_URL}/product/accessories`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Hearing aid accessories" }] },
-    alternates: { canonical: `${BASE_URL}/product/accessories` },
+    openGraph: { title: "Hearing Aid Accessories — Bengaluru", description: "Batteries, cleaning kits, connectivity devices, and custom ear protection at our Jayanagar clinic.", url: `${BASE_URL}/products/accessories`, type: "website", images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Hearing aid accessories" }] },
+    alternates: { canonical: `${BASE_URL}/products/accessories` },
   },
 
   privacy: {

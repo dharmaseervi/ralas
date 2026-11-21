@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/support/faq"],
+        disallow: ["/api/"],
       },
     ],
     sitemap: "https://ralasclinic.com/sitemap.xml",

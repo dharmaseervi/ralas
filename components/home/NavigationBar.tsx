@@ -19,7 +19,7 @@ const navItems = [
   },
   { label: "Hearing Aids", href: "/hearing-aids" },
   { label: "About", href: "/about" },
-  { label: "Resources", href: "/resources" },
+  { label: "FAQ", href: "/support/faq" },
   { label: "Contact", href: "/contact" },
 ]
 
